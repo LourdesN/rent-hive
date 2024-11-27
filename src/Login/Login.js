@@ -26,11 +26,11 @@ const Login = () =>
     }
 
     return(
-        <div className="container-fluid vh-100 d-flex flex-column align-items-center justify-content-center login-backgound">
+        <div className="login-backgound">
             <nav className="login-nav">
-                <Link to="/" className="btn btn-outline-light text-white fw-bold" style={{background: "linear-gradient(rgba(0, 0, 0, 0.377), rgba(0, 0, 0, 0.062))"}}>Home</Link>
+                <Link to="/" className="btn btn-outline-secondary text-white fw-bold" style={{background: "linear-gradient(rgba(0, 0, 0, 0.377), rgba(0, 0, 0, 0.062))"}}>Home</Link>
             </nav>
-            <div className="card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%" }}>
+            <div className="container-fluid vh-100 d-flex flex-column align-items-center justify-content-center card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%" }}>
                 <form onSubmit={submitLogin}>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email</label>

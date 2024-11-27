@@ -24,6 +24,7 @@
 {
     cursor: pointer;
     color: #1d4ed8; 
+    text-decoration: underline;
 }
 @media (min-width: 768px) 
 {
