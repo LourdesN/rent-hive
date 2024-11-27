@@ -7,6 +7,7 @@ import "./Assets/CSS/Properties.css"
 
 import { Routes, Route } from 'react-router-dom';
 import Landing from "./Landing Page/Home"
+import Login from "./Login/Login";
 
 function App() 
 {
@@ -14,6 +15,7 @@ function App()
     <>
       <Routes>
         <Route exact path='/' element={<Landing/>}></Route>
+        <Route exact path='/login' element={<Login/>}></Route>
       </Routes>
     </>
   );
