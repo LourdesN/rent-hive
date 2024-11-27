@@ -1,35 +1,36 @@
-.login-backgound
+.login-backgound 
 {
     background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
 }
-.login-nav
+.login-nav 
 {
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    padding-top: 0.75rem; /* pt-3 in Tailwind */
+    padding-top: 0.75rem;
     z-index: 10;
 }
-.login-nav a
+.login-nav a 
 {
     display: inline-block;
-    padding: 1.25rem 1.75rem; /* py-5 px-7 in Tailwind */
+    padding: 1.25rem 1.75rem;
     color: white;
     text-decoration: none;
     background: linear-gradient(rgba(0, 0, 0, 0.377), rgba(0, 0, 0, 0.062));
     transition: color 0.2s ease-in-out;
 }
-.login-nav a:hover
+.login-nav a:hover 
 {
     cursor: pointer;
-    color: #1d4ed8; 
+    color: #1d4ed8;
     text-decoration: underline;
 }
 @media (min-width: 768px) 
 {
     .login-nav a 
     {
-      padding: 1.25rem 2.5rem; /* md:px-10 in Tailwind */
+      padding: 1.25rem 2.5rem;
     }
 }
+  
