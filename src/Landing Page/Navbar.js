@@ -28,6 +28,9 @@ function Navbar()
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/contact-us">Contact Us</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>
