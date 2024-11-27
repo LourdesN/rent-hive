@@ -27,7 +27,7 @@ const Login = () =>
 
     return(
         <div className="container-fluid vh-100 d-flex flex-column align-items-center justify-content-center login-backgound">
-            <nav className="position-absolute top-0 start-0 w-100">
+            <nav className="login-nav">
                 <Link to="/" className="btn btn-outline-light text-white fw-bold" style={{background: "linear-gradient(rgba(0, 0, 0, 0.377), rgba(0, 0, 0, 0.062))"}}>Home</Link>
             </nav>
             <div className="card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%" }}>

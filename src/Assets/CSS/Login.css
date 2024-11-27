@@ -2,3 +2,33 @@
 {
     background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
 }
+.login-nav
+{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 0.75rem; /* pt-3 in Tailwind */
+    z-index: 10;
+}
+.login-nav a
+{
+    display: inline-block;
+    padding: 1.25rem 1.75rem; /* py-5 px-7 in Tailwind */
+    color: white;
+    text-decoration: none;
+    background: linear-gradient(rgba(0, 0, 0, 0.377), rgba(0, 0, 0, 0.062));
+    transition: color 0.2s ease-in-out;
+}
+.login-nav a:hover
+{
+    cursor: pointer;
+    color: #1d4ed8; 
+}
+@media (min-width: 768px) 
+{
+    .login-nav a 
+    {
+      padding: 1.25rem 2.5rem; /* md:px-10 in Tailwind */
+    }
+}
