@@ -25,80 +25,46 @@ const Login = () => {
 
   return (
     <div className="container-fluid vh-100 d-flex flex-column align-items-center justify-content-center login-backgound">
-      <nav className="login-nav">
-        <Link
-          to="/"
-          className="btn btn-outline-none text-white fw-bold"
-          style={{
-            background:
-              "linear-gradient(rgba(0, 0, 0, 0.377), rgba(0, 0, 0, 0.062))",
-          }}
-        >
-          Home
-        </Link>
-      </nav>
-      <div
-        className="card shadow-sm p-4"
-        style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}
-      >
-        <form onSubmit={submitLogin}>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={loginCredentials.email}
-              onChange={handleInputChange}
-              className="form-control"
-              placeholder="Email address"
-              required
-            />
-          </div>
-          <div className="mb-3 position-relative">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              type={passwordVisibility ? "text" : "password"}
-              name="password"
-              value={loginCredentials.password}
-              onChange={handleInputChange}
-              className="form-control"
-              placeholder="Password"
-              required
-            />
-            <span
-              className="position-absolute end-0 top-50 translate-middle-y me-3 cursor-pointer"
-              onClick={toggleVisibility}
-              title={passwordVisibility ? "Hide password" : "Show password"}
-            >
-              {passwordVisibility ? <FaEyeSlash /> : <FaEye />}
-            </span>
-          </div>
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="rememberMe"
-                checked={rememberMe}
-                onChange={handleRememberMeChange}
-                className="form-check-input"
-              />
-              <label htmlFor="rememberMe" className="form-check-label">
-                Remember me
-              </label>
-            </div>
-            <Link to="/password-reset/new-request" className="text-decoration-none">
-              Forgot password?
-            </Link>
-          </div>
-          <button type="submit" className="btn btn-primary w-100">
-            Login
-          </button>
-        </form>
-      </div>
+        <nav className="login-nav">
+            <Link to="/" className="btn btn-outline-none fw-bold">Home</Link>
+        </nav>
+        <div className="card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}>
+            <form onSubmit={submitLogin}>
+                <div className="mb-3">
+                    <label htmlFor="email" className="form-label">Email</label>
+                    <input type="email" name="email" value={loginCredentials.email} onChange={handleInputChange} className="form-control" placeholder="Email address" required/>
+                </div>
+                <div className="mb-3 position-relative">
+                    <label htmlFor="password" className="form-label">Password</label>
+                    <input type={passwordVisibility ? "text" : "password"} name="password" value={loginCredentials.password} onChange={handleInputChange} className="form-control" placeholder="Password" required/>
+                    <span className="position-absolute end-0 top-50 translate-middle-y me-3 cursor-pointer" onClick={toggleVisibility}
+                    title={passwordVisibility ? "Hide password" : "Show password"}
+                    >
+                    {passwordVisibility ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                </div>
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                    <div className="form-check">
+                    <input
+                        type="checkbox"
+                        id="rememberMe"
+                        checked={rememberMe}
+                        onChange={handleRememberMeChange}
+                        className="form-check-input"
+                    />
+                    <label htmlFor="rememberMe" className="form-check-label">
+                        Remember me
+                    </label>
+                    </div>
+                    <Link to="/password-reset/new-request" className="text-decoration-none">
+                    Forgot password?
+                    </Link>
+                </div>
+                <button type="submit" className="btn btn-primary w-100">
+                    Login
+                </button>
+            </form>
+        </div>
     </div>
   );
 };
