@@ -26,7 +26,7 @@ const Login = () => {
   return (
     <div className="container-fluid vh-100 d-flex flex-column align-items-center justify-content-center login-backgound">
         <nav className="login-nav">
-            <Link to="/" className="btn btn-outline-none fw-bold">Home</Link>
+            <Link to="/" className="btn btn-link btn-outline-none fw-bold">Home</Link>
         </nav>
         <div className="card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}>
             <form onSubmit={submitLogin}>
