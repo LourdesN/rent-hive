@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import './App.css';
+import "./Assets/CSS/Login.css"
 import "./Assets/CSS/Navbar.css"
 import "./Assets/CSS/Properties.css"
 
