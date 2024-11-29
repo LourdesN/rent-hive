@@ -39,7 +39,7 @@ const Login = () =>
             <div className="mb-3 position-relative">
                 <label htmlFor="password" className="form-label">Password</label>
                 <input type={passwordVisibility ? "text" : "password"} name="password" value={loginCredentials.password} onChange={handleInputChange} className="form-control" placeholder="Password" required/>
-                <span className="position-absolute end-0 top-53 translate-middle-y me-3 cursor-pointer" onClick={toggleVisibility}
+                <span className="position-absolute end-0 password-icon translate-middle-y me-3 cursor-pointer" onClick={toggleVisibility}
                 title={passwordVisibility ? "Hide password" : "Show password"}>
                 {
                   passwordVisibility
