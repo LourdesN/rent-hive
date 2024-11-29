@@ -31,7 +31,7 @@ const Login = () =>
         </nav>
         <div className="card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}>
             <form onSubmit={submitLogin}>
-              <img src={Logo} alt="Rent Hive Logo" className="mx-auto w-50 h-25"/>
+              <img src={Logo} alt="Rent Hive Logo" className="mx-auto w-100 h-25"/>
               <div className="mb-3">
                   <label htmlFor="email" className="form-label">Email</label>
                   <input type="email" name="email" value={loginCredentials.email} onChange={handleInputChange} className="form-control" placeholder="Email address" required/>
