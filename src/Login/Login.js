@@ -29,9 +29,9 @@ const Login = () =>
         <nav className="login-nav">
             <Link to="/" className="btn btn-link btn-outline-none fw-bold">Home</Link>
         </nav>
-        <div className="card shadow-sm p-3" style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}>
-          <img src={Logo} alt="Rent Hive Logo" className="w-100" style={{ height: "250px", objectFit: "contain" }} />
-          <form onSubmit={submitLogin}>
+        <div className="card shadow-sm" style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}>
+          <img src={Logo} alt="Rent Hive Logo" className="w-100" style={{ height: "250px", objectFit: "contain", border: "1px solid red" }} />
+          <form onSubmit={submitLogin} className="p-3">
             <div className="mb-3">
                 <label htmlFor="email" className="form-label">Email</label>
                 <input type="email" name="email" value={loginCredentials.email} onChange={handleInputChange} className="form-control" placeholder="Email address" required/>
