@@ -29,9 +29,9 @@ const Login = () =>
         <nav className="login-nav">
             <Link to="/" className="btn btn-link btn-outline-none fw-bold">Home</Link>
         </nav>
-        <div className="card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%", marginTop: "2rem" }}>
+        <div className="card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}>
           <form onSubmit={submitLogin}>
-            <img src={Logo} alt="Rent Hive Logo" className="w-100" style={{ height: "150px", objectFit: "contain" }} />
+            <img src={Logo} alt="Rent Hive Logo" className="w-100" style={{ height: "450px", objectFit: "contain" }} />
             <div className="mb-3">
                 <label htmlFor="email" className="form-label">Email</label>
                 <input type="email" name="email" value={loginCredentials.email} onChange={handleInputChange} className="form-control" placeholder="Email address" required/>
@@ -39,7 +39,7 @@ const Login = () =>
             <div className="mb-3 position-relative">
                 <label htmlFor="password" className="form-label">Password</label>
                 <input type={passwordVisibility ? "text" : "password"} name="password" value={loginCredentials.password} onChange={handleInputChange} className="form-control" placeholder="Password" required/>
-                <span className="position-absolute end-0 top-50 translate-middle-y me-3 cursor-pointer" onClick={toggleVisibility}
+                <span className="position-absolute end-0 top-60 translate-middle-y me-3 cursor-pointer" onClick={toggleVisibility}
                 title={passwordVisibility ? "Hide password" : "Show password"}>
                 {
                   passwordVisibility
