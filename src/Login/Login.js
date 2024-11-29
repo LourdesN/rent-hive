@@ -32,7 +32,7 @@ const Login = () =>
         <div className="card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}>
           <form onSubmit={submitLogin}>
             <div className="text-center">
-              <img src={Logo} alt="Rent Hive Logo" className="w-100 h-15"/>
+              <img src={Logo} alt="Rent Hive Logo" className="w-100" style={{ height: "100px", objectFit: "contain" }} />
             </div>
             <div className="mb-3">
                 <label htmlFor="email" className="form-label">Email</label>
