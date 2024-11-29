@@ -44,8 +44,8 @@ const SignUp = () =>
     }
 
     return (
-        <div className="container-fluid vh-100 d-flex flex-column align-items-center justify-content-center login-backgound">
-            <div className="card p-4 w-50">
+        <div className="container-fluid min-vh-100 d-flex flex-column align-items-center justify-content-center login-backgound">
+            <div className="card p-4" style={{ maxWidth: "650px", width: "100%", marginTop: "1.5rem" }}>
                 <h3 className="text-center mb-4">Sign Up</h3>
                 <form className="row g-3" onSubmit={signup}>
                     <div className="col-md-6">
