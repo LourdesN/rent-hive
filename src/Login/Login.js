@@ -29,7 +29,7 @@ const Login = () =>
         <nav className="login-nav">
             <Link to="/" className="btn btn-link btn-outline-none fw-bold">Home</Link>
         </nav>
-        <div className="card shadow-sm p-4" style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}>
+        <div className="card shadow-sm p-2" style={{ maxWidth: "400px", width: "100%", marginTop: "3rem" }}>
           <form onSubmit={submitLogin}>
             <img src={Logo} alt="Rent Hive Logo" className="w-100" style={{ height: "200px", objectFit: "contain" }} />
             <div className="mb-3">
