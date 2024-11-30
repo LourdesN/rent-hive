@@ -9,22 +9,20 @@ const SignUp = () =>
     const [confirmPasswordVisibility, setConfirmPasswordVisibility]=useState(false)
     const [phoneError, setPhoneError] = useState('')
     const [signUpDetails, setSignUpDetails]=useState(
-        {
-            first_name: "",
-            last_name: "",
-            email: "",
-            phone: "",
-            role: "",
-            password: "",
-            confirm_password: ""
-
-        }
-    )
+    {
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone_number: "",
+        role: "",
+        password: "",
+        confirm_password: ""
+    })
 
     const handleInputChange = e => setSignUpDetails({ ...signUpDetails, [e.target.id]: e.target.value })
     const handlePhoneNumberChange = value =>
     {
-        setSignUpDetails({...signUpDetails, phone: value})
+        setSignUpDetails({...signUpDetails, phone_number: value})
         if(value && !isValidPhoneNumber(value))
         {
             setPhoneError("Invalid phone number")
@@ -41,6 +39,17 @@ const SignUp = () =>
     {
         e.preventDefault()
         console.log(signUpDetails)
+        fetch("https://rent-hive-backend.vercel.app/",
+        {
+            method: "POST",
+            headers: 
+            {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(signUpDetails)
+        })
+        .then(response => response.json())
+        .then(message => console.log(message))
     }
 
     return (
@@ -62,7 +71,7 @@ const SignUp = () =>
                     </div>
                     <div className="col-md-6">
                         <label htmlFor="phone" className="form-label">Phone Number</label>
-                        <PhoneInput international initialValueFormat="national" defaultCountry={"KE"} value={signUpDetails.phone} onChange={handlePhoneNumberChange} required/>
+                        <PhoneInput international initialValueFormat="national" defaultCountry={"KE"} value={signUpDetails.phone_number} onChange={handlePhoneNumberChange} required/>
                         {phoneError && <p className="text-danger text-center">{phoneError}</p>}
                     </div>
                     <div className="col-md-12">
