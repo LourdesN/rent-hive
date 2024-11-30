@@ -39,7 +39,7 @@ const SignUp = () =>
     {
         e.preventDefault()
         console.log(signUpDetails)
-        fetch("https://rent-hive-backend.vercel.app/",
+        fetch("https://rent-hive-backend.vercel.app/sign-up",
         {
             method: "POST",
             headers: 
