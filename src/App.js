@@ -9,6 +9,8 @@ import "./Assets/CSS/Properties.css"
 import "./Assets/CSS/Signup.css"
 
 import { Routes, Route } from 'react-router-dom';
+import { Slide, ToastContainer } from 'react-toastify'
+
 import Landing from "./Landing Page/Home"
 import Login from "./Login/Login";
 import SignUp from "./Sign Up/SignUp";
@@ -17,6 +19,7 @@ function App()
 {
   return (
     <>
+      <ToastContainer position='top-right' bodyClassName="text-black" autoClose={2500} hideProgressBar={false} newestOnTop={true} closeOnClick rtl={false} pauseOnFocusLoss={false} draggable pauseOnHover={false} theme='light' transition={Slide}/>
       <Routes>
         <Route exact path='/' element={<Landing/>}></Route>
         <Route exact path='/login' element={<Login/>}></Route>

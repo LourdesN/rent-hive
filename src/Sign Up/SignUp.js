@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
+import {toast} from 'react-toastify'
 
 const SignUp = () => 
 {
