@@ -1,11 +1,15 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import {toast} from 'react-toastify'
 
+import Loader from "../Assets/Components/Loader"
+
 const SignUp = () => 
 {
+    const navigate = useNavigate()
+    const [loading, setLoading]=useState(false)
     const [passwordVisibility, setPasswordVisibility] = useState(false)
     const [confirmPasswordVisibility, setConfirmPasswordVisibility]=useState(false)
     const [phoneError, setPhoneError] = useState('')
@@ -39,7 +43,7 @@ const SignUp = () =>
     const signup = e =>
     {
         e.preventDefault()
-        console.log(signUpDetails)
+        setLoading(true)
         fetch("https://rent-hive-backend.vercel.app/sign-up",
         {
             method: "POST",
@@ -50,11 +54,23 @@ const SignUp = () =>
             body: JSON.stringify(signUpDetails)
         })
         .then(response => response.json())
-        .then(message => console.log(message))
+        .then(message => 
+        {
+            message.type === "success"
+            ?
+                toast.success(message.message,
+                {
+                    onClose: () => navigate("/login")
+                })
+            :
+                toast.error(message.message)
+        })
+        .finally(()=> setLoading(false))
     }
 
     return (
         <div className="container-fluid min-vh-100 d-flex flex-column align-items-center justify-content-center login-backgound">
+            {loading && <Loader/>}
             <div className="card p-4" style={{ maxWidth: "650px", width: "100%", marginTop: "1.5rem" }}>
                 <h3 className="text-center mb-4">Sign Up</h3>
                 <form className="row g-3" onSubmit={signup}>
@@ -121,4 +137,4 @@ const SignUp = () =>
     );
 };
 
-export default SignUp;
+export default SignUp

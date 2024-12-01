@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import 'react-phone-number-input/style.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 import './App.css';
 import "./Assets/CSS/Login.css"
