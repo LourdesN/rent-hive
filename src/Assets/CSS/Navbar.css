@@ -1,7 +1,7 @@
 .navbar
 {
     background-color: #090909;
-    overflow: hidden;
+    overflow: visible;
     width: 100%; 
     height: auto;
     padding: 18px 0px;
@@ -15,4 +15,8 @@
 .navbar a:hover 
 {
     color: #32a6d5;
+}
+.profile-link:hover
+{
+    background-color: #495057;
 }
