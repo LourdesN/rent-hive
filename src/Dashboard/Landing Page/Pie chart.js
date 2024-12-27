@@ -10,9 +10,9 @@ const Piechart = ({soon, sooner, soonest}) =>
     }
     const data =
     [
-        {id: 0, value: 12, label: "<30 days", color: "#FFFF00"},
+        {id: 0, value: 12, label: "<30 days", color: "#FF0000"},
         {id: 1, value: 12, label: "31-60 days", color: "#800000"},
-        {id: 2, value: 12, label: "61+ days", color: "#FF0000"}
+        {id: 2, value: 12, label: "61+ days", color: "#FFFF00"}
     ]
     return ( 
         <div className="w-100">
