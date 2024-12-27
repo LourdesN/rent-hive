@@ -26,7 +26,6 @@ const Login = () =>
   const submitLogin = e => 
   {
     e.preventDefault()
-    setLoading(true)
     fetch("https://rent-hive-backend.vercel.app/login",
     {
       method: "POST",

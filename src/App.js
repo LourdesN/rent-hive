@@ -12,23 +12,29 @@ import "./Assets/CSS/Signup.css"
 
 import { Routes, Route } from 'react-router-dom';
 import { Slide, ToastContainer } from 'react-toastify'
+import { LoginProvider } from "./Context/Login Context";
 
+import PrivateRoute from "./Private Routes/Private Route";
 import Landing from "./Landing Page/Home"
 import Login from "./Login/Login";
 import SignUp from "./Sign Up/SignUp";
 import Dashboard from "./Dashboard/Dashboard";
+import ErrorPage from "./404/Error";
 
 function App() 
 {
   return (
     <>
       <ToastContainer position='top-right' bodyClassName="text-black" autoClose={2500} hideProgressBar={false} newestOnTop={true} closeOnClick rtl={false} pauseOnFocusLoss={false} draggable pauseOnHover={false} theme='light' transition={Slide}/>
-      <Routes>
-        <Route exact path='/' element={<Landing/>}></Route>
-        <Route exact path='/login' element={<Login/>}></Route>
-        <Route exact path="/sign-up" element={<SignUp/>}></Route>
-        <Route exact path="/dashboard/*" element={<Dashboard/>}></Route>
-      </Routes>
+      <LoginProvider>
+        <Routes>
+          <Route exact path='/' element={<Landing/>}></Route>
+          <Route exact path='/login' element={<Login/>}></Route>
+          <Route exact path="/sign-up" element={<SignUp/>}></Route> 
+          <Route exact path="/dashboard/*" element={<PrivateRoute element={<Dashboard/>}/>}></Route>
+          <Route exact path="*" element={<ErrorPage/>}></Route>
+        </Routes>
+      </LoginProvider>
     </>
   );
 }
