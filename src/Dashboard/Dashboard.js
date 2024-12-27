@@ -7,6 +7,7 @@ import Loader from "../Assets/Components/Loader"
 import Navbar from "./Components/Navbar"
 import Sidebar from "./Components/Sidebar"
 import Landing from "./Landing Page/Home"
+import Properties from "./Owners/Properties/Properties"
 import ErrorPage from "../404/Error"
 
 const Dashboard = () => 
@@ -67,7 +68,7 @@ const Dashboard = () =>
         <>
             <Navbar toggleSidebar={toggleSidebar} sidebarVisible={sidebarVisible} setSidebarVisible={setSidebarVisible}  username={username}/>
             <Sidebar isVisible={sidebarVisible} role={role} className="sidebar"/>
-            <div className="bg-white text-dark min-vh-100 w-100" onClick={handleOutsideClick}>
+            <div className="bg-white text-dark min-vh-100 w-100" style={{paddingTop: "80px"}} onClick={handleOutsideClick}>
                 {
                     isLoading
                     ?
@@ -75,6 +76,7 @@ const Dashboard = () =>
                     :
                         <Routes>
                             <Route exact path="/" element={<Landing fullName={fullName} role={role}/>}/>
+                            <Route exact path="/properties" element={<Properties/>}></Route>
                             <Route exact path="*" element={<ErrorPage/>}></Route>
                         </Routes>
                 }

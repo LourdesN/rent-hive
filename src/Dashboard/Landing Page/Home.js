@@ -7,7 +7,7 @@ const Landing = ({fullName, soon, sooner, soonest, role}) =>
     console.log(role)
     return ( 
         <>
-            <h1 className="text-uppercase fs-2 fw-bold text-center" style={{paddingTop: "80px"}}>Welcome back, {fullName}</h1>
+            <h1 className="text-uppercase fs-2 fw-bold text-center">Welcome back, {fullName}</h1>
             <Cards/>
             <div className="d-flex flex-column flex-md-row flex-md-nowrap justify-content-evenly p-3">
                 <Piechart soon={soon} sooner={sooner} soonest={soonest}/>
