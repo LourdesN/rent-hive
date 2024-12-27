@@ -16,7 +16,6 @@ export const LoginProvider = ({ children }) =>
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const hasCheckedSession = useRef(false) // Flag to track session check
-    const logoutInitiated = useRef(false) // Flag to prevent duplicate logout calls
 
     useEffect(() => 
     {
@@ -49,12 +48,62 @@ export const LoginProvider = ({ children }) =>
             const currentTime = new Date().getTime()
             const timeElapsed = currentTime - parseInt(loginTime, 10)
 
-            if (timeElapsed >= 30 * 60 * 1000) 
+            if (timeElapsed >= 30 * 60 * 1000) // 30 minutes expiration
             {
-                // 30 minutes expiration
-                hasCheckedSession.current = true
-                handleLogout(true)
+                if(!initialCheck || !hasCheckedSession.current)
+                {
+                    hasCheckedSession.current = true
+                    handleLogout(true)
+                }
             }
+        }
+    }
+
+    // Function to handle logout
+    const handleLogout = async (sessionExpired = false) => 
+    {
+        setLoading(true)
+        try 
+        {
+            const response = await fetch("https://rent-hive-backend.vercel.app/logout", 
+            {
+                method: "POST",
+            })
+
+            const result = await response.json()
+
+            if (!response.ok) 
+            {
+                throw new Error(`${result.message}. Please try again later` || "An unexpected error occurred")
+            }
+
+            if (result.type === "success") 
+            {
+                navigate("/login")
+                localStorage.removeItem("isAuthenticated")
+                localStorage.removeItem("loginTime")
+                localStorage.removeItem("X-Session-ID") // Unset session ID
+                setIsAuthenticated(false)
+                
+                sessionExpired
+                ?
+                    toast.error("Session expired. Kindly login again")
+                :
+                    toast.success("Logged out successfully")
+
+            } 
+            else 
+            {
+                toast.error(result.message)
+            }
+        } 
+        catch (error) 
+        {
+            toast.error(`${error.message}.` || "An unexpected error occurred.")
+        } 
+        finally 
+        {
+            setLoading(false)
         }
     }
 
@@ -119,57 +168,7 @@ export const LoginProvider = ({ children }) =>
         }
     }
 
-    // Function to handle logout
-    const handleLogout = async (sessionExpired = false) => 
-    {
-        if (logoutInitiated.current) return // Prevent duplicate calls
-        logoutInitiated.current = true
-
-        setLoading(true)
-        try 
-        {
-            const response = await fetch("https://rent-hive-backend.vercel.app/logout", 
-            {
-                method: "POST",
-            })
-
-            const result = await response.json()
-
-            if (!response.ok) 
-            {
-                throw new Error(`${result.message}. Please try again later` || "An unexpected error occurred")
-            }
-
-            if (result.type === "success") 
-            {
-                localStorage.removeItem("isAuthenticated")
-                localStorage.removeItem("loginTime")
-                localStorage.removeItem("X-Session-ID") // Unset session ID
-                setIsAuthenticated(false)
-                navigate("/login")
-
-                sessionExpired
-                ?
-                    toast.error("Session expired. Kindly login again")
-                :
-                    toast.success("Logged out successfully")
-
-            } 
-            else 
-            {
-                toast.error(result.message)
-            }
-        } 
-        catch (error) 
-        {
-            toast.error(`${error.message}.` || "An unexpected error occurred.")
-        } 
-        finally 
-        {
-            setLoading(false)
-            logoutInitiated.current = false // Reset flag after logout
-        }
-    }
+    
 
     // Logout function
     const logOut = () => handleLogout(false) // Pass false for regular logout

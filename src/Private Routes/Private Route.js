@@ -1,22 +1,26 @@
-import {useEffect} from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { useLogin } from '../Context/Login Context'
-import { toast } from 'react-toastify'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-const PrivateRoute = ({ element: Component, ...rest }) => 
+// Example function to check if the user is authenticated
+const isAuthenticated = () => localStorage.getItem('X-Session-ID') !== null;
+
+const PrivateRoute = ({ element }) => 
 {
-  const { isAuthenticated } = useLogin();
-  const location=useLocation()
-
-  useEffect(()=>
+  const navigate = useNavigate()
+  useEffect(() => 
   {
-    if(!isAuthenticated)
+    if (!isAuthenticated()) 
     {
-      toast.error("Kindly log in to continue!")
-      localStorage.setItem('redirectUrl', location.pathname)
+      // Show the toast notification
+      toast.error('You must be logged in to access this page.');
+      navigate("/login")
     }
-  },[isAuthenticated, location.pathname])
-  return isAuthenticated ? Component : <Navigate to="/login" />;
+  }, []); // Empty dependency array to run only once on mount
+
+
+  return element; // Render the protected route if authenticated
 };
 
 export default PrivateRoute;
