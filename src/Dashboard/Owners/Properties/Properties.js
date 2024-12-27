@@ -1,12 +1,13 @@
-import { IoAddOutline } from "react-icons/io5";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import Home from "../../../Assets/Images/home.jpeg";
-import Houses from "../../../Assets/Images/houses.jpeg";
-import { useState } from "react";
+import { IoAddOutline } from "react-icons/io5"
+import { FaMapMarkerAlt } from "react-icons/fa"
+import Home from "../../../Assets/Images/home.jpeg"
+import Houses from "../../../Assets/Images/houses.jpeg"
+import { useState } from "react"
 
-const Properties = () => {
-    const [activePage, setActivePage] = useState(1);
-    const propertiesPerPage = 4;
+const Properties = () => 
+{
+    const [activePage, setActivePage] = useState(1)
+    const propertiesPerPage = 4
     const properties = [
         {
             id: 1,
@@ -73,13 +74,13 @@ const Properties = () => {
             location: "Kiambu Road, Kenya"
         },
         // Add more properties as needed
-    ];
+    ]
 
-    const indexOfLastProperty = activePage * propertiesPerPage;
-    const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
-    const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
+    const indexOfLastProperty = activePage * propertiesPerPage
+    const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage
+    const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty)
 
-    const handlePageChange = (pageNumber) => setActivePage(pageNumber);
+    const handlePageChange = pageNumber => setActivePage(pageNumber)
 
     return (
         <div className="container py-2">
@@ -128,7 +129,7 @@ const Properties = () => {
                 </ul>
             </nav>
         </div>
-    );
+    )
 }
 
-export default Properties;
+export default Properties
