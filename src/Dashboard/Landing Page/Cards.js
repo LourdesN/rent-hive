@@ -8,7 +8,7 @@ const Cards = () =>
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4">
                 {/* First Card - Properties */}
                 <div className="col">
-                    <div className="card">
+                    <div className="stat-card">
                         <div className="card-body">
                             <div>
                                 <h2>Properties</h2>
@@ -23,7 +23,7 @@ const Cards = () =>
 
                 {/* Second Card - Tenants */}
                 <div className="col">
-                    <div className="card">
+                    <div className="stat-card">
                         <div className="card-body">
                             <div>
                                 <h2>Tenants</h2>
@@ -38,7 +38,7 @@ const Cards = () =>
 
                 {/* Third Card - Properties Listed */}
                 <div className="col">
-                    <div className="card">
+                    <div className="stat-card">
                         <div className="card-body">
                             <div>
                                 <h2>Properties breakdown</h2>
