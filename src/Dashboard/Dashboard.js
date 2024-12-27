@@ -7,6 +7,8 @@ import Loader from "../Assets/Components/Loader"
 import Navbar from "./Components/Navbar"
 import Sidebar from "./Components/Sidebar"
 import Landing from "./Landing Page/Home"
+import ErrorPage from "../404/Error"
+
 const Dashboard = () => 
 {
     //useState hook for the sidebar
@@ -73,6 +75,7 @@ const Dashboard = () =>
                     :
                         <Routes>
                             <Route exact path="/" element={<Landing fullName={fullName} role={role}/>}/>
+                            <Route exact path="*" element={<ErrorPage/>}></Route>
                         </Routes>
                 }
             </div>
