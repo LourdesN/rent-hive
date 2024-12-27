@@ -55,52 +55,6 @@ export const LoginProvider = ({ children }) =>
         }
     }
 
-    // Function to handle logout
-    const handleLogout = async (sessionExpired = false) => {
-        setLoading(true)
-        try 
-        {
-            const response = await fetch("https://mobikey-lms-backend.vercel.app/logout", {
-            method: "POST"
-        })
-        const result = await response.json()
-        if (!response.ok) 
-        {
-            throw new Error(`${result.message}. Please try again later` || "An unexpected error occurred")
-        }
-
-        if (result.type === "success") 
-        {
-            localStorage.removeItem('isAuthenticated')
-            localStorage.removeItem('loginTime')
-            localStorage.removeItem('X-Session-ID') // Unset session ID
-            setIsAuthenticated(false)
-            navigate("/login")
-
-            if (sessionExpired) 
-            {
-                toast.error("Session expired. Kindly login again")
-            } 
-            else 
-            {
-                toast.success("Logged out successfully")
-            }
-        } 
-        else 
-        {
-            toast.error(result.message)
-        }
-        } 
-        catch (error) 
-        {
-            toast.error(`${error.message}.` || "An unexpected error occurred.")
-        } 
-        finally 
-        {
-            setLoading(false)
-        }
-    }
-
     // Login function
     const login = async loginCredentials => 
     {
@@ -118,7 +72,6 @@ export const LoginProvider = ({ children }) =>
             })
 
             const message = await response.json()
-
             if (!response.ok) 
             {
                 throw new Error(`${message.message}` || "An unexpected error occurred. Please try again later!")
@@ -134,12 +87,13 @@ export const LoginProvider = ({ children }) =>
                 setIsAuthenticated(true)
 
                 // Set a timer to unset X-Session-ID after 30 minutes
-                setTimeout(() => {
-                localStorage.removeItem('X-Session-ID')
-                handleLogout(true) // Auto logout after 30 minutes
+                setTimeout(() => 
+                {
+                    localStorage.removeItem('X-Session-ID')
+                    handleLogout(true) // Auto logout after 30 minutes
                 }, 30 * 60 * 1000)
 
-                toast.success(message.success, 
+                toast.success(message.message, 
                 {
                     onClose: () => 
                     {
@@ -161,6 +115,54 @@ export const LoginProvider = ({ children }) =>
             toast.error(`${error.message}` || "An unexpected error occurred. Please try again later!")
         }
     }
+
+    // Function to handle logout
+    const handleLogout = async (sessionExpired = false) => 
+        {
+            setLoading(true)
+            try 
+            {
+                const response = await fetch("https://rent-hive-backend.vercel.app/logout", 
+                {
+                    method: "POST"
+                })
+                const result = await response.json()
+                if (!response.ok) 
+                {
+                    throw new Error(`${result.message}. Please try again later` || "An unexpected error occurred")
+                }
+    
+                if (result.type === "success") 
+                {
+                    localStorage.removeItem('isAuthenticated')
+                    localStorage.removeItem('loginTime')
+                    localStorage.removeItem('X-Session-ID') // Unset session ID
+                    setIsAuthenticated(false)
+                    navigate("/login")
+    
+                    if (sessionExpired) 
+                    {
+                        toast.error("Session expired. Kindly login again")
+                    } 
+                    else 
+                    {
+                        toast.success("Logged out successfully")
+                    }
+                } 
+                else 
+                {
+                    toast.error(result.message)
+                }
+            } 
+            catch (error) 
+            {
+                toast.error(`${error.message}.` || "An unexpected error occurred.")
+            } 
+            finally 
+            {
+                setLoading(false)
+            }
+        }
 
     // Logout function
     const logOut = () => handleLogout(false) // Pass false for regular logout

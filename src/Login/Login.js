@@ -1,21 +1,31 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useLogin } from "../Context/Login Context"
 
 import Logo from "../Assets/Images/Logo.jpg"
 import Loader from "../Assets/Components/Loader"
-import { toast } from "react-toastify"
 
 const Login = () => 
 {
-  const navigate = useNavigate()
-  const [loading, setLoading]=useState(false)
+  const { login, loading } = useLogin()
   const [loginCredentials, setLoginCredentials] = useState({
     email: "",
     password: "",
   })
   const [passwordVisibility, setPasswordVisibility] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
+
+  useEffect(()=>
+  {
+      const savedEmail = localStorage.getItem("email")
+      const savedPassword = localStorage.getItem("password")
+      if(savedEmail && savedPassword)
+      {
+          setLoginCredentials({email: savedEmail, password: savedPassword})
+          setRememberMe(true)
+      }
+  },[])
 
   const handleInputChange = e => setLoginCredentials({ ...loginCredentials, [e.target.name]: e.target.value })
 
@@ -26,28 +36,17 @@ const Login = () =>
   const submitLogin = e => 
   {
     e.preventDefault()
-    fetch("https://rent-hive-backend.vercel.app/login",
+    if(rememberMe)
     {
-      method: "POST",
-      headers: 
-      {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(loginCredentials)
-    })
-    .then(response => response.json())
-    .then(message =>
+      localStorage.setItem("email", loginCredentials.email)
+      localStorage.setItem("password", loginCredentials.password)
+    }
+    else
     {
-      message.type === "success"
-      ?
-        toast.success(message.message,
-          {
-            onClose: ()=> navigate("/dashboard")
-          })
-      :
-        toast.error(message.message)
-    })
-    .finally(()=> setLoading(false))
+      localStorage.removeItem("email")
+      localStorage.removeItem("password")
+    }
+    login(loginCredentials)
   }
 
   return (
