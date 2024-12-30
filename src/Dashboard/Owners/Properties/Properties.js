@@ -97,7 +97,7 @@ const Properties = () =>
             {/* Modal for Adding New Property */}
             {
                 isModalOpen && (
-                    <form className="modal position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-black bg-opacity-50 z-50" encType="multipart/form-data" tabIndex={1}>
+                    <form className="modal position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-black bg-opacity-50 z-50" encType="multipart/form-data" tabIndex={1} onSubmit={addProperty}>
                         <div className="bg-white w-75">
                             <div className="modal-header border-bottom">
                                 <h5 className="modal-title">Add a new property</h5>
@@ -128,7 +128,7 @@ const Properties = () =>
                                 {/* Multiple Image Input */}
                                 <div className="col-12 mb-3">
                                     <label className="form-label">Property Images</label>
-                                    <input type="file" accept="image/*" className="form-control" multiple onChange={handleImageChange}/>
+                                    <input type="file" accept="image/*" className="form-control" multiple onChange={handleImageChange} required/>
                                 </div>
 
                                 {/* Image Preview Section */}
@@ -149,7 +149,7 @@ const Properties = () =>
                                     setModalOpen(!isModalOpen);
                                     setPropertyDetails(initialPropertyDetails);
                                 }}>Close</button>
-                                <button type="submit" className="btn btn-primary" onClick={addProperty}>Add Property</button>
+                                <button type="submit" className="btn btn-primary">Add Property</button>
                             </div>
                         </div>
                     </form>
@@ -157,27 +157,19 @@ const Properties = () =>
 
             <nav aria-label="Page navigation example" className="d-flex justify-content-center mt-3">
                 <ul className="pagination">
-                <li className={`page-item ${activePage === 1 ? "disabled" : ""}`}>
-                    <button className="page-link" onClick={() => handlePageChange(activePage - 1)}>
-                    &laquo;
-                    </button>
-                </li>
-                {[...Array(Math.ceil(properties.length / propertiesPerPage)).keys()].map((number) => (
-                    <li key={number + 1} className={`page-item ${number + 1 === activePage ? "active" : ""}`}>
-                    <button className="page-link" onClick={() => handlePageChange(number + 1)}>
-                        {number + 1}
-                    </button>
+                    <li className={`page-item ${activePage === 1 ? "disabled" : ""}`}>
+                        <button className="page-link" onClick={() => handlePageChange(activePage - 1)}>&laquo;</button>
                     </li>
-                ))}
-                <li
-                    className={`page-item ${
-                    activePage === Math.ceil(properties.length / propertiesPerPage) ? "disabled" : ""
-                    }`}
-                >
-                    <button className="page-link" onClick={() => handlePageChange(activePage + 1)}>
-                    &raquo;
-                    </button>
-                </li>
+                    {[...Array(Math.ceil(properties.length / propertiesPerPage)).keys()].map((number) => (
+                        <li key={number + 1} className={`page-item ${number + 1 === activePage ? "active" : ""}`}>
+                            <button className="page-link" onClick={() => handlePageChange(number + 1)}>
+                                {number + 1}
+                            </button>
+                        </li>
+                    ))}
+                    <li className={`page-item ${activePage === Math.ceil(properties.length /  propertiesPerPage) ? "disabled" : ""}`}>
+                        <button className="page-link" onClick={() => handlePageChange(activePage + 1)}>&raquo;</button>
+                    </li>
                 </ul>
             </nav>
         </div>
