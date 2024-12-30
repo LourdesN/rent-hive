@@ -139,6 +139,7 @@ const Properties = () => {
                                 <button type="button" className="btn-close" onClick={() => {
                                     setModalOpen(!isModalOpen)
                                     setPropertyDetails(initialPropertyDetails)
+                                    setSearchResults([])
                                 }}></button>
                             </div>
                             <div className="modal-body row">
@@ -193,6 +194,7 @@ const Properties = () => {
                                 <button type="button" className="btn btn-secondary" onClick={() => {
                                     setModalOpen(!isModalOpen)
                                     setPropertyDetails(initialPropertyDetails)
+                                    setSearchResults([])
                                 }}>Close</button>
                                 <button type="submit" className="btn btn-primary">Add Property</button>
                             </div>
