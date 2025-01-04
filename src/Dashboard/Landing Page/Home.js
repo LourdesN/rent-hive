@@ -4,7 +4,6 @@ import Piechart from "./Pie chart"
 
 const Landing = ({fullName, soon, sooner, soonest, role}) => 
 {
-    console.log(role)
     return ( 
         <>
             <h1 className="text-uppercase fs-2 fw-bold text-center">Welcome back, {fullName}</h1>

@@ -4,13 +4,20 @@ import { FaMapMarkerAlt } from "react-icons/fa"
 import Home from "../../../Assets/Images/home.jpeg"
 import Houses from "../../../Assets/Images/houses.jpeg"
 import { toast } from "react-toastify"
+import Loader from "../../../Assets/Components/Loader"
+import CircularProgress from "@mui/material/CircularProgress"
 
-const Properties = () => {
+const Properties = () => 
+{
+    const [loading, setLoading]=useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [activePage, setActivePage] = useState(1)
     const [isModalOpen, setModalOpen] = useState(false)
     const initialPropertyDetails=
     {
+        name: "",
         description: "",
+        type: "",
         rent: 0,
         location: "",
         images: [],
@@ -91,11 +98,43 @@ const Properties = () => {
     const addProperty = e => 
     {
         e.preventDefault()
-        console.log(propertyDetails)
+        setIsSubmitting(true)
+        const formData=new FormData()
+        formData.append('name',propertyDetails.name)
+        formData.append('description',propertyDetails.description)
+        formData.append('property_type',propertyDetails.type)
+        formData.append('rent',propertyDetails.rent)
+        formData.append('location',propertyDetails.location)
+        propertyDetails.images.forEach(image => formData.append("images[]",image))
+        fetch("https://rent-hive-backend.vercel.app/properties",
+        {
+            method: "POST",
+            headers:
+            {
+                "X-Session-ID": localStorage.getItem("X-Session-ID")
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => 
+        {
+            data.type === "success"
+            ?
+                toast.success(data.message)
+            :
+                toast.error(data.message)
+        })
+        .finally(()=> 
+        {
+            setPropertyDetails(initialPropertyDetails)
+            setModalOpen(false)
+            setIsSubmitting(false)
+        })
     }
 
     return (
         <div className="container py-2">
+            {loading && <Loader/>}
             <h1 className="text-uppercase fs-2 fw-bold text-center">Properties owned by Samuel Muigai</h1>
             <div className="d-flex justify-content-end gap-2 p-3">
                 <button className="btn btn-primary" onClick={() => setModalOpen(!isModalOpen)}>
@@ -140,21 +179,26 @@ const Properties = () => {
                                     setModalOpen(!isModalOpen)
                                     setPropertyDetails(initialPropertyDetails)
                                     setSearchResults([])
+                                    setIsSubmitting(false)
                                 }}></button>
                             </div>
                             <div className="modal-body row">
-                                <div className="mb-3">
+                                <div className="col-12 col-md-6 col-lg-6 mb-3">
+                                    <label className="form-label">Property Name</label>
+                                    <input type="text" className="form-control" id="property_name" name="name" value={propertyDetails.name} onChange={handleInputChange} required></input>
+                                </div>
+                                <div className="col-12 col-md-6 col-lg-6 mb-3">
                                     <label className="form-label">Property Description</label>
                                     <textarea className="form-control" id="propertyDescription" name="description" value={propertyDetails.description} onChange={handleInputChange} required></textarea>
                                 </div>
-                                <div className="col-12 col-md-6 col-lg-6 mb-3">
+                                <div className="col-12 col-md-4 col-lg-4 mb-3">
                                     <label className="form-label">Rent</label>
                                     <input type="range" className="form-range" id="propertyRent" name="rent" min={0} max={900000} step={1000} value={propertyDetails.rent} onChange={handleInputChange} required/>
                                     <span className="mt-2">
                                         <strong>{formatCurrency(propertyDetails.rent)}</strong>
                                     </span>
                                 </div>
-                                <div className="col-12 col-md-6 col-lg-6 mb-3">
+                                <div className="col-12 col-md-4 col-lg-4 mb-3">
                                     <label className="form-label">Location</label>
                                     <input type="text" className="form-control" id="propertyLocation" name="location" value={propertyDetails.location} onChange={handleInputChange} placeholder="Search location" required/>
                                     {
@@ -170,6 +214,15 @@ const Properties = () => {
                                                 ))}
                                             </div>
                                     }
+                                </div>
+                                <div className="col-12 col-md-4 col-lg-4 mb-3">
+                                    <label className="form-label">Property type</label>
+                                    <select className="form-select" id="property_type" name="type" value={propertyDetails.property_type} onChange={handleInputChange} required>
+                                        <option value="">Select property type</option>
+                                        <option value="Apartment">Apartment</option>
+                                        <option value="Commercial">Commercial</option>
+                                        <option value="Residential">Residential</option>
+                                    </select>
                                 </div>
 
                                 {/* Multiple Image Input */}
@@ -195,8 +248,16 @@ const Properties = () => {
                                     setModalOpen(!isModalOpen)
                                     setPropertyDetails(initialPropertyDetails)
                                     setSearchResults([])
+                                    setIsSubmitting(false)
                                 }}>Close</button>
-                                <button type="submit" className="btn btn-primary">Add Property</button>
+                                <button type="submit" className={`btn btn-primary ${isSubmitting ? "disabled" : ""}`}>
+                                    {
+                                        isSubmitting
+                                        ?
+                                            <CircularProgress size={20}/>
+                                        :
+                                            "Add Property"
+                                }</button>
                             </div>
                         </div>
                     </form>
