@@ -24,7 +24,7 @@ const Sidebar = ({isVisible, role}) =>
     return (
         isVisible && (
             <aside  className={`bg-dark text-white vh-100 fixed-top start-0 ${isVisible ? "translate-x-0" : "-translate-x-100"} d-flex flex-column`} style={{ width: "16rem", zIndex: "1050", marginTop: "5rem", transition: "transform 0.3s ease-in-out"}}>
-                <img src={Logo} alt="Rent Hive" className="bg-light w-100" style={{height: "6rem", width: "6rem"}}/>
+                <img src={Logo} alt="Rent Hive" className="bg-light w-100" style={{height: "6rem", width: "4rem"}}/>
                 <ul className="nav flex-column">
                     <NavLink to="/dashboard" end className={({ isActive }) => isActive ? "li active text-light" : "li text-light"}>
                         <FaHome className="me-2" />  Dashboard
