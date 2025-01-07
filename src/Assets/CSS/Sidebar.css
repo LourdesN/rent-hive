@@ -1,0 +1,15 @@
+.li 
+{
+    margin-bottom: 0.5rem;
+    display: flex; 
+    align-items: center;
+    gap: 0.5rem; 
+    padding: 1rem; 
+    font-size: 1rem; 
+    text-decoration: none;
+}
+
+.li:hover, .li.active  
+{
+    background-color: #495057; 
+}
