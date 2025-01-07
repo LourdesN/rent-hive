@@ -13,6 +13,7 @@ function landing(){
               </a>
            </ul>
           </div>
+          
     );
 }
 export default landing;
