@@ -159,44 +159,49 @@ const Properties = () =>
 
     return (
         <div className="container py-2">
-            {loading && <Loader/>}
             <h1 className="text-uppercase fs-2 fw-bold text-center">Properties owned by Samuel Muigai</h1>
             <div className="d-flex justify-content-end gap-2 p-3">
                 <button className="btn btn-primary" onClick={() => setModalOpen(!isModalOpen)}>
                     <IoAddOutline className="fs-4" /> Add a new property
                 </button>
             </div>
-            <div className="row">
-                {
-                    currentProperties.length === 0
-                    ?
-                        <div className="d-flex flex-column align-items-center justify-content-center w-100 my-5">
-                            <h4 className="text-muted mt-3">No properties found</h4>
-                        </div>
-                    :
-                        currentProperties.map(property => 
-                            <div key={property.id} className="col-12 col-md-6 col-lg-3 mb-2">
-                                <div className="card h-100 border rounded shadow-sm overflow-hidden">                                   
-                                    {
-                                        property.images.map(image =>
-                                            /* Hi Nimo, 
-                                             Ukipata code ya kustyle the image auto play functionality place the styling here*/
-                                            <img key={image.id} src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="h-50 object-fit z-50"/>
-                                        )
-                                    }
-                                    <div className="card-body d-flex flex-column">
-                                        <p className="card-text">{property.description}</p>
-                                        <p className="card-text">Rent per month: <b>Kshs. {property.rent}</b></p>
-                                        <p className="text-muted d-flex align-items-center">
-                                            <FaMapMarkerAlt /> {property.location}
-                                        </p>
-                                    </div>
+            {
+                loading
+                ?
+                    <Loader/>
+                :
+                    <div className="row">
+                        {
+                            currentProperties.length === 0
+                            ?
+                                <div className="d-flex flex-column align-items-center justify-content-center w-100 my-5">
+                                    <h4 className="text-muted mt-3">No properties found</h4>
                                 </div>
-                            </div>
-                        )    
-                }
-            </div>
-
+                            :
+                                currentProperties.map(property => 
+                                    <div key={property.id} className="col-12 col-md-6 col-lg-3 mb-2">
+                                        <div className="card h-100 border rounded shadow-sm overflow-hidden">                                   
+                                            {
+                                                property.images.map(image =>
+                                                    /* Hi Nimo, 
+                                                    Ukipata code ya kustyle the image auto play functionality place the styling here*/
+                                                    <img key={image.id} src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="h-50 object-fit z-50"/>
+                                                )
+                                            }
+                                            <div className="card-body d-flex flex-column">
+                                                <p className="card-text">{property.description}</p>
+                                                <p className="card-text">Rent per month: <b>Kshs. {property.rent}</b></p>
+                                                <p className="text-muted d-flex align-items-center">
+                                                    <FaMapMarkerAlt /> {property.location}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )    
+                        }
+                    </div>
+            }
+            
             {/* Modal for Adding New Property */}
             {
                 isModalOpen && 
