@@ -23,9 +23,11 @@ const Dashboard = () =>
     const [username, setUsername]=useState()
 
     //State values for the dashboard landing page
+    const [properties, setProperties]=useState(0)
     const [soon, setSoon]=useState(0)
     const [sooner, setSooner]=useState(0)
     const [soonest, setSoonest]=useState(0)
+    
 
     //Fetching the data from the backend
     useEffect(()=>
@@ -43,9 +45,10 @@ const Dashboard = () =>
         {
             if(data.type === "success")
             {
-                setFullName(data.fullName)
-                setRole(data.role)
-                setUsername((data.fullName.split(" ")[0].charAt(0) + data.fullName.split(" ")[1]).toLowerCase())
+                setFullName(data?.fullName)
+                setRole(data?.role)
+                setUsername((data?.fullName.split(" ")[0].charAt(0) + data?.fullName.split(" ")[1]).toLowerCase())
+                setProperties(data?.properties)
             }
         })
         .finally(()=> setIsLoading(false))
@@ -75,7 +78,7 @@ const Dashboard = () =>
                         <Loader/>
                     :
                         <Routes>
-                            <Route exact path="/" element={<Landing fullName={fullName} role={role}/>}/>
+                            <Route exact path="/" element={<Landing fullName={fullName} role={role} properties={properties}/>}/>
                             <Route exact path="/properties" element={<Properties/>}></Route>
                             <Route exact path="*" element={<ErrorPage/>}></Route>
                         </Routes>
