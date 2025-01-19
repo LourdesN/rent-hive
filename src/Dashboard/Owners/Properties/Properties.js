@@ -179,6 +179,8 @@ const Properties = () =>
                                 <div className="card h-100 border rounded shadow-sm overflow-hidden">                                   
                                     {
                                         property.images.map(image =>
+                                            /* Hi Nimo, 
+                                             Ukipata code ya kustyle the image auto play functionality place the styling here*/
                                             <img key={image.id} src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="h-50 object-fit z-50"/>
                                         )
                                     }
