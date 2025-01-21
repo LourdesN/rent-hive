@@ -9,6 +9,7 @@ import Sidebar from "./Components/Sidebar"
 import Landing from "./Landing Page/Home"
 import Properties from "./Owners/Properties/Properties"
 import AvailableProperties from "./Tenants/Available Properties/Properties"
+import AvailableProperty from "./Tenants/Available Properties/Property"
 import ErrorPage from "../404/Error"
 
 const Dashboard = () => 
@@ -82,6 +83,7 @@ const Dashboard = () =>
                             <Route exact path="/" element={<Landing fullName={fullName} role={role} properties={properties}/>}/>
                             <Route exact path="/properties" element={<Properties/>}></Route>
                             <Route exact path="/available-properties" element={<AvailableProperties/>}></Route>
+                            <Route exact path="/available-properties/:id" element={<AvailableProperty/>}></Route>
                             <Route exact path="*" element={<ErrorPage/>}></Route>
                         </Routes>
                 }

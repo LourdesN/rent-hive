@@ -111,8 +111,8 @@ const AvailableProperties = () =>
     const totalPages = Math.ceil(filteredProperties.length / propertiesPerPage)
     
   return (
-    <div className="container mt-4">
-        <h1 className="text-uppercase fs-2 fw-bold text-center mb-4">List of Available Properties</h1>
+    <div className="container mt-2">
+        <h1 className="text-uppercase fs-2 fw-bold text-center mb-2">List of Available Properties</h1>
         <div className="row g-3">
             <div className="col-12 col-md-6 col-lg-4 mb-3 position-relative">
                 <input type="text" name="location" id="location" placeholder="Filter by location" className="form-control p-3" value={filters.location} onChange={handleInputChange}/>
