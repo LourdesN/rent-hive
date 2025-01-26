@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { toast } from "react-toastify"
 
 import CircularProgress from "@mui/material/CircularProgress"
 
@@ -9,9 +9,9 @@ import Home from "../../../Assets/Images/home.jpeg"
 import Houses from "../../../Assets/Images/houses.jpeg"
 const AvailableProperty = () => 
 {
-    const navigate = useNavigate();
-    const { id } = useParams();
-    const [property, setProperty] = useState(null);
+    const navigate = useNavigate()
+    const { id } = useParams()
+    const [property, setProperty] = useState(null)
     const [isModalOpen, setIsModalOpen]=useState(false)
     const [isSubmitting, setIsSubmitting]=useState(false)
     const [leasePeriod, setLeasePeriod]=useState("")
@@ -23,32 +23,32 @@ const AvailableProperty = () =>
     }
     const [leaseData, setLeaseData] = useState(initialLeaseData)
 
-    const fetchProperty = () =>
-    {
-        fetch(`https://rent-hive-backend.vercel.app/available-properties/${id}`, 
-        {
-            method: "GET",
-            headers: 
-            {
-                "X-Session-ID": localStorage.getItem("X-Session-ID")
-            }
-        })
-        .then(response => response.json())
-        .then(data => 
-        {
-            data.type === "error"
-            ?
-                data.reason === "Not found" || data.reason === "Invalid credentials"
-                ?
-                    toast.error(data.message, { onClose: () => navigate(-1) })
-                :
-                    toast.error(data.message)
-            : 
-                setProperty(data.property)
-        });
-    }
+    // const fetchProperty = () =>
+    // {
+    //     fetch(`https://rent-hive-backend.vercel.app/available-properties/${id}`, 
+    //     {
+    //         method: "GET",
+    //         headers: 
+    //         {
+    //             "X-Session-ID": localStorage.getItem("X-Session-ID")
+    //         }
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => 
+    //     {
+    //         data.type === "error"
+    //         ?
+    //             data.reason === "Not found" || data.reason === "Invalid credentials"
+    //             ?
+    //                 toast.error(data.message, { onClose: () => navigate(-1) })
+    //             :
+    //                 toast.error(data.message)
+    //         : 
+    //             setProperty(data.property)
+    //     })
+    // }
 
-    useEffect(() => fetchProperty(), [id, navigate]);
+    // useEffect(() => fetchProperty(), [id, navigate])
 
     // Dummy data for preview
     const dummyProperty = {
@@ -68,16 +68,16 @@ const AvailableProperty = () =>
             email: "john.doe@example.com",
             phone: "+254 712 345678"
         }
-    };
+    }
 
-    const propertyData = property || dummyProperty;
+    const propertyData = property || dummyProperty
 
     const handleInputChange = e => setLeaseData({...leaseData, [e.target.id]: e.target.value})
 
     useEffect(() => 
     {
         // Prevent running if start_date is empty
-        if (!leaseData.start_date) return; 
+        if (!leaseData.start_date) return 
     
         const monthsToAdd = 
         {
@@ -85,19 +85,19 @@ const AvailableProperty = () =>
             "6 months": 6,
             "9 months": 9,
             "1 year": 12
-        }[leasePeriod] || 0;
+        }[leasePeriod] || 0
     
         if (monthsToAdd > 0) 
         {
-            const startDate = new Date(leaseData.start_date);
-            startDate.setMonth(startDate.getMonth() + monthsToAdd);
+            const startDate = new Date(leaseData.start_date)
+            startDate.setMonth(startDate.getMonth() + monthsToAdd)
     
             setLeaseData(prev => ({
                 ...prev,
                 end_date: startDate.toISOString().split("T")[0] // Format as YYYY-MM-DD
-            }));
+            }))
         }
-    }, [leasePeriod, leaseData.start_date]);
+    }, [leasePeriod, leaseData.start_date])
 
     const createLease = e =>
     {
@@ -196,7 +196,7 @@ const AvailableProperty = () =>
                 </form>
             }
         </div>
-    );
-};
+    )
+}
 
-export default AvailableProperty;
+export default AvailableProperty
