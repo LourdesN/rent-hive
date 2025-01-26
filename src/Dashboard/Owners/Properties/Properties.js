@@ -271,11 +271,11 @@ const Properties = () =>
                                     <label className="form-label">Deposit required</label>
                                     <div className="d-flex flex-column">
                                         <div className="form-check">
-                                            <input className="form-check-input" type="radio" name="deposit" value="Yes" checked={propertyDetails.deposit === "Yes"} onChange={handleInputChange}/>
+                                            <input className="form-check-input" type="radio" name="deposit" value="Yes" checked={propertyDetails.deposit === "Yes"} onChange={handleInputChange} required/>
                                             <label className="form-check-label">Yes</label>
                                         </div>
                                         <div className="form-check">
-                                            <input className="form-check-input" type="radio" name="deposit" value="No" checked={propertyDetails.deposit === "No"} onChange={handleInputChange} />
+                                            <input className="form-check-input" type="radio" name="deposit" value="No" checked={propertyDetails.deposit === "No"} onChange={handleInputChange} required/>
                                             <label className="form-check-label">No</label>
                                         </div>
                                     </div>
