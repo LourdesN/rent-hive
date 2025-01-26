@@ -22,7 +22,7 @@ const Properties = () =>
         type: "",
         rent: 0,
         location: "",
-        deposit: "Yes",
+        deposit: "",
         images: [],
     }
     const [propertyDetails, setPropertyDetails] = useState(initialPropertyDetails)
@@ -130,6 +130,7 @@ const Properties = () =>
         formData.append('property_type',propertyDetails.type)
         formData.append('rent',propertyDetails.rent)
         formData.append('location',propertyDetails.location)
+        formData.append('deposit',propertyDetails.deposit)
         propertyDetails.images.forEach(image => formData.append("images[]",image))
         fetch("https://rent-hive-backend.vercel.app/properties",
         {
@@ -190,7 +191,7 @@ const Properties = () =>
                                                 )
                                             }
                                             <div className="card-body d-flex flex-column">
-                                                <p className="card-text">{property.description}</p>
+                                                <p className="card-text">{property.name}</p>
                                                 <p className="card-text">Rent per month: <b>Kshs. {property.rent}</b></p>
                                                 <p className="text-muted d-flex align-items-center">
                                                     <FaMapMarkerAlt /> {property.location}
