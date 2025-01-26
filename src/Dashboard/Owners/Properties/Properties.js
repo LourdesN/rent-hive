@@ -22,6 +22,7 @@ const Properties = () =>
         type: "",
         rent: 0,
         location: "",
+        deposit: "Yes",
         images: [],
     }
     const [propertyDetails, setPropertyDetails] = useState(initialPropertyDetails)
@@ -260,9 +261,24 @@ const Properties = () =>
                                 </div>
 
                                 {/* Multiple Image Input */}
-                                <div className="col-12 mb-3">
+                                <div className="col-8 mb-3">
                                     <label className="form-label">Property Images</label>
                                     <input type="file" accept="image/*" className="form-control" multiple onChange={handleImageChange} required/>
+                                </div>
+                                
+                                {/* Deposit required checkboxes */}
+                                <div className="col-4 mb-3">
+                                    <label className="form-label">Deposit required</label>
+                                    <div className="d-flex flex-column">
+                                        <div className="form-check">
+                                            <input className="form-check-input" type="radio" name="deposit" value="Yes" checked={propertyDetails.deposit === "Yes"} onChange={handleInputChange}/>
+                                            <label className="form-check-label">Yes</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <input className="form-check-input" type="radio" name="deposit" value="No" checked={propertyDetails.deposit === "No"} onChange={handleInputChange} />
+                                            <label className="form-check-label">No</label>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {/* Image Preview Section */}
