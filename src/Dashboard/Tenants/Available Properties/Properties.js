@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable array-callback-return */
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
@@ -160,21 +159,25 @@ const AvailableProperties = () =>
                         :
                             currentProperties?.map(property =>
                             {   
-                                <div key={property.id} className="col-12 col-md-6 col-lg-3 mb-2">
-                                    <div className="card h-100 border rounded shadow-sm overflow-hidden">
-                                        {
-                                            property.images.map(image =>
+                                return(
+                                    <div key={property.id} className="col-12 col-md-6 col-lg-3 mb-2">
+                                        <div className="card h-100 border rounded shadow-sm overflow-hidden">
                                             {
-                                                <img key={image.id} src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="h-50 object-fit z-50"/>
-                                            })
-                                        }
-                                        <div className="card-body d-flex flex-column">
-                                            <p className="card-text">{property.description}</p>
-                                            <p className="card-text">Rent per month: <b>Kshs. {property.rent}</b></p>
-                                            <Link to={`/dashboard/available-properties/${property.id}`}>View property</Link>
+                                                property.images.map(image =>
+                                                {
+                                                   return(
+                                                    <img key={image.id} src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="h-50 object-fit z-50"/>
+                                                   )
+                                                })
+                                            }
+                                            <div className="card-body d-flex flex-column">
+                                                <p className="card-text">{property.description}</p>
+                                                <p className="card-text">Rent per month: <b>Kshs. {property.rent}</b></p>
+                                                <Link to={`/dashboard/available-properties/${property.id}`}>View property</Link>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                )
                             })
                     }
                 </div>

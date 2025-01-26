@@ -5,13 +5,12 @@ import { toast } from "react-toastify"
 
 import CircularProgress from "@mui/material/CircularProgress"
 
-import Home from "../../../Assets/Images/home.jpeg"
-import Houses from "../../../Assets/Images/houses.jpeg"
 const AvailableProperty = () => 
 {
     const navigate = useNavigate()
     const { id } = useParams()
     const [property, setProperty] = useState(null)
+    const [ownerDetails, setOwnerDetails]=useState(null)
     const [isModalOpen, setIsModalOpen]=useState(false)
     const [isSubmitting, setIsSubmitting]=useState(false)
     const [leasePeriod, setLeasePeriod]=useState("")
@@ -23,56 +22,45 @@ const AvailableProperty = () =>
     }
     const [leaseData, setLeaseData] = useState(initialLeaseData)
 
-    // const fetchProperty = () =>
-    // {
-    //     fetch(`https://rent-hive-backend.vercel.app/available-properties/${id}`, 
-    //     {
-    //         method: "GET",
-    //         headers: 
-    //         {
-    //             "X-Session-ID": localStorage.getItem("X-Session-ID")
-    //         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => 
-    //     {
-    //         data.type === "error"
-    //         ?
-    //             data.reason === "Not found" || data.reason === "Invalid credentials"
-    //             ?
-    //                 toast.error(data.message, { onClose: () => navigate(-1) })
-    //             :
-    //                 toast.error(data.message)
-    //         : 
-    //             setProperty(data.property)
-    //     })
-    // }
-
-    // useEffect(() => fetchProperty(), [id, navigate])
-
-    // Dummy data for preview
-    const dummyProperty = {
-        id: 1,
-        images: [
-            { id: 101, image_url: Home },
-            { id: 102, image_url: Houses }
-        ],
-        description: "Spacious 3-bedroom apartment with modern amenities.",
-        rent: 45000,
-        location: {
-            city: "Nairobi",
-            address: "Westlands, Parklands Rd, House No. 12"
-        },
-        owner: {
-            name: "John Doe",
-            email: "john.doe@example.com",
-            phone: "+254 712 345678"
-        }
+    const fetchProperty = () =>
+    {
+        fetch(`https://rent-hive-backend.vercel.app/available-properties/${id}`, 
+        {
+            method: "GET",
+            headers: 
+            {
+                "X-Session-ID": localStorage.getItem("X-Session-ID")
+            }
+        })
+        .then(response => response.json())
+        .then(data => 
+        {
+            data.type === "error"
+            ?
+                data.reason === "Not found" || data.reason === "Invalid credentials"
+                ?
+                    toast.error(data.message, { onClose: () => navigate(-1) })
+                :
+                    toast.error(data.message)
+            : 
+                setProperty(data.property)
+                setOwnerDetails(data.owner)
+        })
     }
 
-    const propertyData = property || dummyProperty
+    useEffect(() => fetchProperty(), [id, navigate])
 
     const handleInputChange = e => setLeaseData({...leaseData, [e.target.id]: e.target.value})
+
+    const formatNumber = number => 
+    {
+        return new Intl.NumberFormat('en-KE', 
+        {
+          style: 'decimal',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(number)
+    }
 
     useEffect(() => 
     {
@@ -110,9 +98,9 @@ const AvailableProperty = () =>
         <div className="container mt-2">
             <div className="row">
                 {
-                    propertyData.images.map(image => (
+                    property?.images.map(image => (
                         <div key={image.id} className="col-md-6 mb-2">
-                            <img src={image.image_url} alt="Property" className="img-fluid rounded shadow-sm"/>
+                            <img src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="img-fluid rounded shadow-sm"/>
                         </div>
                     ))
                 }
@@ -121,11 +109,12 @@ const AvailableProperty = () =>
                 {/* Property Details */}
                 <div className="col-md-8">
                     <div className="card p-4 shadow-sm">
-                        <p className="lead">{propertyData.description}</p>
+                        <h1 className="lead fw-bold text-uppercase fs-4">{property?.name}</h1>
+                        <p className="lead">{property?.description}</p>
                         <h5 className="text-secondary">
-                            <strong>Location:</strong> {propertyData.location.city}, {propertyData.location.address}
+                            <strong>Location:</strong> {property?.location}
                         </h5>
-                        <h4 className="text-primary">Rent per month: Ksh {propertyData.rent}</h4>
+                        <h4 className="text-primary">Rent per month: Ksh {formatNumber(property?.rent)}</h4>
                         <div className="mt-3 d-flex gap-2">
                             <button className="btn btn-success" onClick={()=> setIsModalOpen(true)}>Lease Property</button>
                             <button className="btn btn-secondary" onClick={() => navigate(-1)}>Back</button>
@@ -138,9 +127,9 @@ const AvailableProperty = () =>
                     <div className="card p-3 shadow-sm">
                         <h5 className="text-center">Owner Details</h5>
                         <hr />
-                        <p><strong>Name:</strong> {propertyData.owner.name}</p>
-                        <p><strong>Email:</strong> {propertyData.owner.email}</p>
-                        <p><strong>Phone:</strong> {propertyData.owner.phone}</p>
+                        <p><strong>Name:</strong> {ownerDetails?.first_name} {ownerDetails?.last_name}</p>
+                        <p><strong>Email:</strong> {ownerDetails?.email}</p>
+                        <p><strong>Phone:</strong> {ownerDetails?.phone_number}</p>
                     </div>
                 </div>
             </div>
@@ -174,6 +163,14 @@ const AvailableProperty = () =>
                                     <option value="1 year">1 year</option>
                                 </select>
                             </div>
+                            {
+                                property?.deposit_required &&
+                                (
+                                    <div className="mb-3 text-danger fw-bold text-uppercase">
+                                        <p>NB: Once you lease this property, you will be required to pay a deposit of Kshs. {formatNumber(property?.rent)} before moving in.</p>
+                                    </div>
+                                )
+                            }
                         </div>
                         <div className="modal-footer border-top">
                             <button type="button" className="btn btn-secondary" onClick={()=>
