@@ -79,6 +79,7 @@ const AvailableProperty = () =>
         // Prevent running if start_date is empty
         if (!leaseData.start_date) return 
     
+        //Creating an object with the expected lease period and the number of months for each and using object lookup with bracket notation to set the number of months accordingly
         const monthsToAdd = 
         {
             "3 months": 3,
