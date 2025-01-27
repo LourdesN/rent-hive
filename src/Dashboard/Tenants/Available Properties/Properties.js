@@ -109,15 +109,13 @@ const AvailableProperties = () =>
 
     const totalPages = Math.ceil(filteredProperties.length / propertiesPerPage)
 
-    const formatCurrency = number => 
-    {
-        return new Intl.NumberFormat('en-KE', 
-        {
-            style: 'decimal',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        }).format(number)
-    }
+    const formatCurrency = value => 
+        new Intl.NumberFormat("en-KE", 
+        { 
+            style: "currency", 
+            currency: "KES", 
+            minimumFractionDigits: 2 
+        }).format(value)
     
   return (
     <div className="container mt-2">
@@ -182,7 +180,7 @@ const AvailableProperties = () =>
                                             }
                                             <div className="card-body d-flex flex-column">
                                                 <p className="card-text">{property.description}</p>
-                                                <p className="card-text">Rent per month: <b>Kshs. {formatCurrency(property.rent)}</b></p>
+                                                <p className="card-text">Rent per month: <b>{formatCurrency(property.rent)}</b></p>
                                                 <Link to={`/dashboard/available-properties/${property.id}`}>View property</Link>
                                             </div>
                                         </div>

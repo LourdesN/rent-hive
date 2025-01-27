@@ -52,15 +52,13 @@ const AvailableProperty = () =>
 
     const handleInputChange = e => setLeaseData({...leaseData, [e.target.id]: e.target.value})
 
-    const formatCurrency = number => 
-    {
-        return new Intl.NumberFormat('en-KE', 
-        {
-          style: 'decimal',
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }).format(number)
-    }
+    const formatCurrency = value => 
+        new Intl.NumberFormat("en-KE", 
+        { 
+            style: "currency", 
+            currency: "KES", 
+            minimumFractionDigits: 2 
+        }).format(value)
 
     useEffect(() => 
     {

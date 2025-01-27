@@ -192,7 +192,7 @@ const Properties = ({fullName}) =>
                                             }
                                             <div className="card-body d-flex flex-column">
                                                 <p className="card-text">{property.name}</p>
-                                                <p className="card-text">Rent per month: <b>Kshs. {formatCurrency(property.rent)}</b></p>
+                                                <p className="card-text">Rent per month: <b>{formatCurrency(property.rent)}</b></p>
                                                 <p className="text-muted d-flex align-items-center">
                                                     <FaMapMarkerAlt /> {property.location}
                                                 </p>
