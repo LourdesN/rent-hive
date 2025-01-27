@@ -40,5 +40,4 @@ const Sidebar = ({isVisible, role}) =>
         )
     )
 }
- 
 export default Sidebar
