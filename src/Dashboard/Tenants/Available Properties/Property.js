@@ -52,7 +52,7 @@ const AvailableProperty = () =>
 
     const handleInputChange = e => setLeaseData({...leaseData, [e.target.id]: e.target.value})
 
-    const formatNumber = number => 
+    const formatCurrency = number => 
     {
         return new Intl.NumberFormat('en-KE', 
         {
@@ -114,7 +114,7 @@ const AvailableProperty = () =>
                         <h5 className="text-secondary">
                             <strong>Location:</strong> {property?.location}
                         </h5>
-                        <h4 className="text-primary">Rent per month: Ksh {formatNumber(property?.rent)}</h4>
+                        <h4 className="text-primary">Rent per month: Ksh {formatCurrency(property?.rent)}</h4>
                         <div className="mt-3 d-flex gap-2">
                             <button className="btn btn-success" onClick={()=> setIsModalOpen(true)}>Lease Property</button>
                             <button className="btn btn-secondary" onClick={() => navigate(-1)}>Back</button>
@@ -167,7 +167,7 @@ const AvailableProperty = () =>
                                 property?.deposit_required &&
                                 (
                                     <div className="mb-3 text-danger fw-bold text-uppercase">
-                                        <p>NB: Once you lease this property, you will be required to pay a deposit of Kshs. {formatNumber(property?.rent)} before moving in.</p>
+                                        <p>NB: Once you lease this property, you will be required to pay a deposit of Kshs. {formatCurrency(property?.rent)} before moving in.</p>
                                     </div>
                                 )
                             }

@@ -108,6 +108,16 @@ const AvailableProperties = () =>
     const currentProperties = filteredProperties.slice(indexOfFirstProperty, indexOfLastProperty);
 
     const totalPages = Math.ceil(filteredProperties.length / propertiesPerPage)
+
+    const formatCurrency = number => 
+    {
+        return new Intl.NumberFormat('en-KE', 
+        {
+            style: 'decimal',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(number)
+    }
     
   return (
     <div className="container mt-2">
@@ -139,7 +149,7 @@ const AvailableProperties = () =>
                 </select>
             </div>
             <div className="col-12 col-md-6 col-lg-4 mb-3">
-                <label htmlFor="rent" className="form-label fw-bold"> Max Rent: Ksh {filters.rent}</label>
+                <label htmlFor="rent" className="form-label fw-bold"> Max Rent: Ksh {formatCurrency(filters.rent)}</label>
                 <input type="range" name="rent" id="rent" min={0} max={90000} step={1000} className="form-range" value={filters.rent} onChange={handleInputChange}/>
             </div>
         </div>
@@ -172,7 +182,7 @@ const AvailableProperties = () =>
                                             }
                                             <div className="card-body d-flex flex-column">
                                                 <p className="card-text">{property.description}</p>
-                                                <p className="card-text">Rent per month: <b>Kshs. {property.rent}</b></p>
+                                                <p className="card-text">Rent per month: <b>Kshs. {formatCurrency(property.rent)}</b></p>
                                                 <Link to={`/dashboard/available-properties/${property.id}`}>View property</Link>
                                             </div>
                                         </div>
