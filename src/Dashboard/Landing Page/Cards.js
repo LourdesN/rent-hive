@@ -1,7 +1,7 @@
 import { BiBuildingHouse } from "react-icons/bi";
 import { PiUsersBold } from "react-icons/pi";
 
-const Cards = () => 
+const Cards = ({properties}) => 
 {
     return (
         <div className="container-fluid px-4">
@@ -12,7 +12,7 @@ const Cards = () =>
                         <div className="card-body">
                             <div>
                                 <h2>Properties</h2>
-                                <p className="stat">10</p>
+                                <p className="stat">{properties}</p>
                             </div>
                             <div className="icon">
                                 <BiBuildingHouse />

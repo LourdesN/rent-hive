@@ -1,14 +1,16 @@
-import React, { useState } from "react"
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react"
 import { IoAddOutline } from "react-icons/io5"
 import { FaMapMarkerAlt } from "react-icons/fa"
-import Home from "../../../Assets/Images/home.jpeg"
-import Houses from "../../../Assets/Images/houses.jpeg"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
+
 import Loader from "../../../Assets/Components/Loader"
 import CircularProgress from "@mui/material/CircularProgress"
 
-const Properties = () => 
+const Properties = ({fullName}) => 
 {
+    const navigate = useNavigate()
     const [loading, setLoading]=useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [activePage, setActivePage] = useState(1)
@@ -20,29 +22,52 @@ const Properties = () =>
         type: "",
         rent: 0,
         location: "",
+        deposit: "",
         images: [],
     }
     const [propertyDetails, setPropertyDetails] = useState(initialPropertyDetails)
     const [searchResults, setSearchResults] = useState([])
+    const [properties, setProperties]=useState([])
 
-    const propertiesPerPage = 4
-
-    const properties = [
+    const fetchProperties = () =>
+    {
+        setLoading(true)
+        fetch("https://rent-hive-backend.vercel.app/properties",
         {
-            id: 1,
-            imgFront: Home,
-            imgBack: Houses,
-            description: "This is a 2-bedroom master ensuite for rent in the suburbs of Kiambu with ample parking space.",
-            rent: "Ksh. 54,000 plus Ksh. 6,000 service charge per month. TOTAL = KSH. 60,000",
-            location: "Kiambu Road, Kenya",
-        },
-    ]
+            method: "GET",
+            headers:
+            {
+                "X-Session-ID": localStorage.getItem("X-Session-ID")
+            }
+        })
+        .then(response => response.json())
+        .then(data => 
+        {
+            data.type === "error"
+            ?
+                data.reason === "Invalid credentials"
+                ?
+                    toast.error(data.message,
+                    {
+                        onClose: () => navigate(-1)
+                    })
+                :
+                    toast.error(data.message)
+            :
+                    setProperties(data.properties)
+        })
+        .finally(()=> setLoading(false))
+    }
+
+    useEffect(()=> fetchProperties(),[])
+    
+    const propertiesPerPage = 4
 
     const indexOfLastProperty = activePage * propertiesPerPage
     const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage
     const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty)
 
-    const handlePageChange = (pageNumber) => setActivePage(pageNumber)
+    const handlePageChange = pageNumber => setActivePage(pageNumber)
 
     const handleInputChange = e => 
     {
@@ -105,6 +130,7 @@ const Properties = () =>
         formData.append('property_type',propertyDetails.type)
         formData.append('rent',propertyDetails.rent)
         formData.append('location',propertyDetails.location)
+        formData.append('deposit',propertyDetails.deposit)
         propertyDetails.images.forEach(image => formData.append("images[]",image))
         fetch("https://rent-hive-backend.vercel.app/properties",
         {
@@ -129,45 +155,55 @@ const Properties = () =>
             setPropertyDetails(initialPropertyDetails)
             setModalOpen(false)
             setIsSubmitting(false)
+            fetchProperties()
         })
     }
 
     return (
         <div className="container py-2">
-            {loading && <Loader/>}
-            <h1 className="text-uppercase fs-2 fw-bold text-center">Properties owned by Samuel Muigai</h1>
+            <h1 className="text-uppercase fs-2 fw-bold text-center">Properties owned by {fullName}</h1>
             <div className="d-flex justify-content-end gap-2 p-3">
                 <button className="btn btn-primary" onClick={() => setModalOpen(!isModalOpen)}>
                     <IoAddOutline className="fs-4" /> Add a new property
                 </button>
             </div>
-            <div className="row">
-                {
-                    currentProperties.map(property => 
-                        <div key={property.id} className="col-12 col-md-6 col-lg-3 mb-2">
-                            <div className="card h-100 border rounded shadow-sm">
-                                <div className="flip-box">
-                                    <div className="flip-box-inner position-relative">
-                                        <div className="flip-box-front">
-                                            <img src={property.imgFront} className="card-img-top" alt="Home"/>
-                                        </div>
-                                        <div className="flip-box-back position-absolute top-0 start-0 w-100 h-100 bg-light">
-                                            <img src={property.imgBack} className="card-img-top" alt="Houses"/>
+            {
+                loading
+                ?
+                    <Loader/>
+                :
+                    <div className="row">
+                        {
+                            currentProperties.length === 0
+                            ?
+                                <div className="d-flex flex-column align-items-center justify-content-center w-100 my-5">
+                                    <h4 className="text-muted mt-3">No properties found</h4>
+                                </div>
+                            :
+                                currentProperties.map(property => 
+                                    <div key={property.id} className="col-12 col-md-6 col-lg-3 mb-2">
+                                        <div className="card h-100 border rounded shadow-sm overflow-hidden">                                   
+                                            {
+                                                property.images.map(image =>
+                                                    /* Hi Nimo, 
+                                                    Ukipata code ya kustyle the image auto play functionality place the styling here*/
+                                                    <img key={image.id} src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="h-50 object-fit z-50"/>
+                                                )
+                                            }
+                                            <div className="card-body d-flex flex-column">
+                                                <p className="card-text">{property.name}</p>
+                                                <p className="card-text">Rent per month: <b>Kshs. {formatCurrency(property.rent)}</b></p>
+                                                <p className="text-muted d-flex align-items-center">
+                                                    <FaMapMarkerAlt /> {property.location}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="card-body d-flex flex-column">
-                                    <p className="card-text">{property.description}</p>
-                                    <p className="card-text">{property.rent}</p>
-                                    <p className="text-muted d-flex align-items-center">
-                                        <FaMapMarkerAlt /> {property.location}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                )}
-            </div>
-
+                                )    
+                        }
+                    </div>
+            }
+            
             {/* Modal for Adding New Property */}
             {
                 isModalOpen && 
@@ -193,7 +229,7 @@ const Properties = () =>
                                 </div>
                                 <div className="col-12 col-md-4 col-lg-4 mb-3">
                                     <label className="form-label">Rent</label>
-                                    <input type="range" className="form-range" id="propertyRent" name="rent" min={0} max={900000} step={1000} value={propertyDetails.rent} onChange={handleInputChange} required/>
+                                    <input type="range" className="form-range" id="propertyRent" name="rent" min={0} max={90000} step={1000} value={propertyDetails.rent} onChange={handleInputChange} required/>
                                     <span className="mt-2">
                                         <strong>{formatCurrency(propertyDetails.rent)}</strong>
                                     </span>
@@ -226,9 +262,24 @@ const Properties = () =>
                                 </div>
 
                                 {/* Multiple Image Input */}
-                                <div className="col-12 mb-3">
+                                <div className="col-8 mb-3">
                                     <label className="form-label">Property Images</label>
                                     <input type="file" accept="image/*" className="form-control" multiple onChange={handleImageChange} required/>
+                                </div>
+                                
+                                {/* Deposit required checkboxes */}
+                                <div className="col-4 mb-3">
+                                    <label className="form-label">Deposit required</label>
+                                    <div className="d-flex flex-column">
+                                        <div className="form-check">
+                                            <input className="form-check-input" type="radio" name="deposit" value="Yes" checked={propertyDetails.deposit === "Yes"} onChange={handleInputChange} required/>
+                                            <label className="form-check-label">Yes</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <input className="form-check-input" type="radio" name="deposit" value="No" checked={propertyDetails.deposit === "No"} onChange={handleInputChange} required/>
+                                            <label className="form-check-label">No</label>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {/* Image Preview Section */}
