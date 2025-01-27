@@ -81,7 +81,7 @@ const Dashboard = () =>
                     :
                         <Routes>
                             <Route exact path="/" element={<Landing fullName={fullName} role={role} properties={properties}/>}/>
-                            <Route exact path="/properties" element={<Properties/>}></Route>
+                            <Route exact path="/properties" element={<Properties fullName={fullName}/>}></Route>
                             <Route exact path="/available-properties" element={<AvailableProperties/>}></Route>
                             <Route exact path="/available-properties/:id" element={<AvailableProperty/>}></Route>
                             <Route exact path="*" element={<ErrorPage/>}></Route>

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 import Loader from "../../../Assets/Components/Loader"
 import CircularProgress from "@mui/material/CircularProgress"
 
-const Properties = () => 
+const Properties = ({fullName}) => 
 {
     const navigate = useNavigate()
     const [loading, setLoading]=useState(false)
@@ -161,7 +161,7 @@ const Properties = () =>
 
     return (
         <div className="container py-2">
-            <h1 className="text-uppercase fs-2 fw-bold text-center">Properties owned by Samuel Muigai</h1>
+            <h1 className="text-uppercase fs-2 fw-bold text-center">Properties owned by {fullName}</h1>
             <div className="d-flex justify-content-end gap-2 p-3">
                 <button className="btn btn-primary" onClick={() => setModalOpen(!isModalOpen)}>
                     <IoAddOutline className="fs-4" /> Add a new property
