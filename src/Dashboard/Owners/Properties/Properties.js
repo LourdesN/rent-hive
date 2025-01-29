@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom"
 import Loader from "../../../Assets/Components/Loader"
 import CircularProgress from "@mui/material/CircularProgress"
 
+import Carousel from "../../Components/Carousel"
+
 const Properties = ({fullName}) => 
 {
     const navigate = useNavigate()
@@ -182,17 +184,11 @@ const Properties = ({fullName}) =>
                             :
                                 currentProperties.map(property => 
                                     <div key={property.id} className="col-12 col-md-6 col-lg-3 mb-2">
-                                        <div className="card h-100 border rounded shadow-sm overflow-hidden">                                   
-                                            {
-                                                property.images.map(image =>
-                                                    /* Hi Nimo, 
-                                                    Ukipata code ya kustyle the image auto play functionality place the styling here*/
-                                                    <img key={image.id} src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="h-50 object-fit z-50"/>
-                                                )
-                                            }
+                                        <div className="card h-100 border rounded shadow-sm overflow-hidden">  
+                                            <Carousel images={property.images}/>    
                                             <div className="card-body d-flex flex-column">
                                                 <p className="card-text">{property.name}</p>
-                                                <p className="card-text">Rent per month: <b>Kshs. {formatCurrency(property.rent)}</b></p>
+                                                <p className="card-text">Rent per month: <b>{formatCurrency(property.rent)}</b></p>
                                                 <p className="text-muted d-flex align-items-center">
                                                     <FaMapMarkerAlt /> {property.location}
                                                 </p>
