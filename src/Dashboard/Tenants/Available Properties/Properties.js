@@ -187,7 +187,7 @@ const AvailableProperties = () =>
                                                 <p className="card-text">{property.description}</p>
                                                 <p className="card-text">Rent per month: <b>Kshs. {formatCurrency(property.rent)}</b></p>
                                             </div>
-                                            <Link to={`/dashboard/available-properties/${property.id}`} className="btn btn-primary">View property</Link>
+                                            <Link to={`/dashboard/available-properties/${property.id}`} className="btn btn-primary mx-2 mb-2">View property</Link>
                                         </div>
                                     </div>
                                 )
