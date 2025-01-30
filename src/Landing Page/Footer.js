@@ -1,10 +1,12 @@
 import React from "react";
-import "../../src/Assets/CSS/About.css"; 
+import "../../src/Assets/CSS/About.css";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear(); // Get the current year dynamically
+
   return (
     <footer>
-        &copy; 2025 Rent Hive. All rights reserved.
+      &copy; {currentYear} Rent Hive. All rights reserved.
     </footer>
   );
 };
