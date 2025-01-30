@@ -26,7 +26,6 @@ const About = () => {
             <a href="tel:+254745416760" className="contact-link">Contact Us</a>
           </button>
         </div>
-
         {/* Right Side - Images */}
         <div className="responsive-container-block rightSide">
           <img className="number1img" src="https://i.pinimg.com/736x/fa/cf/3a/facf3a22c166279dce0ed3e75d8ef3e3.jpg" alt="1" />
