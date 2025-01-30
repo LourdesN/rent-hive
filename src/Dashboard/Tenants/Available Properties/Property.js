@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import "../../../Assets/CSS/Images.css";
+import ImageSlider from "../../Components/ImageSlider";
 
 import CircularProgress from "@mui/material/CircularProgress"
 
@@ -97,15 +98,8 @@ const AvailableProperty = () =>
 
     return (
         <div className="container mt-2">
-            <div className="row">
-                {
-                    property?.images.map(image => (
-                        <div key={image.id} className="col-md-6 mb-2">
-                            <img src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="img-fluid rounded shadow-sm"/>
-                        </div>
-                    ))
-                }
-            </div>
+           {property?.images && <ImageSlider images={property.images} />}
+
             <div className="row mt-3">
                 {/* Property Details */}
                 <div className="col-md-8">
