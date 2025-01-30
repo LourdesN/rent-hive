@@ -26,7 +26,7 @@ function Navbar()
                             <NavLink className="nav-link" to="/list-property">List Property</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/contact-us">Contact Us</NavLink>
+                            <NavLink className="nav-link" to="./Footer.js">Contact Us</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/login">Login</NavLink>

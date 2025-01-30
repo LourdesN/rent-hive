@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import Properties from "./Properties";
 import About from "./About";
 import Footer from "./Footer";
+import Services from "./Services";
 
 const Landing = () => 
 {
@@ -11,6 +12,7 @@ const Landing = () =>
             <div>
       <About />
     </div>
+    <Services/>
             <Properties/>
             <Footer/>
         </>
