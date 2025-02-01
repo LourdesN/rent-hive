@@ -93,7 +93,38 @@ const AvailableProperty = () =>
     const createLease = e =>
     {
         e.preventDefault()
-        console.log(leaseData)
+        setIsSubmitting(true)
+        fetch("https://rent-hive-backend.vercel.app/lease",
+            {
+                method: "POST",
+                headers:
+                {
+                    "X-Session-ID": localStorage.getItem("X-Session-ID"),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(leaseData)
+            }
+        )
+        .then(response => response.json())
+        .then(data => 
+        {
+            data.type === "success"
+            ?
+                toast.success(data.message,
+                {
+                    onClose: () => 
+                    {
+                        setLeaseData(initialLeaseData)
+                        navigate("/dashboard/available-properties")
+                    }
+                })   
+            :
+                toast.error(data.message)
+        })
+        .finally(()=>
+        {
+            setIsSubmitting(false)
+        })
     }
 
     return (
