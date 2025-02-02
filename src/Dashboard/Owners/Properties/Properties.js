@@ -269,7 +269,7 @@ const Properties = ({fullName}) =>
                                 {/* Deposit required checkboxes */}
                                 <div className="col-4 mb-3">
                                     <label className="form-label">Deposit required</label>
-                                    <div className="d-flex flex-column">
+                                    <div className="d-flex flex-row gap-2">
                                         <div className="form-check">
                                             <input className="form-check-input" type="radio" name="deposit" value="Yes" checked={propertyDetails.deposit === "Yes"} onChange={handleInputChange} required/>
                                             <label className="form-check-label">Yes</label>
