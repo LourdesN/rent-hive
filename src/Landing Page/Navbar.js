@@ -29,11 +29,11 @@ function Navbar()
                             <NavLink className="nav-link" to="./Footer.js">Contact Us</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                            <NavLink className="nav-link" to="/login">Get started</NavLink>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink className="nav-link" to="/sign-up">Sign Up</NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>

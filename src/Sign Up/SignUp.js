@@ -72,8 +72,8 @@ const SignUp = () =>
         <div className="container-fluid min-vh-100 d-flex flex-column align-items-center justify-content-center login-backgound">
             {loading && <Loader/>}
             <div className="card p-4" style={{ maxWidth: "650px", width: "100%", marginTop: "1.5rem" }}>
-                <h3 className="text-center mb-4">Sign Up</h3>
-                <form className="row g-3" onSubmit={signup}>
+                <h3 className="text-center mb-2">Sign Up</h3>
+                <form className="row g-2" onSubmit={signup}>
                     <div className="col-md-6">
                         <label htmlFor="firstName" className="form-label">First Name</label>
                         <input type="text" className="form-control" id="first_name" value={signUpDetails.first_name} onChange={handleInputChange} placeholder="Enter your first name" required/>
@@ -127,10 +127,10 @@ const SignUp = () =>
                             }
                         </span>
                     </div>
-                    <div className="d-flex justify-content-center mt-4">
+                    <div className="d-flex justify-content-center mt-3">
                         <button type="submit" className="btn btn-primary px-4">Sign Up</button>
                     </div>
-                    <Link to="/login" className="d-flex justify-content-end">Already have an account? </Link>
+                    <Link to="/login" className="d-flex justify-content-center justify-content-md-end">Already have an account? </Link>
                 </form>
             </div>
         </div>

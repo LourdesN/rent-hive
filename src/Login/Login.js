@@ -84,6 +84,7 @@ const Login = () =>
             <Link to="/password-reset/new-request" className="text-decoration-none">Forgot password?</Link>
           </div>
           <button type="submit" className="btn btn-primary w-100">Login</button>
+          <Link to="/sign-up" className="d-flex justify-content-center text-decoration-none py-2">Don't have an account?</Link>
         </form>
       </div>
     </div>
