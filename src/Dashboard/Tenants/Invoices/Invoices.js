@@ -11,7 +11,7 @@ const Invoices = () =>
             {
                 filters.map((filter) => (
                     <button key={filter} onClick={() => setFilter(filter)} className={`btn ${invoiceFilter === filter ? "btn-primary" : "btn-outline-primary"} px-4 py-2`}>
-                        {filter}
+                        {filter} invoices
                     </button>
                 ))
             }
