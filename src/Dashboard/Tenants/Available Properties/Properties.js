@@ -5,6 +5,8 @@ import { toast } from "react-toastify"
 import Loader from "../../../Assets/Components/Loader"
 import { Link, useNavigate } from "react-router-dom"
 
+import Carousel from "../../Components/Carousel"
+
 const AvailableProperties = () => 
 {
     const navigate = useNavigate()
@@ -90,6 +92,11 @@ const AvailableProperties = () =>
     // Filter properties based on user input
     useEffect(() => 
     {
+        if(Number(filters.rent) === 0)
+        {
+            setFilteredProperties(properties)
+            return
+        }
         const filtered = properties.filter(property => 
         {
             return (
@@ -98,8 +105,11 @@ const AvailableProperties = () =>
                 (filters.rent === 0 || property.rent <= filters.rent)
             )
         })
+        
         setFilteredProperties(filtered)
+
     }, [filters, properties])
+    
 
     const propertiesPerPage = 4
 
@@ -170,19 +180,12 @@ const AvailableProperties = () =>
                                 return(
                                     <div key={property.id} className="col-12 col-md-6 col-lg-3 mb-2">
                                         <div className="card h-100 border rounded shadow-sm overflow-hidden">
-                                            {
-                                                property.images.map(image =>
-                                                {
-                                                   return(
-                                                    <img key={image.id} src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="h-50 object-fit z-50"/>
-                                                   )
-                                                })
-                                            }
+                                            <Carousel images={property.images}/>
                                             <div className="card-body d-flex flex-column">
                                                 <p className="card-text">{property.description}</p>
-                                                <p className="card-text">Rent per month: <b>{formatCurrency(property.rent)}</b></p>
-                                                <Link to={`/dashboard/available-properties/${property.id}`}>View property</Link>
+                                                <p className="card-text">Rent per month: <b>Kshs. {formatCurrency(property.rent)}</b></p>
                                             </div>
+                                            <Link to={`/dashboard/available-properties/${property.id}`} className="btn btn-primary mx-2 mb-2">View property</Link>
                                         </div>
                                     </div>
                                 )

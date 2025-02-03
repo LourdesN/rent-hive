@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
+import "../../../Assets/CSS/Images.css";
+import ImageSlider from "../../Components/ImageSlider";
 
 import CircularProgress from "@mui/material/CircularProgress"
 
@@ -89,20 +91,44 @@ const AvailableProperty = () =>
     const createLease = e =>
     {
         e.preventDefault()
-        console.log(leaseData)
+        setIsSubmitting(true)
+        fetch("https://rent-hive-backend.vercel.app/lease",
+            {
+                method: "POST",
+                headers:
+                {
+                    "X-Session-ID": localStorage.getItem("X-Session-ID"),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(leaseData)
+            }
+        )
+        .then(response => response.json())
+        .then(data => 
+        {
+            data.type === "success"
+            ?
+                toast.success(data.message,
+                {
+                    onClose: () => 
+                    {
+                        setLeaseData(initialLeaseData)
+                        navigate("/dashboard/available-properties")
+                    }
+                })   
+            :
+                toast.error(data.message)
+        })
+        .finally(()=>
+        {
+            setIsSubmitting(false)
+        })
     }
 
     return (
         <div className="container mt-2">
-            <div className="row">
-                {
-                    property?.images.map(image => (
-                        <div key={image.id} className="col-md-6 mb-2">
-                            <img src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="img-fluid rounded shadow-sm"/>
-                        </div>
-                    ))
-                }
-            </div>
+           {property?.images && <ImageSlider images={property.images} />}
+
             <div className="row mt-3">
                 {/* Property Details */}
                 <div className="col-md-8">

@@ -10,6 +10,7 @@ import "./Assets/CSS/Properties.css"
 import "./Assets/CSS/Sidebar.css"
 import "./Assets/CSS/Signup.css"
 import "./Assets/CSS/Stats.css"
+import "./Assets/CSS/Images.css"
 
 import { Routes, Route } from 'react-router-dom';
 import { Slide, ToastContainer } from 'react-toastify'

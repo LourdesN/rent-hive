@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom"
 import Loader from "../../../Assets/Components/Loader"
 import CircularProgress from "@mui/material/CircularProgress"
 
+import Carousel from "../../Components/Carousel"
+
 const Properties = ({fullName}) => 
 {
     const navigate = useNavigate()
@@ -182,21 +184,19 @@ const Properties = ({fullName}) =>
                             :
                                 currentProperties.map(property => 
                                     <div key={property.id} className="col-12 col-md-6 col-lg-3 mb-2">
-                                        <div className="card h-100 border rounded shadow-sm overflow-hidden">                                   
-                                            {
-                                                property.images.map(image =>
-                                                    /* Hi Nimo, 
-                                                    Ukipata code ya kustyle the image auto play functionality place the styling here*/
-                                                    <img key={image.id} src={`https://mobikey-lms.s3.amazonaws.com/${image.image_url}`} alt="Property" className="h-50 object-fit z-50"/>
-                                                )
-                                            }
+                                        <div className="card h-100 border rounded shadow-sm overflow-hidden">  
+                                            <Carousel images={property.images}/>    
                                             <div className="card-body d-flex flex-column">
                                                 <p className="card-text">{property.name}</p>
+                                                <p className="card-text">{property.description}</p>
+                                                <p className="card-text">Rent per month: <b>{formatCurrency(property.rent)}</b></p>
                                                 <p className="card-text">Rent per month: <b>{formatCurrency(property.rent)}</b></p>
                                                 <p className="text-muted d-flex align-items-center">
                                                     <FaMapMarkerAlt /> {property.location}
                                                 </p>
                                             </div>
+                                           
+                                            <button className="btn btn-primary mb-3 mx-2">Edit property</button>
                                         </div>
                                     </div>
                                 )    
@@ -270,7 +270,7 @@ const Properties = ({fullName}) =>
                                 {/* Deposit required checkboxes */}
                                 <div className="col-4 mb-3">
                                     <label className="form-label">Deposit required</label>
-                                    <div className="d-flex flex-column">
+                                    <div className="d-flex flex-row gap-2">
                                         <div className="form-check">
                                             <input className="form-check-input" type="radio" name="deposit" value="Yes" checked={propertyDetails.deposit === "Yes"} onChange={handleInputChange} required/>
                                             <label className="form-check-label">Yes</label>
