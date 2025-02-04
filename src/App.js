@@ -4,13 +4,14 @@ import 'react-phone-number-input/style.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 import './App.css';
+import "./Assets/CSS/Images.css"
 import "./Assets/CSS/Login.css"
 import "./Assets/CSS/Navbar.css"
 import "./Assets/CSS/Properties.css"
 import "./Assets/CSS/Sidebar.css"
 import "./Assets/CSS/Signup.css"
 import "./Assets/CSS/Stats.css"
-import "./Assets/CSS/Images.css"
+import "./Assets/CSS/Table.css"
 
 import { Routes, Route } from 'react-router-dom';
 import { Slide, ToastContainer } from 'react-toastify'

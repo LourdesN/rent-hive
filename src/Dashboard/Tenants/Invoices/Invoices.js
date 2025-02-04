@@ -60,28 +60,28 @@ const Invoices = () =>
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Invoice No</th>
-                        <th>Invoice Date</th>
-                        <th>Amount</th>
-                        <th>Due Date</th> 
+                        <th scope="col" className="thead">Invoice No</th>
+                        <th scope="col" className="thead">Invoice Date</th>
+                        <th scope="col" className="thead">Amount</th>
+                        <th scope="col" className="thead">Due Date</th> 
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>INV0001</td>
-                        <td>2024-03-02</td>
-                        <td>Kshs. 25,000.00</td>
-                        <td>2024-04-02</td>
-                        <td>
+                        <td data-label="Invoice No" className='td'>INV0001</td>
+                        <td data-label="Invoice Date" className='td'>2024-03-02</td>
+                        <td data-label="Amount" className='td'>Kshs. 25,000.00</td>
+                        <td data-label="Due Date" className='td'>2024-04-02</td>
+                        <td className='td'>
                             <Link to="/dashboard/invoices/" className="btn btn-primary">View invoice details</Link>
                         </td>
                     </tr>
                     <tr>
-                        <td>INV0002</td>
-                        <td>2024-03-02</td>
-                        <td>Kshs. 25,000.00</td>
-                        <td>2024-04-02</td>
-                        <td>
+                        <td data-label="Invoice No" className='td'>INV0002</td>
+                        <td data-label="Invoice Date" className='td'>2024-03-02</td>
+                        <td data-label="Amount" className='td'>Kshs. 25,000.00</td>
+                        <td data-label="Due Date" className='td'>2024-04-02</td>
+                        <td className='td'>
                             <Link to="/dashboard/invoices/" className="btn btn-primary">View invoice details</Link>
                         </td>
                     </tr>
