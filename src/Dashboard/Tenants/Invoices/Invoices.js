@@ -82,7 +82,7 @@ const Invoices = () =>
                         <td data-label="Amount" className='text-center p-4'>Kshs. 25,000.00</td>
                         <td data-label="Due Date" className='text-center p-4'>2024-04-02</td>
                         <td className='text-center p-4'>
-                            <Link to="/dashboard/invoices/" className="btn btn-primary">View invoice details</Link>
+                            <Link to="/dashboard/invoices/" className="btn btn-primary p-2">View invoice details</Link>
                         </td>
                     </tr>
                 </tbody>
