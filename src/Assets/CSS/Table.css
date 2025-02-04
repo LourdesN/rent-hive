@@ -9,13 +9,6 @@
     border: 2px solid #d1d5db; /* Equivalent to border-gray-300 */
     padding: 8px;
 }
-.thead 
-{
-    background-color: #198754; /* Bootstrap success color */
-    color: white;
-    text-transform: uppercase;
-    font-size: 1rem; /* Equivalent to text-base */
-}
 .tbody
 {
     text-transform: uppercase;
