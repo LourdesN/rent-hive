@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
-import Loader from "../../../Assets/Components/Loader"
+import CircularProgress from "@mui/material/CircularProgress"
 
 const Invoices = () => 
 {
@@ -81,7 +81,7 @@ const Invoices = () =>
                         {
                             loading
                             ?
-                                <Loader/>
+                                <CircularProgress size={20}/>
                             :
                                 invoices.length > 0
                                 ?
