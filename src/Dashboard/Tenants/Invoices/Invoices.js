@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import {useNavigate} from "react-router-dom"
-import {toast} from "react-toastify"
+import { useNavigate, Link } from "react-router-dom"
+import { toast } from "react-toastify"
 
 import Loader from "../../../Assets/Components/Loader"
 
@@ -14,7 +14,7 @@ const Invoices = () =>
     const navigate = useNavigate()
     const fetchInvoices = () =>
     {
-
+        setLoading(true)
         fetch("https://rent-hive-backend.vercel.app/invoices",
         {
             method: "GET",
@@ -57,7 +57,36 @@ const Invoices = () =>
                     ))
                 }
             </nav>
-            
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Invoice No</th>
+                        <th>Invoice Date</th>
+                        <th>Amount</th>
+                        <th>Due Date</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>INV0001</td>
+                        <td>2024-03-02</td>
+                        <td>Kshs. 25,000.00</td>
+                        <td>2024-04-02</td>
+                        <td>
+                            <Link to="/dashboard/invoices/" className="btn btn-primary">View invoice details</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>INV0002</td>
+                        <td>2024-03-02</td>
+                        <td>Kshs. 25,000.00</td>
+                        <td>2024-04-02</td>
+                        <td>
+                            <Link to="/dashboard/invoices/" className="btn btn-primary">View invoice details</Link>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </>
     )
 }
