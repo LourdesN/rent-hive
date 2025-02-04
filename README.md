@@ -16,11 +16,9 @@ Rent Hive is a property rental management platform that connects homeowners and 
 
 ## Technologies Used  
 
-- **Frontend**: React.js, Tailwind CSS  
-- **Backend**: Node.js, Express.js  
-- **Database**: MongoDB  
-- **Authentication**: JWT (JSON Web Token)  
-- **Payment Integration**: (Specify payment gateway, e.g., Stripe, Flutterwave, etc.)  
+- **Frontend**: React.js, Bootstrap CSS  
+- **Backend**: Python, Flask  
+- **Database**: PostgreSQL  
 - **Deployment**: Vercel  
 
 ## Contributors  
