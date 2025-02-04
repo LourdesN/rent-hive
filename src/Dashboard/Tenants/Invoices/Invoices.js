@@ -57,7 +57,7 @@ const Invoices = () =>
                     ))
                 }
             </nav>
-            <div className="overflow-x-auto p-2 p-md-7">
+            <div className="overflow-x-auto p-2 p-md-5">
                 <table className="table">
                     <thead>
                         <tr>
