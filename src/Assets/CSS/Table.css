@@ -9,11 +9,6 @@
     border: 2px solid #d1d5db; /* Equivalent to border-gray-300 */
     padding: 8px;
 }
-.tbody
-{
-    text-transform: uppercase;
-    font-size: 1rem; /* Equivalent to text-base */
-}
 .table td:last-child a
 {
     padding: 5px !important; /* Remove any padding */

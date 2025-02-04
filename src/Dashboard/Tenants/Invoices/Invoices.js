@@ -47,7 +47,7 @@ const Invoices = () =>
     console.log(invoices)
 
     return (
-        <>
+        <div className="p-2 p-md-7">
             <nav className="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 p-3 bg-light shadow-sm rounded">
                 {
                     filters.map((filter) => (
@@ -57,37 +57,40 @@ const Invoices = () =>
                     ))
                 }
             </nav>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col" className="text-white text-uppercase bg-success">Invoice No</th>
-                        <th scope="col" className="text-white text-uppercase bg-success">Invoice Date</th>
-                        <th scope="col" className="text-white text-uppercase bg-success">Amount</th>
-                        <th scope="col" className="text-white text-uppercase bg-success">Due Date</th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-label="Invoice No" className='text-center p-4'>INV0001</td>
-                        <td data-label="Invoice Date" className='text-center p-4'>2024-03-02</td>
-                        <td data-label="Amount" className='text-center p-4'>Kshs. 25,000.00</td>
-                        <td data-label="Due Date" className='text-center p-4'>2024-04-02</td>
-                        <td className='text-center p-4'>
-                            <Link to="/dashboard/invoices/" className="btn btn-primary">View invoice details</Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Invoice No" className='text-center p-4'>INV0002</td>
-                        <td data-label="Invoice Date" className='text-center p-4'>2024-03-02</td>
-                        <td data-label="Amount" className='text-center p-4'>Kshs. 25,000.00</td>
-                        <td data-label="Due Date" className='text-center p-4'>2024-04-02</td>
-                        <td className='text-center p-4'>
-                            <Link to="/dashboard/invoices/" className="btn btn-primary p-2">View invoice details</Link>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </>
+            <div className="overflow-x-auto">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" className="text-white text-uppercase bg-success">Invoice No</th>
+                            <th scope="col" className="text-white text-uppercase bg-success">Invoice Date</th>
+                            <th scope="col" className="text-white text-uppercase bg-success">Amount</th>
+                            <th scope="col" className="text-white text-uppercase bg-success">Due Date</th> 
+                            <th scope="col" className="text-white text-uppercase bg-success">Action</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Invoice No" className='text-center p-4'>INV0001</td>
+                            <td data-label="Invoice Date" className='text-center p-4'>2024-03-02</td>
+                            <td data-label="Amount" className='text-center p-4'>Kshs. 25,000.00</td>
+                            <td data-label="Due Date" className='text-center p-4'>2024-04-02</td>
+                            <td className='text-center p-4'>
+                                <Link to="/dashboard/invoices/" className="btn btn-primary">View invoice details</Link>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Invoice No" className='text-center p-4'>INV0002</td>
+                            <td data-label="Invoice Date" className='text-center p-4'>2024-03-02</td>
+                            <td data-label="Amount" className='text-center p-4'>Kshs. 25,000.00</td>
+                            <td data-label="Due Date" className='text-center p-4'>2024-04-02</td>
+                            <td className='text-center p-4'>
+                                <Link to="/dashboard/invoices/" className="btn btn-primary p-2">View invoice details</Link>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     )
 }
 
