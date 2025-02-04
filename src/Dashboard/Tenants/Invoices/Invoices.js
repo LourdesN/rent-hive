@@ -40,6 +40,7 @@ const Invoices = () =>
             :
                 setInvoices(data.invoices)
         })
+        .finally(() => setLoading(false))
     }
 
     useEffect(() => fetchInvoices(),[])
