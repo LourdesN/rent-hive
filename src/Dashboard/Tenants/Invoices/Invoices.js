@@ -44,6 +44,14 @@ const Invoices = () =>
 
     useEffect(() => fetchInvoices(),[])
 
+    const formatCurrency = value => 
+        new Intl.NumberFormat("en-KE", 
+        { 
+            style: "currency", 
+            currency: "KES", 
+            minimumFractionDigits: 2 
+        }).format(value)
+
     console.log(invoices)
 
     return (
@@ -69,24 +77,29 @@ const Invoices = () =>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-label="Invoice No" className='text-center p-4'>INV0001</td>
-                            <td data-label="Invoice Date" className='text-center p-4'>2024-03-02</td>
-                            <td data-label="Amount" className='text-center p-4'>Kshs. 25,000.00</td>
-                            <td data-label="Due Date" className='text-center p-4'>2024-04-02</td>
-                            <td className='text-center p-4'>
-                                <Link to="/dashboard/invoices/" className="btn btn-primary">View invoice details</Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Invoice No" className='text-center p-4'>INV0002</td>
-                            <td data-label="Invoice Date" className='text-center p-4'>2024-03-02</td>
-                            <td data-label="Amount" className='text-center p-4'>Kshs. 25,000.00</td>
-                            <td data-label="Due Date" className='text-center p-4'>2024-04-02</td>
-                            <td className='text-center p-4'>
-                                <Link to="/dashboard/invoices/" className="btn btn-primary p-4">View invoice details</Link>
-                            </td>
-                        </tr>
+                        {
+                            loading
+                            ?
+                                <Loader/>
+                            :
+                                invoices.length > 0
+                                ?
+                                    invoices.map(invoice =>
+                                        <tr key={invoice.ref_no}>
+                                            <td data-label="Invoice No" className='text-center p-4'>{invoice.ref_no}</td>
+                                            <td data-label="Invoice Date" className='text-center p-4'>{invoice.invoice_date}</td>
+                                            <td data-label="Amount" className='text-center p-4'>{formatCurrency(invoice.amount)}</td>
+                                            <td data-label="Due Date" className='text-center p-4'>{invoice.due_date}</td>
+                                            <td className='text-center p-4'>
+                                                <Link to={`/dashboard/invoices/${invoice.ref_no}`} className="btn btn-primary">View invoice details</Link>
+                                            </td>
+                                        </tr>
+                                    )
+                                :
+                                    <tr>
+                                        <td colSpan={5} className="text-center">No invoices found</td> 
+                                    </tr>
+                        }
                     </tbody>
                 </table>
             </div>
