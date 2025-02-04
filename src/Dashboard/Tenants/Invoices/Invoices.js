@@ -39,9 +39,12 @@ const Invoices = () =>
                     toast.error(data.message)
             :
                 setInvoices(data.invoices)
-        }
-        )
+        })
     }
+
+    useEffect(() => fetchInvoices(),[])
+
+    console.log(invoices)
 
     return (
         <>
