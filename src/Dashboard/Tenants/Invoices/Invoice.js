@@ -13,41 +13,39 @@ const Invoice = () =>
     }).format(value)
 
     return(
-        <>
-            <h1>Invoice page for invoice no {ref}</h1>
+        <div className="py-5">
             <div className="d-flex justify-content-end">
-                <h2>Invoice details</h2>
-                <p><b>Invoice number:</b>: {ref}</p>
-                <p><b>Invoice date</b>: 2025-02-05</p>
-                <p><b>Due date</b>: 2025-03-05</p>
+                <div className="py-2">
+                    <p><strong>Invoice no:</strong> {ref}</p>
+                    <p><strong>Invoice date:</strong> 2024-02-02</p>
+                    <p><strong>Due date:</strong> 2024-03-02</p>
+                </div>
             </div>
-            <div className="d-flex justify-content-start">
-                <h2>Billed to</h2>
-                <p><b>Name</b>: Samuel Muigai</p>
-                <p><b>Phone number:</b> +254707251073</p>
-                <p><b>Email address:</b> ndungu.muigai01@gmail.com</p>
+            <div className="d-flex justify-content-end">
+                <div className="py-2">
+                    <h2>Billed to</h2>
+                    <p><strong>Name:</strong> Samuel Muigai</p>
+                    <p><strong>Email address:</strong> ndungu.muigai01@gmail.com</p>
+                    <p><strong>Phone number:</strong> +254707251073</p>
+                </div>
             </div>
-
-            <table>
+            <table className="table mx-auto text-center mt-4">
                 <thead>
                     <tr>
-                        <th>Item No</th>
-                        <th>Description</th>
-                        <th>Amount</th>
+                        <th scope="col" className="text-white text-uppercase text-center bg-success">Item No</th>
+                        <th scope="col" className="text-white text-uppercase text-center bg-success">Description</th>
+                        <th scope="col" className="text-white text-uppercase text-center bg-success">Amount</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Rent deposit for property 1</td>
-                        <td>{formatCurrency(75000)}</td>
+                        <td data-label="Item No" className='text-center p-4'>1</td>
+                        <td data-label="Description" className='text-center p-4'>Rent deposit for property 1</td>
+                        <td data-label="Amount" className='text-center p-4'>{formatCurrency(75000)}</td>
                     </tr>
                 </tbody>
             </table>
-            <div>
-                <h2>Payment details</h2>
-            </div>
-        </>
+        </div>
     )
 
 }
