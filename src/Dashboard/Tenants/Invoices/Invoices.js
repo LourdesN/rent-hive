@@ -46,14 +46,12 @@ const Invoices = () =>
     useEffect(() => fetchInvoices(),[])
 
     const formatCurrency = value => 
-        new Intl.NumberFormat("en-KE", 
-        { 
-            style: "currency", 
-            currency: "KES", 
-            minimumFractionDigits: 2 
-        }).format(value)
-
-    console.log(invoices)
+    new Intl.NumberFormat("en-KE", 
+    { 
+        style: "currency", 
+        currency: "KES", 
+        minimumFractionDigits: 2 
+    }).format(value)
 
     return (
         <>
