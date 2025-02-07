@@ -13,7 +13,7 @@ const Invoice = () =>
     }).format(value)
 
     return(
-        <div className="py-5">
+        <div className="mx-5">
             <div className="d-flex justify-content-end">
                 <div className="py-2">
                     <p><strong>Invoice no:</strong> {ref}</p>
@@ -21,7 +21,7 @@ const Invoice = () =>
                     <p><strong>Due date:</strong> 2024-03-02</p>
                 </div>
             </div>
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-start">
                 <div className="py-2">
                     <h2>Billed to</h2>
                     <p><strong>Name:</strong> Samuel Muigai</p>
