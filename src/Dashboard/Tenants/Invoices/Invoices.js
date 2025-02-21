@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { toast } from "react-toastify"
+import { formatCurrency } from "../../Calculations/Format Currency"
 
 import CircularProgress from "@mui/material/CircularProgress"
 
@@ -44,14 +45,6 @@ const Invoices = () =>
     }
 
     useEffect(() => fetchInvoices(),[])
-
-    const formatCurrency = value => 
-    new Intl.NumberFormat("en-KE", 
-    { 
-        style: "currency", 
-        currency: "KES", 
-        minimumFractionDigits: 2 
-    }).format(value)
 
     return (
         <>

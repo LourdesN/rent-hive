@@ -1,16 +1,9 @@
 import { useParams } from "react-router-dom"
+import { formatCurrency } from "../../Calculations/Format Currency"
 
 const Invoice = () =>
 {
     const { ref } = useParams()
-
-    const formatCurrency = value => 
-    new Intl.NumberFormat("en-KE", 
-    { 
-        style: "currency", 
-        currency: "KES", 
-        minimumFractionDigits: 2 
-    }).format(value)
 
     return(
         <div className="mx-5">

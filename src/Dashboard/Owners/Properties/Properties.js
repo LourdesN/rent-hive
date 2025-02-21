@@ -5,6 +5,8 @@ import { FaMapMarkerAlt } from "react-icons/fa"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 
+import {formatCurrency} from "../../Calculations/Format Currency"
+
 import Loader from "../../../Assets/Components/Loader"
 import CircularProgress from "@mui/material/CircularProgress"
 
@@ -113,14 +115,6 @@ const Properties = ({fullName}) =>
         const files = Array.from(e.target.files)
         setPropertyDetails((prevDetails) => ({ ...prevDetails, images: files }))
     }
-
-    const formatCurrency = value => 
-        new Intl.NumberFormat("en-KE", 
-        { 
-            style: "currency", 
-            currency: "KES", 
-            minimumFractionDigits: 2 
-        }).format(value)
 
     const addProperty = e => 
     {

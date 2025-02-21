@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { FaMapMarkerAlt } from "react-icons/fa"
+import {formatCurrency} from "../../Calculations/Format Currency"
 
 import Loader from "../../../Assets/Components/Loader"
 import Carousel from "../../Components/Carousel"
@@ -54,7 +55,7 @@ const Leases = ({fullName}) =>
                                                 <div className="card-body d-flex flex-column">
                                                     <p className="card-text fw-bold text-uppercase">{data.propertyName}</p>
                                                     <p className="card-text"><FaMapMarkerAlt/> {data.location}</p>
-                                                    <p className="card-text">Rent per month: <b>Kshs. {data.rent}</b></p>
+                                                    <p className="card-text">Rent per month: <b>{formatCurrency(data.rent)}</b></p>
                                                     <p className="card-text">Lease start date: {data.lease_start_date}</p>
                                                 </div>
                                             </div>

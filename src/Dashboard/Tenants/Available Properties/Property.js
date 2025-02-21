@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
+import { formatCurrency } from "../../Calculations/Format Currency";
+
 import "../../../Assets/CSS/Images.css";
 import ImageSlider from "../../Components/ImageSlider";
 
@@ -53,14 +55,6 @@ const AvailableProperty = () =>
     useEffect(() => fetchProperty(), [id, navigate])
 
     const handleInputChange = e => setLeaseData({...leaseData, [e.target.id]: e.target.value})
-
-    const formatCurrency = value => 
-        new Intl.NumberFormat("en-KE", 
-        { 
-            style: "currency", 
-            currency: "KES", 
-            minimumFractionDigits: 2 
-        }).format(value)
 
     useEffect(() => 
     {

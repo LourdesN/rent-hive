@@ -4,6 +4,7 @@ import { toast } from "react-toastify"
 
 import Loader from "../../../Assets/Components/Loader"
 import { Link, useNavigate } from "react-router-dom"
+import { formatCurrency } from "../../Calculations/Format Currency"
 
 import Carousel from "../../Components/Carousel"
 
@@ -118,14 +119,6 @@ const AvailableProperties = () =>
     const currentProperties = filteredProperties.slice(indexOfFirstProperty, indexOfLastProperty);
 
     const totalPages = Math.ceil(filteredProperties.length / propertiesPerPage)
-
-    const formatCurrency = value => 
-        new Intl.NumberFormat("en-KE", 
-        { 
-            style: "currency", 
-            currency: "KES", 
-            minimumFractionDigits: 2 
-        }).format(value)
     
   return (
     <div className="container mt-2">
