@@ -17,12 +17,12 @@ const AvailableProperty = () =>
     const [ownerDetails, setOwnerDetails]=useState(null)
     const [isModalOpen, setIsModalOpen]=useState(false)
     const [isSubmitting, setIsSubmitting]=useState(false)
-    const [leasePeriod, setLeasePeriod]=useState("")
     const initialLeaseData=
     {
         property_id: id,
         start_date: "",
         end_date: "",
+        duration: ""
     }
     const [leaseData, setLeaseData] = useState(initialLeaseData)
 
@@ -68,7 +68,7 @@ const AvailableProperty = () =>
             "6 months": 6,
             "9 months": 9,
             "1 year": 12
-        }[leasePeriod] || 0
+        }[leaseData.duration] || 0
     
         if (monthsToAdd > 0) 
         {
@@ -80,7 +80,7 @@ const AvailableProperty = () =>
                 end_date: startDate.toISOString().split("T")[0] // Format as YYYY-MM-DD
             }))
         }
-    }, [leasePeriod, leaseData.start_date])
+    }, [leaseData.duration, leaseData.start_date])
 
     const createLease = e =>
     {
@@ -163,7 +163,6 @@ const AvailableProperty = () =>
                             {
                                 setIsModalOpen(false)
                                 setLeaseData(initialLeaseData)
-                                setLeasePeriod("")
                             }}></button>
                         </div>
                         <div className="modal-body">
@@ -173,7 +172,7 @@ const AvailableProperty = () =>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Lease Period</label>
-                                <select className="form-select" value={leasePeriod} onChange={e => setLeasePeriod(e.target.value)} required>
+                                <select className="form-select" id="duration" value={leaseData.duration} onChange={handleInputChange} required>
                                     <option value="">Select lease period</option>
                                     <option value="3 months">3 months</option>
                                     <option value="6 months">6 months</option>
@@ -195,7 +194,6 @@ const AvailableProperty = () =>
                                 {
                                     setIsModalOpen(!isModalOpen)
                                     setLeaseData(initialLeaseData)
-                                    setLeasePeriod("")
                                 }
                             }>Close</button>
                             <button type="submit" className={`btn btn-primary ${isSubmitting ? "disabled" : ""}`}>
