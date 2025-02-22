@@ -132,7 +132,7 @@ const AvailableProperty = () =>
                         <h5 className="text-secondary">
                             <strong>Location:</strong> {property?.location}
                         </h5>
-                        <h4 className="text-primary">Rent per month: Ksh {formatCurrency(property?.rent)}</h4>
+                        <h4 className="text-primary">Rent per month: {formatCurrency(property?.rent)}</h4>
                         <div className="mt-3 d-flex gap-2">
                             <button className="btn btn-success" onClick={()=> setIsModalOpen(true)}>Lease Property</button>
                             <button className="btn btn-secondary" onClick={() => navigate(-1)}>Back</button>
