@@ -55,7 +55,7 @@ const Lease = () =>
                     <>
                         <div className="row mt-2">
                             <div className="col-12 col-md-6">
-                                <div className="card p-2 shadow-sm gap-2">
+                                <div className="card p-2 shadow-sm gap-1">
                                     <Carousel images={leaseDetails?.property.images || []}/>
                                     <h1 className="lead fw-bold text-uppercase fs-4">{leaseDetails?.property.name}</h1>
                                     <p className="lead">{leaseDetails?.property.description}</p>
