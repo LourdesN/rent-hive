@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import { formatCurrency } from "../../Calculations/Format Currency";
 
-import "../../../Assets/CSS/Images.css";
 import ImageSlider from "../../Components/ImageSlider";
 
 import CircularProgress from "@mui/material/CircularProgress"
@@ -120,20 +119,20 @@ const AvailableProperty = () =>
     }
 
     return (
-        <div className="container mt-2">
+        <div className="container mt-1">
            {property?.images && <ImageSlider images={property.images} />}
 
-            <div className="row mt-3">
+            <div className="row">
                 {/* Property Details */}
                 <div className="col-md-8">
-                    <div className="card p-4 shadow-sm">
+                    <div className="card p-3 shadow-sm">
                         <h1 className="lead fw-bold text-uppercase fs-4">{property?.name}</h1>
                         <p className="lead">{property?.description}</p>
                         <h5 className="text-secondary">
                             <strong>Location:</strong> {property?.location}
                         </h5>
                         <h4 className="text-primary">Rent per month: {formatCurrency(property?.rent)}</h4>
-                        <div className="mt-3 d-flex gap-2">
+                        <div className="mt-1 d-flex gap-2">
                             <button className="btn btn-success" onClick={()=> setIsModalOpen(true)}>Lease Property</button>
                             <button className="btn btn-secondary" onClick={() => navigate(-1)}>Back</button>
                         </div>

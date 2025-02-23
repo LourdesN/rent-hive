@@ -13,6 +13,7 @@ import AvailableProperty from "./Tenants/Available Properties/Property"
 import Invoices from "./Tenants/Invoices/Invoices"
 import Invoice from "./Tenants/Invoices/Invoice"
 import Leases from "./Tenants/Leases/Leases"
+import Lease from "./Tenants/Leases/Lease"
 import ErrorPage from "../404/Error"
 
 const Dashboard = () => 
@@ -90,6 +91,7 @@ const Dashboard = () =>
                             <Route exact path="/invoices" element={<Invoices/>}></Route>
                             <Route exact path="/invoices/:ref" element={<Invoice/>}></Route>
                             <Route exact path="/leases" element={<Leases fullName={fullName}/>}></Route>
+                            <Route exact path="/leases/:id" element={<Lease/>}></Route>
                             <Route exact path="*" element={<ErrorPage/>}></Route>
                         </Routes>
                 }

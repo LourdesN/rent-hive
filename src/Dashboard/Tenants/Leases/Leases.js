@@ -71,14 +71,13 @@ const Leases = ({fullName}) =>
                                                     <p className="card-text fw-bold text-uppercase">{lease.property.name}</p>
                                                     <p className="card-text"><FaMapMarkerAlt/> {lease.property.location}</p>
                                                     <p className="card-text">Rent per month: <b>{formatCurrency(lease.rent_amount)}</b></p>
-                                                    <p className="card-text">Lease start date: {lease.start_date.split("T")[0]}</p>
+                                                    <p className="card-text">Lease start date: {lease.start_date}</p>
                                                 </div>
                                                 <Link to={`/dashboard/leases/${lease.id}`} className="btn btn-primary mx-2 mb-2">View lease details</Link>
                                             </div>
                                         </div>
                                     )
-                                }
-                                )
+                                })
                         }
                     </div>
             }
