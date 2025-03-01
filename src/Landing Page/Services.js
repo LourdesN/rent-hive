@@ -4,7 +4,7 @@ import "../../src/Assets/CSS/Services.css";
 const Services = () => {
   return (
     // Gallery Section
-    <section>
+    <section className="container py-2">
         <h3>What We Offer...</h3>
     <div className="images-container">
       <div className="image-wrapper">
