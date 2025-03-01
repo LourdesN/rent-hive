@@ -12,7 +12,7 @@ const Footer = () => {
         <a href="whatsapp://send?text=Hello I would like to Enquire about managing my properties &phone=+254770909233" target="_blank" rel="noopener noreferrer">
           <FaWhatsapp />
         </a>
-        <a href="lourdeswairimu@gmail.com" target="_blank" rel="noopener noreferrer">
+        <a href="mailto:lourdeswairimu@gmail.com" target="_blank" rel="noopener noreferrer">
           <FaEnvelope />
         </a>
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
