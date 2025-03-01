@@ -9,12 +9,18 @@ const Landing = () =>
     return ( 
         <>
             <Navbar/>
-            <div>
-      <About />
-    </div>
-    <Services/>
-            <Properties/>
-            <Footer/>
+            <div id="about">
+                <About />
+            </div>
+            <div id="services">
+                <Services/>
+            </div>
+            <div id="properties">
+                <Properties/>
+            </div>
+            <div id="contact">
+                <Footer/>
+            </div>
         </>
      );
 }

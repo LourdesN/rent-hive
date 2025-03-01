@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { NavHashLink } from "react-router-hash-link";
 
 function Navbar() 
 {
@@ -17,23 +18,20 @@ function Navbar()
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/">Home</NavLink>
+                            <NavHashLink smooth className="nav-link" to="/#about">Home</NavHashLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/properties">Properties</NavLink>
+                            <NavHashLink smooth className="nav-link" to="/#services">Our services</NavHashLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/list-property">List Property</NavLink>
+                            <NavHashLink smooth className="nav-link" to="/#properties">Properties</NavHashLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="./Footer.js">Contact Us</NavLink>
+                            <NavHashLink smooth className="nav-link" to="#contact">Contact Us</NavHashLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/login">Get started</NavLink>
                         </li>
-                        {/* <li className="nav-item">
-                            <NavLink className="nav-link" to="/sign-up">Sign Up</NavLink>
-                        </li> */}
                     </ul>
                 </div>
             </div>
