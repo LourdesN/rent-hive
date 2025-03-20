@@ -1,4 +1,5 @@
 import { CiCamera } from "react-icons/ci";
+import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
