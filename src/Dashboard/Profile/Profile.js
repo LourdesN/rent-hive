@@ -27,7 +27,7 @@ const Profile = () =>
             {/* Change password section */}
             <div className="mt-4">
                 <h5 className="text-center border-bottom pb-2">Change password</h5>
-                <form className="row gap-3">
+                <form className="row gap-2">
                     <div className="col-md-4">
                         <label className="form-label">Current password</label>
                         <input type="password" name="current_password" className="form-control" required></input>
