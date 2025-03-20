@@ -8,7 +8,7 @@ const Profile = () =>
     const phone = "+254707251073" 
     return(
         <div className="container p-4">
-            <div className="d-flex align-items-center gap-4 border-bottom pb-3">
+            <div className="d-flex justify-content-center align-items-center gap-4 border-bottom pb-3">
                 <div className="position-relative p-3 rounded">
                     <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&size=200" alt={`${fullName}'s profile image`} className="rounded-circle" width="100" height="100"/>
                     <button className="btn btn-light position-absolute bottom-0 end-0 p-1 border rounded-circle">
