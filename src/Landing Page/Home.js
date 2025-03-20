@@ -4,6 +4,8 @@ import About from "./About";
 import Footer from "./Footer";
 import Services from "./Services";
 
+import ScrollToTop from "react-scroll-to-top";
+
 const Landing = () => 
 {
     return ( 
@@ -21,6 +23,7 @@ const Landing = () =>
             <div id="contact">
                 <Footer/>
             </div>
+            <ScrollToTop smooth top={40} color="#6f00ff"/>
         </>
      );
 }

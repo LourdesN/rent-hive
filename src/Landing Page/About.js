@@ -10,7 +10,7 @@ const About = () => {
           <p className="text-blk heading">Rent Hive</p>
           <p className="text-blk subHeading">
             Your Premium Solution for property management!  &#128578; 
-            <br />
+            <br/>
             We strive to simplify and streamline the complexities of property management through innovative technology.
             Our mission is to provide property owners and tenants with a seamless, efficient, and transparent platform
             for managing all aspects of rental properties. With our user-friendly interface and robust features,
