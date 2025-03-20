@@ -1,4 +1,6 @@
 import { CiCamera } from "react-icons/ci";
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Profile = () =>
 {
@@ -6,6 +8,38 @@ const Profile = () =>
     const role = "Home Owner"
     const email = "ndungu.muigai01@gmail.com"
     const phone = "+254707251073" 
+
+    const navigate=useNavigate()
+
+    const [userDetails, setUserDetails] = useState({})
+    
+    useEffect(()=>
+    {
+        fetch("https://rent-hive-backend.vercel.app/profile",
+        {
+            method: "GET",
+            headers:
+            {
+                "X-Session-ID": localStorage.getItem("X-Session-ID")
+            }
+        })
+        .then(response => response.json())
+        .then(data =>
+        {
+            data.type === "error"
+            ?
+                data.reason === "Not found" || data.reason === "Invalid credentials"
+                ?
+                    toast.error(data.message, { onClose: () => navigate(-1) })
+                :
+                    toast.error(data.message)
+            :
+                setUserDetails(data.user_details)
+        })
+    })
+
+    console.log(userDetails)
+    
     return(
         <div className="container p-4">
             <div className="d-flex justify-content-center align-items-center gap-4 pb-3">
