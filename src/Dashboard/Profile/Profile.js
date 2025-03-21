@@ -52,7 +52,7 @@ const Profile = () =>
                     <p className="mb-1">Name: {loading ? "Loading..." : `${userDetails.first_name} ${userDetails.last_name}`}</p>
                     <p className="mb-1">Email: {loading ? "Loading..." : userDetails.email}</p>
                     <p className="mb-1">Phone number: {loading ? "Loading..." : userDetails.phone_number}</p>
-                    <p className="mb-1">Role: {loading ? "Loading..." : (userDetails.role === "Owner" ? "Home Owner" : "Tenant")}</p>
+                    <p className="mb-1">Role: {loading ? "Loading..." : (userDetails.role === "Owner" ? "Home Owner" : userDetails.role ==="Tenant" ? "Tenant" : "")}</p>
                 </div>
             </div>
 
