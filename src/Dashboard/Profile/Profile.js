@@ -8,6 +8,7 @@ const Profile = () =>
     const navigate=useNavigate()
 
     const [userDetails, setUserDetails] = useState({})
+    const [loading, setIsLoading] = useState(true)
     
     useEffect(()=>
     {
@@ -34,23 +35,24 @@ const Profile = () =>
             :
                 setUserDetails(responseObject.user_details)
         })
+        .finally(()=> setIsLoading(false))
     },[])
     
     return(
         <div className="container p-4">
             <div className="d-flex justify-content-center align-items-center gap-4 pb-3">
                 <div className="position-relative p-3 rounded">
-                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&size=200" alt={`${userDetails.first_name} ${userDetails.last_name}'s profile image`} className="rounded-circle" width="100" height="100"/>
+                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&size=200" alt={loading ? "Loading..." : `${userDetails.first_name} ${userDetails.last_name}'s profile image`} className="rounded-circle" width="100" height="100"/>
                     <button className="btn btn-light position-absolute bottom-0 end-0 p-1 border rounded-circle">
                         <CiCamera className="text-dark fs-5"/>
                     </button>
                 </div>
                 <div>
                     <h4 className="border-bottom p-1">User details</h4>
-                    <p className="mb-1">Name: {userDetails.first_name} {userDetails.last_name}</p>
-                    <p className="mb-1">Email: {userDetails.email}</p>
-                    <p className="mb-1">Phone number: {userDetails.phone_number}</p>
-                    <p className="mb-1">Role: {userDetails.role === "Owner" ? "Home Owner" : "Tenant"}</p>
+                    <p className="mb-1">Name: {loading ? "Loading..." : `${userDetails.first_name} ${userDetails.last_name}`}</p>
+                    <p className="mb-1">Email: {loading ? "Loading..." : userDetails.email}</p>
+                    <p className="mb-1">Phone number: {loading ? "Loading..." : userDetails.phone_number}</p>
+                    <p className="mb-1">Role: {loading ? "Loading..." : (userDetails.role === "Owner" ? "Home Owner" : "Tenant")}</p>
                 </div>
             </div>
 
