@@ -28,15 +28,17 @@ const Profile = () =>
         .then(data =>
         {
             console.log(data.user_details)
-            data.type === "error"
+            const responseObject = data[0]
+
+            responseObject.type === "error"
             ?
-                data.reason === "Not found" || data.reason === "Invalid credentials"
+                responseObject.reason === "Not found" || responseObject.reason === "Invalid credentials"
                 ?
-                    toast.error(data.message, { onClose: () => navigate(-1) })
+                    toast.error(responseObject.message, { onClose: () => navigate(-1) })
                 :
-                    toast.error(data.message)
+                    toast.error(responseObject.message)
             :
-                setUserDetails(data.user_details)
+                setUserDetails(responseObject.user_details)
         })
     },[])
 
