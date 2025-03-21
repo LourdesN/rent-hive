@@ -5,11 +5,6 @@ import { useNavigate } from "react-router-dom"
 
 const Profile = () =>
 {
-    const fullName = "Samuel Muigai"
-    const role = "Home Owner"
-    const email = "ndungu.muigai01@gmail.com"
-    const phone = "+254707251073" 
-
     const navigate=useNavigate()
 
     const [userDetails, setUserDetails] = useState({})
@@ -27,7 +22,6 @@ const Profile = () =>
         .then(response => response.json())
         .then(data =>
         {
-            console.log(data.user_details)
             const responseObject = data[0]
 
             responseObject.type === "error"
@@ -41,24 +35,22 @@ const Profile = () =>
                 setUserDetails(responseObject.user_details)
         })
     },[])
-
-    console.log(userDetails)
     
     return(
         <div className="container p-4">
             <div className="d-flex justify-content-center align-items-center gap-4 pb-3">
                 <div className="position-relative p-3 rounded">
-                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&size=200" alt={`${fullName}'s profile image`} className="rounded-circle" width="100" height="100"/>
+                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&size=200" alt={`${userDetails.first_name} ${userDetails.last_name}'s profile image`} className="rounded-circle" width="100" height="100"/>
                     <button className="btn btn-light position-absolute bottom-0 end-0 p-1 border rounded-circle">
                         <CiCamera className="text-dark fs-5"/>
                     </button>
                 </div>
                 <div>
                     <h4 className="border-bottom p-1">User details</h4>
-                    <p className="mb-1">Name: {fullName}</p>
-                    <p className="mb-1">Role: {role}</p>
-                    <p className="mb-1">Email: {email}</p>
-                    <p className="mb-1">Phone number: {phone}</p>
+                    <p className="mb-1">Name: {userDetails.first_name} {userDetails.last_name}</p>
+                    <p className="mb-1">Email: {userDetails.email}</p>
+                    <p className="mb-1">Phone number: {userDetails.phone_number}</p>
+                    <p className="mb-1">Role: {userDetails.role}</p>
                 </div>
             </div>
 
