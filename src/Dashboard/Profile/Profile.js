@@ -27,7 +27,7 @@ const Profile = () =>
         .then(response => response.json())
         .then(data =>
         {
-            console.log(data)
+            console.log(data.user_details)
             data.type === "error"
             ?
                 data.reason === "Not found" || data.reason === "Invalid credentials"
