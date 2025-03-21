@@ -50,7 +50,7 @@ const Profile = () =>
                     <p className="mb-1">Name: {userDetails.first_name} {userDetails.last_name}</p>
                     <p className="mb-1">Email: {userDetails.email}</p>
                     <p className="mb-1">Phone number: {userDetails.phone_number}</p>
-                    <p className="mb-1">Role: {userDetails.role}</p>
+                    <p className="mb-1">Role: {userDetails.role === "Owner" ? "Home Owner" : "Tenant"}</p>
                 </div>
             </div>
 
