@@ -11,6 +11,7 @@ import Loader from "../../../Assets/Components/Loader"
 import CircularProgress from "@mui/material/CircularProgress"
 
 import Carousel from "../../Components/Carousel"
+import EditProperty from "./Edit property"
 
 const Properties = ({fullName}) => 
 {
@@ -19,6 +20,11 @@ const Properties = ({fullName}) =>
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [activePage, setActivePage] = useState(1)
     const [isModalOpen, setModalOpen] = useState(false)
+    const [editModalOpen, setEditModalOpen]=useState(false)
+
+    //State to manage the property being edited
+    const [propertyToEdit, setPropertyToEdit] = useState({})
+
     const initialPropertyDetails=
     {
         name: "",
@@ -155,6 +161,14 @@ const Properties = ({fullName}) =>
         })
     }
 
+    //Function to handle property edit functionality
+    const handleEditProperty = id =>
+    {
+        const propertToEdit = properties.find(property => property.id === id)
+        setPropertyToEdit(propertToEdit)
+        setEditModalOpen(true)
+    }
+
     return (
         <div className="container py-2">
             <h1 className="text-uppercase fs-2 fw-bold text-center">Properties owned by {fullName}</h1>
@@ -189,7 +203,7 @@ const Properties = ({fullName}) =>
                                                 </p>
                                             </div>
                                            
-                                            <button className="btn btn-primary mb-3 mx-2">Edit property</button>
+                                            <button className="btn btn-primary mb-3 mx-2" onClick={()=> handleEditProperty(property.id)}>Edit property</button>
                                         </div>
                                     </div>
                                 )    
@@ -305,6 +319,11 @@ const Properties = ({fullName}) =>
                             </div>
                         </div>
                     </form>
+            }
+
+            {/* Modal for editing property details */}
+            {
+                editModalOpen && <EditProperty setEditModalOpen={setEditModalOpen} propertyDetails={propertyToEdit}/>
             }
 
             <nav aria-label="Page navigation example" className="d-flex justify-content-center mt-3">
