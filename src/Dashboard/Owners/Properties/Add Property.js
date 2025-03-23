@@ -5,9 +5,13 @@ import { CircularProgress } from "@mui/material"
 
 const AddProperty = ({addModal, setAddModal, fetchProperties}) => 
 {
+    //State to keep track of form submission status
     const [isSubmitting, setIsSubmitting] = useState(false)
+
+    //State to keep track of location search results
     const [searchResults, setSearchResults] = useState([])
 
+    //Initial property state values
     const initialPropertyDetails=
         {
             name: "",
@@ -18,89 +22,96 @@ const AddProperty = ({addModal, setAddModal, fetchProperties}) =>
             deposit: "",
             images: [],
         }
+    
+    //State to keep track of form values: Copies the initial property state
     const [propertyDetails, setPropertyDetails] = useState(initialPropertyDetails)
 
+    //Function to handle form input changes
     const handleInputChange = e => 
+    {
+        setPropertyDetails((prevDetails) => ({ ...prevDetails, [e.target.name]: e.target.value }))
+        if (e.target.name === 'location') 
         {
-            setPropertyDetails((prevDetails) => ({ ...prevDetails, [e.target.name]: e.target.value }))
-            if (e.target.name === 'location') 
-            {
-                fetchLocationSuggestions(e.target.value)
-            }
+            fetchLocationSuggestions(e.target.value)
         }
-    
-        const fetchLocationSuggestions = async (query) => {
-            if (query.length > 2) 
-            { // Only fetch if the query has more than 2 characters
-                try 
-                {
-                    const response = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${query}&apiKey=u6yB4aVuy7TirPp2UQFLMg-xe1NnafnrcN2w9klsclU&limit=5`)
-                    if (!response.ok) 
-                    {
-                        throw new Error('Network response was not ok')
-                    }
-                    const data = await response.json()
-                    setSearchResults(data.items.map(item => ({
-                        label: `${item.address.label}, ${item.address.countryName}`,
-                        position: item.position
-                    })))
-                } 
-                catch (error) 
-                {
-                    toast.error("Error fetching location:", error)
-                    setSearchResults([]) // Clear suggestions on error
-                }
-            } 
-            else 
-            {
-                setSearchResults([])
-            }
-        }
-    
-        const handleImageChange = e => 
-        {
-            const files = Array.from(e.target.files)
-            setPropertyDetails((prevDetails) => ({ ...prevDetails, images: files }))
-        }
+    }
 
-    const addProperty = e => 
-        {
-            e.preventDefault()
-            setIsSubmitting(true)
-            const formData=new FormData()
-            formData.append('name',propertyDetails.name)
-            formData.append('description',propertyDetails.description)
-            formData.append('property_type',propertyDetails.type)
-            formData.append('rent',propertyDetails.rent)
-            formData.append('location',propertyDetails.location)
-            formData.append('deposit',propertyDetails.deposit)
-            propertyDetails.images.forEach(image => formData.append("images[]",image))
-            fetch("https://rent-hive-backend.vercel.app/properties",
+    //Function to fetch locations based on user input
+    const fetchLocationSuggestions = async query => 
+    {
+        if (query.length > 2) 
+        { // Only fetch if the query has more than 2 characters
+            try 
             {
-                method: "POST",
-                headers:
+                const response = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${query}&apiKey=u6yB4aVuy7TirPp2UQFLMg-xe1NnafnrcN2w9klsclU&limit=5`)
+                if (!response.ok) 
                 {
-                    "X-Session-ID": localStorage.getItem("X-Session-ID")
-                },
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => 
+                    throw new Error('Network response was not ok')
+                }
+                const data = await response.json()
+                setSearchResults(data.items.map(item => ({
+                    label: `${item.address.label}, ${item.address.countryName}`,
+                    position: item.position
+                })))
+            } 
+            catch (error) 
             {
-                data.type === "success"
-                ?
-                    toast.success(data.message)
-                :
-                    toast.error(data.message)
-            })
-            .finally(()=> 
-            {
-                setPropertyDetails(initialPropertyDetails)
-                setAddModal(false)
-                setIsSubmitting(false)
-                fetchProperties()
-            })
+                toast.error("Error fetching location:", error)
+                setSearchResults([]) // Clear suggestions on error
+            }
+        } 
+        else 
+        {
+            setSearchResults([])
         }
+    }
+    
+    //Function to handle image upload
+    const handleImageChange = e => 
+    {
+        const files = Array.from(e.target.files)
+        setPropertyDetails((prevDetails) => ({ ...prevDetails, images: files }))
+    }
+
+    //Form submission function: Sends data to the backend 
+    const addProperty = e => 
+    {
+        e.preventDefault()
+        setIsSubmitting(true)
+        const formData=new FormData()
+        formData.append('name',propertyDetails.name)
+        formData.append('description',propertyDetails.description)
+        formData.append('property_type',propertyDetails.type)
+        formData.append('rent',propertyDetails.rent)
+        formData.append('location',propertyDetails.location)
+        formData.append('deposit',propertyDetails.deposit)
+        propertyDetails.images.forEach(image => formData.append("images[]",image))
+        fetch("https://rent-hive-backend.vercel.app/properties",
+        {
+            method: "POST",
+            headers:
+            {
+                "X-Session-ID": localStorage.getItem("X-Session-ID")
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => 
+        {
+            data.type === "success"
+            ?
+                toast.success(data.message)
+            :
+                toast.error(data.message)
+        })
+        .finally(()=> 
+        {
+            setPropertyDetails(initialPropertyDetails)
+            setAddModal(false)
+            setIsSubmitting(false)
+            fetchProperties()
+        })
+    }
 
     return ( 
         <form className="modal position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-black bg-opacity-50 z-50" encType="multipart/form-data" tabIndex={1} onSubmit={addProperty}>
@@ -208,7 +219,7 @@ const AddProperty = ({addModal, setAddModal, fetchProperties}) =>
                 </div>
             </div>
         </form>
-     );
+    )
 }
  
-export default AddProperty;
+export default AddProperty
