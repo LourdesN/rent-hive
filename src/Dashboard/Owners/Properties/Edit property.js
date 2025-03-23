@@ -1,20 +1,23 @@
-import { useState } from "react";
-import { formatCurrency } from "../../Calculations/Format Currency";
+import { useState } from "react"
+import { formatCurrency } from "../../Calculations/Format Currency"
+import { toast } from "react-toastify"
 
 const EditProperty = ({ setEditModalOpen, propertyDetails }) => 
 {
+    //State to check if the form is submitting
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     // Extracting the values from the passed down prop
-    let { id, name, property_type, deposit_required, rent, location, description, images } = propertyDetails;
+    let { id, name, property_type, deposit_required, rent, location, description, images } = propertyDetails
 
     // Altering the deposit required obtained from the database
     if (deposit_required === true) 
     {
-        deposit_required = "Yes";
+        deposit_required = "Yes"
     } 
     else 
     {
-        deposit_required = "No";
+        deposit_required = "No"
     }
 
     // Creating a new state for the property values
@@ -26,25 +29,38 @@ const EditProperty = ({ setEditModalOpen, propertyDetails }) =>
         rent,
         location,
         description,
-        images
-    });
+        images : images || []
+    })
 
     // Function to handle input change and update the property details state
-    const handleInputChange = e => setNewPropertyDetails({ ...newPropertyDetails, [e.target.name]: e.target.value });
+    const handleInputChange = e => setNewPropertyDetails({ ...newPropertyDetails, [e.target.name]: e.target.value })
 
     // Function to handle images upload
     const handleImageChange = e => 
     {
-        const files = Array.from(e.target.files);
-        setNewPropertyDetails(prevDetails => ({ ...prevDetails, images: files }));
-    };
+        const files = Array.from(e.target.files)
+        setNewPropertyDetails(prevDetails => ({ ...prevDetails, images: [...prevDetails.images, ...files] }))
+    }
+
+    //Function to handle image delete
+    const handleImageDelete = id => setNewPropertyDetails(prevDetails => ({...prevDetails, images: prevDetails.images.filter(image => id !== image.id)}))
+
+    //Function to handle form submission
+    const updateDetails = e =>
+    {
+        e.preventDefault()
+        setIsSubmitting(true)
+        toast.success("Form submitted")
+        console.log(newPropertyDetails)
+        setTimeout(() => setIsSubmitting(false), 3000);
+    }
 
     return (
-        <form className="modal position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-black bg-opacity-50 z-50">
+        <form className="modal position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-black bg-opacity-50 z-50" onSubmit={updateDetails}>
             <div className="bg-white w-75">
                 <div className="modal-header border-bottom">
                     <h5 className="modal-title">Edit {newPropertyDetails.name}'s details</h5>
-                    <button type="button" className="btn-close" onClick={() => { setEditModalOpen(false); }}></button>
+                    <button type="button" className="btn-close" onClick={() => { setEditModalOpen(false) }}></button>
                 </div>
                 <div className="modal-body row">
                     <div className="col-12 col-md-6 col-lg-6 mb-3">
@@ -63,7 +79,7 @@ const EditProperty = ({ setEditModalOpen, propertyDetails }) =>
                         </span>
                     </div>
                     <div className="col-12 col-md-6 col-lg-4 mb-3">
-                        <label className="form-label">Upload new images</label>
+                        <label className="form-label">Add new property images</label>
                         <input type="file" accept="image/*" className="form-control" multiple onChange={handleImageChange} />
                     </div>
                     <div className="col-12 col-md-6 col-lg-4 mb-3">
@@ -87,26 +103,35 @@ const EditProperty = ({ setEditModalOpen, propertyDetails }) =>
                                 newPropertyDetails.images.length > 0 &&
                                     newPropertyDetails.images.map((image, index) => 
                                     {
-                                        if (image instanceof File) {
-                                            return (
-                                                <div key={index} className="position-relative">
-                                                    <img src={URL.createObjectURL(image)} alt={`Preview ${index}`} className="img-thumbnail" style={{ width: "100px", height: "100px",  objectFit: "cover" }}/>
-                                                </div>
-                                            );
-                                        }
-                                        return null; // Don't render if it's not a valid File object
+                                        //Checking if the image is a new file or an existing one
+                                        const imageUrl=image instanceof File ? URL.createObjectURL(image) : `https://mobikey-lms.s3.amazonaws.com/${image.image_url}`
+
+                                        return (
+                                            <div key={image.id} className="position-relative p-3">
+                                                <img src={imageUrl} alt={`Preview ${image.id}`} className="img-thumbnail" style={{ width: "120px", height: "120px",  objectFit: "cover" }}/>
+                                                <button type="button" className="position-absolute top-0 end-0 text-white border-0 btn-close" onClick={() => handleImageDelete(image.id)} style={{ cursor: "pointer" }} title="Remove image"></button>
+                                            </div>
+                                        )
                                     })
                             }
                         </div>
                     </div>
                 </div>
                 <div className="modal-footer border-top">
-                    <button type="button" className="btn btn-secondary" onClick={() => { setEditModalOpen(false); }}>Cancel</button>
-                    <button type="button" className="btn btn-primary">Save changes</button>
+                    <button type="button" className="btn btn-secondary" onClick={() => { setEditModalOpen(false) }}>Cancel</button>
+                    <button type="submit" className={`btn btn-primary ${isSubmitting ? "disabled" : " "}`}>
+                        {
+                            isSubmitting
+                            ?
+                                "Saving changes..."
+                            :
+                                "Save changes"
+                        }
+                    </button>
                 </div>
             </div>
         </form>
-    );
-};
+    )
+}
 
-export default EditProperty;
+export default EditProperty
