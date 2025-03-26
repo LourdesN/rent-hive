@@ -51,13 +51,13 @@ const Property = () =>
     useEffect(()=> fetchPropertyDetails(), [id, navigate])
 
     return(
-        <div className="container">
+        <div className="container mt-1">
             {property?.images && <ImageSlider images={property.images}/>}
 
             <div className="row">
                 {/* Property details */}
                 <div className="col-md-6">
-                    <div className="card p-2 shadow-sm">
+                    <div className="card p-3 shadow-sm">
                         <h1 className="lead fw-bold text-uppercase fs-4">{property?.name}</h1>
                         <p className="lead">{property?.description}</p>
                         <h5 className="text-secondary">
@@ -78,21 +78,21 @@ const Property = () =>
                     <div className="col-md-6">
                         <div className="d-flex flex-column flex-lg-row gap-3">
                             {/* Tenant details */}
-                            <div className="card p-2 shadow-sm flex-fill">
+                            <div className="card p-3 shadow-sm flex-fill">
                                 <h5 className="text-center">Tenant Details</h5>
                                 <hr />
-                                <p><strong>Name:</strong> {tenantDetails?.first_name} {tenantDetails?.last_name}</p>
-                                <p><strong>Email:</strong> {tenantDetails?.email}</p>
-                                <p><strong>Phone number:</strong> {tenantDetails?.phone_number}</p>
+                                <p className="mb-2"><strong>Name:</strong> {tenantDetails?.first_name} {tenantDetails?.last_name}</p>
+                                <p className="mb-2"><strong>Email:</strong> {tenantDetails?.email}</p>
+                                <p className="mb-2"><strong>Phone number:</strong> {tenantDetails?.phone_number}</p>
                             </div>
 
                             {/* Lease details */}
-                            <div className="card p-2 shadow-sm flex-fill">
+                            <div className="card p-3 shadow-sm flex-fill">
                                 <h5 className="text-center">Lease Details</h5>
                                 <hr />
-                                <p><strong>Start date:</strong> {leaseDetails?.start_date}</p>
-                                <p><strong>End date:</strong> {leaseDetails?.end_date}</p>
-                                <p><strong>Lease period:</strong> {leaseDetails?.duration}</p>
+                                <p className="mb-2"><strong>Start date:</strong> {leaseDetails?.start_date}</p>
+                                <p className="mb-2"><strong>End date:</strong> {leaseDetails?.end_date}</p>
+                                <p className="mb-2"><strong>Lease period:</strong> {leaseDetails?.duration}</p>
                             </div>
                         </div>
                     </div>
