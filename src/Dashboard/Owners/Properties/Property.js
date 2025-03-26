@@ -76,22 +76,24 @@ const Property = () =>
                     property?.property_status === "Leased" &&
                 
                     <div className="col-md-4">
-                        {/* Tenant details */}
-                        <div className="card p-3 shadow-sm">
-                            <h5 className="text-center">Tenant Details</h5>
-                            <hr />
-                            <p><strong>Name:</strong> {tenantDetails?.first_name} {tenantDetails?.last_name}</p>
-                            <p><strong>Email:</strong> {tenantDetails?.email}</p>
-                            <p><strong>Phone:</strong> {tenantDetails?.phone_number}</p>
-                        </div>
+                        <div className="d-flex flex-column flex-lg-row gap-3">
+                            {/* Tenant details */}
+                            <div className="card p-3 shadow-sm flex-fill">
+                                <h5 className="text-center">Tenant Details</h5>
+                                <hr />
+                                <p><strong>Name:</strong> {tenantDetails?.first_name} {tenantDetails?.last_name}</p>
+                                <p><strong>Email:</strong> {tenantDetails?.email}</p>
+                                <p><strong>Phone:</strong> {tenantDetails?.phone_number}</p>
+                            </div>
 
-                        {/* Lease details */}
-                        <div className="card p-3 shadow-sm">
-                            <h5 className="text-center">Lease Details</h5>
-                            <hr />
-                            <p><strong>Start date:</strong> {leaseDetails?.start_date}</p>
-                            <p><strong>End date:</strong> {leaseDetails?.end_date}</p>
-                            <p><strong>LEase period:</strong> {leaseDetails?.lease_period}</p>
+                            {/* Lease details */}
+                            <div className="card p-3 shadow-sm flex-fill">
+                                <h5 className="text-center">Lease Details</h5>
+                                <hr />
+                                <p><strong>Start date:</strong> {leaseDetails?.start_date}</p>
+                                <p><strong>End date:</strong> {leaseDetails?.end_date}</p>
+                                <p><strong>LEase period:</strong> {leaseDetails?.lease_period}</p>
+                            </div>
                         </div>
                     </div>
                 }
