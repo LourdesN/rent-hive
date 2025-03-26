@@ -56,7 +56,7 @@ const Property = () =>
 
             <div className="row">
                 {/* Property details */}
-                <div className="col-md-8">
+                <div className="col-md-6">
                     <div className="card p-3 shadow-sm">
                         <h1 className="lead fw-bold text-uppercase fs-4">{property?.name}</h1>
                         <p className="lead">{property?.description}</p>
@@ -75,7 +75,7 @@ const Property = () =>
                 {
                     property?.property_status === "Leased" &&
                 
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <div className="d-flex flex-column flex-lg-row gap-3">
                             {/* Tenant details */}
                             <div className="card p-3 shadow-sm flex-fill">
