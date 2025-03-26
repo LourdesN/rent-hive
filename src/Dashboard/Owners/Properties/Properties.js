@@ -67,16 +67,6 @@ const Properties = ({fullName}) =>
 
     const handlePageChange = pageNumber => setActivePage(pageNumber)
 
-    
-
-    //Function to handle property edit functionality
-    const handleEditProperty = id =>
-    {
-        const propertToEdit = properties.find(property => property.id === id)
-        setPropertyToEdit(propertToEdit)
-        setEditModalOpen(true)
-    }
-
     return (
         <div className="container py-2">
             <h1 className="text-uppercase fs-2 fw-bold text-center">Properties owned by {fullName}</h1>
@@ -122,11 +112,6 @@ const Properties = ({fullName}) =>
             {/* Modal for Adding New Property */}
             {addModal && <AddProperty addModal={addModal} setAddModal={setAddModal} fetchProperties={fetchProperties}/>}
             
-            {/* Modal for editing property details */}
-            {/* {
-                editModalOpen && <EditProperty setEditModalOpen={setEditModalOpen} propertyDetails={propertyToEdit}/>
-            } */}
-
             <nav aria-label="Page navigation example" className="d-flex justify-content-center mt-3">
                 <ul className="pagination">
                     <li className={`page-item ${activePage === 1 ? "disabled" : ""}`}>
