@@ -92,7 +92,7 @@ const Property = () =>
                                 <hr />
                                 <p><strong>Start date:</strong> {leaseDetails?.start_date}</p>
                                 <p><strong>End date:</strong> {leaseDetails?.end_date}</p>
-                                <p><strong>Lease period:</strong> {leaseDetails?.lease_period}</p>
+                                <p><strong>Lease period:</strong> {leaseDetails?.duration}</p>
                             </div>
                         </div>
                     </div>
