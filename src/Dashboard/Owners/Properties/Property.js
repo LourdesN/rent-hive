@@ -81,18 +81,18 @@ const Property = () =>
                             <div className="card p-3 shadow-sm flex-fill">
                                 <h5 className="text-center">Tenant Details</h5>
                                 <hr />
-                                <p className="mb-2"><strong>Name:</strong> {tenantDetails?.first_name} {tenantDetails?.last_name}</p>
-                                <p className="mb-2"><strong>Email:</strong> {tenantDetails?.email}</p>
-                                <p className="mb-2"><strong>Phone number:</strong> {tenantDetails?.phone_number}</p>
+                                <p className="mb-3"><strong>Name:</strong> {tenantDetails?.first_name} {tenantDetails?.last_name}</p>
+                                <p className="mb-3"><strong>Email:</strong> {tenantDetails?.email}</p>
+                                <p className="mb-3"><strong>Phone number:</strong> {tenantDetails?.phone_number}</p>
                             </div>
 
                             {/* Lease details */}
                             <div className="card p-3 shadow-sm flex-fill">
                                 <h5 className="text-center">Lease Details</h5>
                                 <hr />
-                                <p className="mb-2"><strong>Start date:</strong> {leaseDetails?.start_date}</p>
-                                <p className="mb-2"><strong>End date:</strong> {leaseDetails?.end_date}</p>
-                                <p className="mb-2"><strong>Lease period:</strong> {leaseDetails?.duration}</p>
+                                <p className="mb-3"><strong>Start date:</strong> {leaseDetails?.start_date}</p>
+                                <p className="mb-3"><strong>End date:</strong> {leaseDetails?.end_date}</p>
+                                <p className="mb-3"><strong>Lease period:</strong> {leaseDetails?.duration}</p>
                             </div>
                         </div>
                     </div>
