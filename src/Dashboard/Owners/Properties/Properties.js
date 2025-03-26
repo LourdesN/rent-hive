@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { IoAddOutline } from "react-icons/io5"
 import { FaMapMarkerAlt } from "react-icons/fa"
 import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 import {formatCurrency} from "../../Calculations/Format Currency"
 
@@ -20,7 +20,7 @@ const Properties = ({fullName}) =>
     
     const [activePage, setActivePage] = useState(1)
     const [addModal, setAddModal] = useState(false)
-    const [editModalOpen, setEditModalOpen]=useState(false)
+    // const [editModalOpen, setEditModalOpen]=useState(false)
 
     //State to manage the property being edited
     const [propertyToEdit, setPropertyToEdit] = useState({})
@@ -111,7 +111,7 @@ const Properties = ({fullName}) =>
                                                 </p>
                                             </div>
                                            
-                                            <button className="btn btn-primary mb-3 mx-2" onClick={()=> handleEditProperty(property.id)}>Edit property</button>
+                                            <Link to={`/dashboard/properties/${property.id}`} className="btn btn-primary mb-3 mx-2">View property</Link>
                                         </div>
                                     </div>
                                 )    
@@ -123,9 +123,9 @@ const Properties = ({fullName}) =>
             {addModal && <AddProperty addModal={addModal} setAddModal={setAddModal} fetchProperties={fetchProperties}/>}
             
             {/* Modal for editing property details */}
-            {
+            {/* {
                 editModalOpen && <EditProperty setEditModalOpen={setEditModalOpen} propertyDetails={propertyToEdit}/>
-            }
+            } */}
 
             <nav aria-label="Page navigation example" className="d-flex justify-content-center mt-3">
                 <ul className="pagination">
