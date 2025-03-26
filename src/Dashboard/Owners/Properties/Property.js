@@ -83,7 +83,7 @@ const Property = () =>
                                 <hr />
                                 <p><strong>Name:</strong> {tenantDetails?.first_name} {tenantDetails?.last_name}</p>
                                 <p><strong>Email:</strong> {tenantDetails?.email}</p>
-                                <p><strong>Phone:</strong> {tenantDetails?.phone_number}</p>
+                                <p><strong>Phone number:</strong> {tenantDetails?.phone_number}</p>
                             </div>
 
                             {/* Lease details */}
