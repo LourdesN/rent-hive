@@ -3,6 +3,7 @@ import { CiCamera } from "react-icons/ci";
 import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import UploadImage from "./Image update";
 
 const Profile = () =>
 {
@@ -10,6 +11,9 @@ const Profile = () =>
 
     const [userDetails, setUserDetails] = useState({})
     const [loading, setIsLoading] = useState(true)
+
+    //State to control the upload profile image
+    const [imageModal, setImageModal] = useState(null)
     
     useEffect(()=>
     {
@@ -45,7 +49,7 @@ const Profile = () =>
                 <div className="position-relative p-3 rounded">
                     <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&size=200" alt={loading ? "Loading..." : `${userDetails.first_name} ${userDetails.last_name}'s profile image`} className="rounded-circle" width="100" height="100"/>
                     <button className="btn btn-light position-absolute bottom-0 end-0 p-1 border rounded-circle">
-                        <CiCamera className="text-dark fs-5"/>
+                        <CiCamera className="text-dark fs-5" onClick={()=> setImageModal(true)}/>
                     </button>
                 </div>
                 <div>
@@ -80,6 +84,9 @@ const Profile = () =>
                     </div>
                 </form>
             </div>
+            {
+                imageModal && <UploadImage setImageModal={setImageModal}/>
+            }
         </div>
     )
 }
