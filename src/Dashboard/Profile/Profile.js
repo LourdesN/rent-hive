@@ -68,7 +68,8 @@ const Profile = () =>
         if (errorMessage) setErrorMessage("")
     }
 
-    useEffect(() => 
+    //Function to fetch user details
+    const getUserDetails =  () =>
     {
         fetch("https://rent-hive-backend.vercel.app/profile", 
         {
@@ -78,23 +79,25 @@ const Profile = () =>
                 "X-Session-ID": localStorage.getItem("X-Session-ID"),
             },
         })
-            .then(response => response.json())
-            .then(data => 
-            {
-                const responseObject = data[0]
+        .then(response => response.json())
+        .then(data => 
+        {
+            const responseObject = data[0]
 
-                responseObject.type === "error"
+            responseObject.type === "error"
+            ? 
+                responseObject.reason === "Not found" || responseObject.reason === "Invalid credentials"
                 ? 
-                    responseObject.reason === "Not found" || responseObject.reason === "Invalid credentials"
-                    ? 
-                        toast.error(responseObject.message, { onClose: () => navigate(-1) })
-                    : 
-                        toast.error(responseObject.message)
+                    toast.error(responseObject.message, { onClose: () => navigate(-1) })
                 : 
-                    setUserDetails(responseObject.user_details)
-            })
-            .finally(() => setIsLoading(false))
-    }, [])
+                    toast.error(responseObject.message)
+            : 
+                setUserDetails(responseObject.user_details)
+        })
+        .finally(() => setIsLoading(false))
+    }
+
+    useEffect(() => getUserDetails(), [])
 
     const updatePassword = e => 
     {
@@ -133,7 +136,11 @@ const Profile = () =>
                 :
                     toast.error(data.message)
             })
-            .finally(()=> setIsSubmitting(false))
+            .finally(()=> 
+            {
+                setIsSubmitting(false)
+                getUserDetails()
+            })
         }
     }
 
@@ -141,7 +148,7 @@ const Profile = () =>
         <div className="container p-4 w-75">
             <div className="d-flex justify-content-center align-items-center gap-4 pb-3">
                 <div className="position-relative p-3 rounded">
-                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&size=200" alt={loading ? "Loading..." : `${userDetails.first_name} ${userDetails.last_name}'s profile image`}  className="rounded-circle" width="100" height="100"/>
+                    <img src={`${userDetails.profile_picture ? `https://mobikey-lms.s3.amazonaws.com/images/${userDetails.profile_picture}` : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&size=200"}`} alt={loading ? "Loading..." : `${userDetails.first_name} ${userDetails.last_name}'s profile image`}  className="rounded-circle" width="100" height="100" style={{objectFit: "contain"}}/>
                     <button className="btn btn-light position-absolute bottom-0 end-0 p-1 border rounded-circle">
                         <CiCamera className="text-dark fs-5" onClick={() => setImageModal(true)} />
                     </button>
@@ -219,7 +226,7 @@ const Profile = () =>
                     </div>
                 </form>
             </div>
-            {imageModal && <UploadImage setImageModal={setImageModal} />}
+            {imageModal && <UploadImage setImageModal={setImageModal} getUserDetails={getUserDetails}/>}
         </div>
     )
 }

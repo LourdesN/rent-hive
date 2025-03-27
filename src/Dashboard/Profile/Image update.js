@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { toast } from "react-toastify"
 
-const UploadImage = ({ setImageModal }) => 
+const UploadImage = ({ setImageModal, getUserDetails }) => 
 {
     //State to store the uploaded image
     const [image, setImage] = useState(null)
@@ -34,7 +34,7 @@ const UploadImage = ({ setImageModal }) =>
     {
         e.preventDefault()
         setIsSubmitting(true)
-        
+
         const formData= new FormData()
         formData.append('profile_image', image)
 
@@ -61,6 +61,7 @@ const UploadImage = ({ setImageModal }) =>
             setIsSubmitting(false)
             setImageModal(false)
             setImage(null)
+            getUserDetails()
         })
     }
 
