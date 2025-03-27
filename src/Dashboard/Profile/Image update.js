@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { toast } from "react-toastify"
 
 const UploadImage = ({ setImageModal }) => 
 {
@@ -35,11 +36,34 @@ const UploadImage = ({ setImageModal }) =>
         setIsSubmitting(true)
 
         console.log(image)
-        setTimeout(() => 
+
+        const formData= new FormData()
+        formData.append('profile_image', image)
+
+        fetch("https://rent-hive-backend.vercel.app/profile",
+        {
+            method: "PATCH",
+            headers:
             {
-                setIsSubmitting(false)
-                setImageModal(false)
-            }, 2000)
+                "X-Session-ID": localStorage.getItem("X-Session-ID")
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => 
+        {
+            data.type === "success"
+            ?
+                toast.success(data.message)
+            :
+                toast.error(data.message)
+        })
+        .finally(()=>
+        {
+            setIsSubmitting(false)
+            setImageModal(false)
+            setImage(null)
+        })
     }
 
     return ( 
