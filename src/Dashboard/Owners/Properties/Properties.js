@@ -1,17 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
 import { IoAddOutline } from "react-icons/io5"
-import { FaMapMarkerAlt } from "react-icons/fa"
 import { toast } from "react-toastify"
 import { useNavigate, Link } from "react-router-dom"
 
-import {formatCurrency} from "../../Calculations/Format Currency"
 
 import Loader from "../../../Assets/Components/Loader"
 
 import Carousel from "../../Components/Carousel"
 import AddProperty from "./Add Property"
-import EditProperty from "./Edit property"
 
 const Properties = ({fullName}) => 
 {
@@ -20,10 +17,6 @@ const Properties = ({fullName}) =>
     
     const [activePage, setActivePage] = useState(1)
     const [addModal, setAddModal] = useState(false)
-    // const [editModalOpen, setEditModalOpen]=useState(false)
-
-    //State to manage the property being edited
-    const [propertyToEdit, setPropertyToEdit] = useState({})
 
     const [properties, setProperties]=useState([])
 
@@ -95,10 +88,6 @@ const Properties = ({fullName}) =>
                                             <div className="card-body d-flex flex-column">
                                                 <p className="card-text">{property.name}</p>
                                                 <p className="card-text">{property.description}</p>
-                                                {/* <p className="card-text">Rent per month: <b>{formatCurrency(property.rent)}</b></p>
-                                                <p className="text-muted d-flex align-items-center">
-                                                    <FaMapMarkerAlt /> {property.location}
-                                                </p> */}
                                             </div>
                                            
                                             <Link to={`/dashboard/properties/${property.id}`} className="btn btn-primary mb-3 mx-2">View property</Link>
