@@ -34,9 +34,7 @@ const UploadImage = ({ setImageModal }) =>
     {
         e.preventDefault()
         setIsSubmitting(true)
-
-        console.log(image)
-
+        
         const formData= new FormData()
         formData.append('profile_image', image)
 
