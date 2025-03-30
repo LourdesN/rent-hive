@@ -92,7 +92,13 @@ const Dashboard = () =>
                         <Loader/>
                     :
                         <Routes>
-                            <Route exact path="/" element={<Landing fullName={fullName} role={role} properties={properties}/>}/>
+                            <Route exact path="/" element={
+                                role === "Admin"
+                                ?
+                                    <AdminDashboard fullName={fullName}/>
+                                :
+                                    <Landing fullName={fullName} role={role} properties={properties}/>
+                            }/>
                             <Route exact path="/properties" element={<Properties fullName={fullName}/>}></Route>
                             <Route exact path="/properties/:id"  element={<Property/>}></Route>
                             <Route exact path="/available-properties" element={<AvailableProperties/>}></Route>
