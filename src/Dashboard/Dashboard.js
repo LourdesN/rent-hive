@@ -19,6 +19,11 @@ import ErrorPage from "../404/Error"
 import Profile from "./Profile/Profile"
 import PaymentForm from "./Tenants/Payments Mpesa/Payment"
 
+//Admin pages
+import AdminDashboard from "./Admin/Dashboard/Dashboard"
+import Owners from "./Admin/Home Owners/Owners"
+import Tenants from "./Admin/Tenants/Tenants"
+
 const Dashboard = () => 
 {
     //useState hook for the sidebar
@@ -98,6 +103,10 @@ const Dashboard = () =>
                             <Route exact path="/leases/:id" element={<Lease/>}></Route>
                             <Route exact path="/profile" element={<Profile/>}></Route>
                             <Route exact path= "/payments" element= {<PaymentForm/>}></Route>
+
+                            {/* Admin routes */}
+                            <Route exact path="/owners" element={<Owners/>}></Route>
+                            <Route exact path="/tenants" element={<Tenants/>}></Route>
                             <Route exact path="*" element={<ErrorPage/>}></Route>
                         </Routes>
                 }
