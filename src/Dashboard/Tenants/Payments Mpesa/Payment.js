@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function PaymentForm({phone_number,setEditModalOpen,amount}) {
-    const [phone, setPhone] = useState("");
+    const [phone, setPhone] = useState(phone_number);
    
     const [message, setMessage] = useState("");
 
@@ -25,14 +25,14 @@ function PaymentForm({phone_number,setEditModalOpen,amount}) {
             <input
                 type="text"
                 placeholder="Phone number"
-                value={phone}
+                value={phone_number}
                 onChange={(e) => setPhone(e.target.value)}
             />
             <input
                 type="number"
                 placeholder="Amount"
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                
             />
             <button onClick={handlePayment}>Pay via M-Pesa</button>
             {message && <p>{message}</p>}
