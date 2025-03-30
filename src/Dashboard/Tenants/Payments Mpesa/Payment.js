@@ -21,22 +21,30 @@ function PaymentForm({phone_number,setEditModalOpen,amount}) {
     };
 
     return (
-        <div>
-            <input
-                type="text"
-                placeholder="Phone number"
-                value={phone_number}
-                onChange={(e) => setPhone(e.target.value)}
-            />
-            <input
-                type="number"
-                placeholder="Amount"
-                value={amount}
-                
-            />
-            <button onClick={handlePayment}>Pay via M-Pesa</button>
-            {message && <p>{message}</p>}
-        </div>
+        <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md text-center">
+        <h2 className="text-xl font-semibold mb-4">Make a Payment</h2>
+        <input
+            type="text"
+            placeholder="Phone number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+        />
+        <input
+            type="number"
+            placeholder="Amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+        />
+        <button
+            onClick={handlePayment}
+            className="w-full p-2 bg-green-600 text-white rounded hover:bg-green-700"
+        >
+            Pay via M-Pesa
+        </button>
+        {message && <p className="mt-2 text-red-500">{message}</p>}
+    </div>
     );
 }
 
