@@ -3,7 +3,7 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 
-const AddTenant = ({ tenants, setTenants, setAddModal }) => 
+const AddTenant = ({ fetchTenants, setAddModal }) => 
 {
     const navigate = useNavigate()
 
@@ -14,10 +14,10 @@ const AddTenant = ({ tenants, setTenants, setAddModal }) =>
         last_name: "",
         email: "",
         phone_number: "",
-        role: "Owner"
+        role: "Tenant"
     }
 
-    //State to handle owner details
+    //State to handle tenant details
     const [tenant, setTenant] = useState({...intialState})
     
     //State to handle form submission
@@ -25,6 +25,9 @@ const AddTenant = ({ tenants, setTenants, setAddModal }) =>
 
     //State for the phone number validation error(s)
     const [phoneError, setPhoneError] = useState('')
+
+    //Function to handle form input changes
+    const handleInputChange = e => setTenant({...tenant, [e.target.name] : e.target.value})
 
     //Function to handle phone number input changes
     const handlePhoneNumberChange = value =>
@@ -53,6 +56,7 @@ const AddTenant = ({ tenants, setTenants, setAddModal }) =>
         }
 
         setIsSubmitting(true)
+        console.log(tenant)
         fetch("https://rent-hive-backend.vercel.app/tenants",
         {
             method: "POST",
@@ -68,14 +72,16 @@ const AddTenant = ({ tenants, setTenants, setAddModal }) =>
         {
             if(data.type === "success")
             {
-                //Appending the newly created tenant to the tenants array
-                setTenants([...tenants, data.tenant])
+                toast.success(data.message)
 
                 //Closing the add modal form
                 setAddModal(false)
 
                 //Clearing the tenant state
                 setTenant({...intialState})
+
+                //Triggering the tenants fetch
+                fetchTenants()
             }
             else
             {
@@ -103,15 +109,15 @@ const AddTenant = ({ tenants, setTenants, setAddModal }) =>
                 <div className="modal-body row">
                     <div className="col-12 col-md-6">
                         <label className="form-label">First Name: <span className="text-danger fs-5">*</span></label>
-                        <input type="text" className="form-control" name="first_name" placeholder="e.g., John" required/>
+                        <input type="text" className="form-control" name="first_name" placeholder="e.g., John" value={tenant.first_name} onChange={handleInputChange} required/>
                     </div>
                     <div className="col-12 col-md-6">
                         <label className="form-label">Last Name: <span className="text-danger fs-5">*</span></label>
-                        <input type="text" className="form-control" name="last_name" placeholder="e.g., Doe" required/>
+                        <input type="text" className="form-control" name="last_name" placeholder="e.g., Doe" value={tenant.last_name} onChange={handleInputChange} required/>
                     </div>
                     <div className="col-12 col-md-6">
                         <label className="form-label">Email: <span className="text-danger fs-5">*</span></label>
-                        <input type="email" className="form-control" name="email" placeholder="e.g., johndoe@example.com" required/>
+                        <input type="email" className="form-control" name="email" placeholder="e.g., johndoe@example.com" value={tenant.email} onChange={handleInputChange} required/>
                     </div>
                     <div className="col-12 col-md-6">
                         <label className="form-label">Phone Number: <span className="text-danger fs-5">*</span></label>

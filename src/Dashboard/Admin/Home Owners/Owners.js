@@ -153,7 +153,7 @@ const Owners = () =>
                 editModal && <EditOwner owner={onwerToEdit} setEditModal={setEditModal} fetchOwners={fetchOwners}/>
             }
             {
-                addModal && <AddOwner owners={owners} setOwners={setOwners} setAddModal={setAddModal} />
+                addModal && <AddOwner fetchOwners={fetchOwners} setAddModal={setAddModal} />
             }
         </div>
     )

@@ -3,7 +3,7 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-const AddOwner = ({ owners, setOwners, setAddModal }) => 
+const AddOwner = ({ fetchOwners, setAddModal }) => 
 {
     const navigate = useNavigate()
 
@@ -25,6 +25,9 @@ const AddOwner = ({ owners, setOwners, setAddModal }) =>
 
     //State for the phone number validation error(s)
     const [phoneError, setPhoneError] = useState('')
+
+    //Function to handle form input changes
+    const handleInputChange = e => setOwner({...owner, [e.target.name] : e.target.value})
 
     //Function to handle phone number input changes
     const handlePhoneNumberChange = value =>
@@ -53,6 +56,7 @@ const AddOwner = ({ owners, setOwners, setAddModal }) =>
         }
 
         setIsSubmitting(true)
+        console.log(owner)
         fetch("https://rent-hive-backend.vercel.app/owners",
         {
             method: "POST",
@@ -68,14 +72,16 @@ const AddOwner = ({ owners, setOwners, setAddModal }) =>
         {
             if(data.type === "success")
             {
-                //Appending the newly created owner to the owners array
-                setOwners([...owners, data.owner])
+                toast.success(data.message)
 
                 //Closing the add modal form
                 setAddModal(false)
 
                 //Clearing the owner state
                 setOwner({...intialState})
+
+                //Triggering a fetch of the owners
+                fetchOwners()
             }
             else
             {
@@ -103,15 +109,15 @@ const AddOwner = ({ owners, setOwners, setAddModal }) =>
                 <div className="modal-body row">
                     <div className="col-12 col-md-6">
                         <label className="form-label">First Name: <span className="text-danger fs-5">*</span></label>
-                        <input type="text" className="form-control" name="first_name" placeholder="e.g., John" required/>
+                        <input type="text" className="form-control" name="first_name" placeholder="e.g., John" value={owner.first_name} onChange={handleInputChange} required/>
                     </div>
                     <div className="col-12 col-md-6">
                         <label className="form-label">Last Name: <span className="text-danger fs-5">*</span></label>
-                        <input type="text" className="form-control" name="last_name" placeholder="e.g., Doe" required/>
+                        <input type="text" className="form-control" name="last_name" placeholder="e.g., Doe" value={owner.last_name} onChange={handleInputChange} required/>
                     </div>
                     <div className="col-12 col-md-6">
                         <label className="form-label">Email: <span className="text-danger fs-5">*</span></label>
-                        <input type="email" className="form-control" name="email" placeholder="e.g., johndoe@example.com" required/>
+                        <input type="email" className="form-control" name="email" placeholder="e.g., johndoe@example.com" value={owner.email} onChange={handleInputChange} required/>
                     </div>
                     <div className="col-12 col-md-6">
                         <label className="form-label">Phone Number: <span className="text-danger fs-5">*</span></label>

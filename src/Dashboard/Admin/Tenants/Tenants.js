@@ -150,7 +150,7 @@ const Tenants = () =>
                 </table>
             </div>
             {
-                addModal && <AddTenant tenants={tenants} setTenants={setTenants} setAddModal={setAddModal}/>
+                addModal && <AddTenant fetchTenants={fetchTenants} setAddModal={setAddModal}/>
             }
             {
                 editModal && <EditTenant tenant={tenantToEdit} setEditModal={setEditModal} fetchTenants={fetchTenants}/>
