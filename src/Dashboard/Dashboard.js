@@ -82,28 +82,30 @@ const Dashboard = () =>
                 if(data?.role === "Admin")
                 {
                     setTotalOwners(data?.owners)
-                    setTotalTenants(data?.tenants)
-                    setTotalProperties(data?.properties)
                     setOccupied(data?.occupied)
                     setVacant(data?.vacant)
                 }
-                else if(data?.role === "Owner")
-                {
-                    setTotalProperties(data?.properties)
-                    setTotalTenants(data?.tenants)
+                if(data?.role === "Owner")
+                {                    
                     setVacantProperties(data?.vacant)
                     setRentedProperties(data?.rented)
-                    setSoon(data?.expiring_61_plus_days) //Furthest away from expiring
-                    setSooner(data?.expiring_31_60_days) //Second furtherst
-                    setSoonest(data?.expiring_30_days) //Soonest to expire
                 }
-                else if(data?.role === "Tenant")
+                if(data?.role === "Tenant")
                 {
                     setRentDue(data?.rent_due)
                     setLeasedProperties(data?.leased_properties)
-                    setSoon(data?.expiring_61_plus_days) //Furthest away from expiring
-                    setSooner(data?.expiring_31_60_days) //Second furtherst
-                    setSoonest(data?.expiring_30_days) //Soonest to expire
+                    
+                }
+                //Combining the state value stores
+                if (data?.role === "Owner" || data?.role === "Tenant") {
+                    setSoon(data?.expiring_61_plus_days); 
+                    setSooner(data?.expiring_31_60_days);
+                    setSoonest(data?.expiring_30_days);
+                }
+                if(data?.role === "Admin" || data?.role === "Owner")
+                {
+                    setTotalProperties(data?.properties)
+                    setTotalTenants(data?.tenants)
                 }
             }
         })
