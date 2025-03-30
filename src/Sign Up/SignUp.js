@@ -43,6 +43,15 @@ const SignUp = () =>
     const signup = e =>
     {
         e.preventDefault()
+
+        //Validating the phone number before submission
+        if(!signUpDetails.phone_number || !isValidPhoneNumber(signUpDetails.phone_number))
+        {
+            setPhoneError("Invalid phone number")
+            return ;
+        }
+
+        //Submitting the form
         setLoading(true)
         fetch("https://rent-hive-backend.vercel.app/sign-up",
         {
