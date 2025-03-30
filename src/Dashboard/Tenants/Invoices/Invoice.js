@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { formatCurrency } from "../../Calculations/Format Currency"
 import { useState } from "react"
 import PaymentForm from "../Payments Mpesa/Payment"
@@ -6,8 +6,13 @@ import PaymentForm from "../Payments Mpesa/Payment"
 const Invoice = () =>
 {
     const { ref } = useParams()
-     //State to handle the edit payment form modal
-     const [editModalOpen, setEditModalOpen]=useState(false)
+    const navigate = useNavigate()
+
+    //State to handle the edit payment form modal
+    const [editModalOpen, setEditModalOpen]=useState(false)
+
+    const phone_number = "+254707251073"
+    const amount = 75000
 
     return(
         <div className="mx-5">
@@ -38,16 +43,20 @@ const Invoice = () =>
                     <tr>
                         <td data-label="Item No" className='text-center p-4'>1</td>
                         <td data-label="Description" className='text-center p-4'>Rent deposit for property 1</td>
-                        <td data-label="Amount" className='text-center p-4'>{formatCurrency(75000)}</td>
+                        <td data-label="Amount" className='text-center p-4'>{formatCurrency(amount)}</td>
                     </tr>
                 </tbody>
             </table>
 
-            <button className="paynow btn btn-success" onClick={()=> setEditModalOpen(true)}> Pay Via Mpesa</button>
-             {/* Modal for editing payment details */}
-             {
-                editModalOpen && <PaymentForm setEditModalOpen={setEditModalOpen}/>
-             }
+            <div className="d-flex justify-content-center gap-5">
+                <button className="paynow btn btn-success" onClick={()=> setEditModalOpen(true)}> Pay Via Mpesa</button>
+                <button className="btn btn-secondary" onClick={()=> navigate(-1)}>Back</button>
+            </div>
+
+            {/* Modal for editing payment details */}
+            {
+            editModalOpen && <PaymentForm phone_number={phone_number} amount={amount} setEditModalOpen={setEditModalOpen}/>
+            }
         </div>
     )
 
