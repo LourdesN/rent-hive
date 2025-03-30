@@ -3,8 +3,13 @@ import { FaRegTrashAlt } from "react-icons/fa"
 import { GoPencil } from "react-icons/go"
 import { toast } from "react-toastify"
 import EditOwner from "./Edit"
+import { CircularProgress } from "@mui/material"
+
 const Owners = () => 
 {
+    //State to store the data loading state
+    const [loading, setLoading] = useState(true)
+
     //State to store the owner details
     const [owners, setOwners] = useState([])
 
@@ -34,6 +39,7 @@ const Owners = () =>
             :
                 toast.error(data.message)
         })
+        .finally(() => setLoading(false))
     }
     
     useEffect(()=> fetchOwners(),[])
@@ -73,30 +79,36 @@ const Owners = () =>
                     </thead>
                     <tbody>
                         {
-                            owners.length > 0
+                            loading
                             ?
-                                owners.map(owner =>
-                                {
-                                    return(
-                                        <tr key={owner.id}>
-                                            <td data-label="Name" className='text-center p-3'>{owner.first_name} {owner.last_name}</td>
-                                            <td data-label="Email address" className='text-center p-3'>{owner.email}</td>
-                                            <td data-label="Phone number" className='text-center p-3'>{owner.phone_number}</td>
-                                            <td data-label="Propeties Listed" className='text-center p-3'>{owner.properties_listed || 0}</td>
-                                            <td className='text-center p-3'>
-                                                <div className="d-flex flex-row justify-content-between border-0">
-                                                    <GoPencil className="fs-5" onClick={()=> editOwner(owner.id)}/>
-                                                    <FaRegTrashAlt className="text-danger fs-5" onClick={()=> deleteOwner(owner.id)}/>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    )
-                                }
-                                )
-                            :
                                 <tr>
-                                    <td colSpan={5}>No home owners to display</td>
+                                    <td colSpan={5} className="text-center"><CircularProgress size={30}/></td>
                                 </tr>
+                            :
+                                owners.length > 0
+                                ?
+                                    owners.map(owner =>
+                                    {
+                                        return(
+                                            <tr key={owner.id}>
+                                                <td data-label="Name" className='text-center p-3'>{owner.first_name} {owner.last_name}</td>
+                                                <td data-label="Email address" className='text-center p-3'>{owner.email}</td>
+                                                <td data-label="Phone number" className='text-center p-3'>{owner.phone_number}</td>
+                                                <td data-label="Propeties Listed" className='text-center p-3'>{owner.properties_listed || 0}</td>
+                                                <td className='text-center p-3'>
+                                                    <div className="d-flex flex-row justify-content-between border-0">
+                                                        <GoPencil className="fs-5" onClick={()=> editOwner(owner.id)}/>
+                                                        <FaRegTrashAlt className="text-danger fs-5" onClick={()=> deleteOwner(owner.id)}/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                    )
+                                :
+                                    <tr>
+                                        <td colSpan={5}>No home owners to display</td>
+                                    </tr>
                         }
                     </tbody>
                 </table>

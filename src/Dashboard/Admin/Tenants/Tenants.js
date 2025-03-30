@@ -1,11 +1,15 @@
 import { FaRegTrashAlt } from "react-icons/fa"
 import { GoPencil } from "react-icons/go"
-
+import { CircularProgress } from "@mui/material"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
 const Tenants = () => 
 {
+    //State to store the data loading state
+    const [loading, setLoading] = useState(true)
+
+    //State to store tenants data
     const [tenants, setTenants] = useState([])
 
     //Fetching the tenant details from the backend
@@ -28,6 +32,7 @@ const Tenants = () =>
             :
                 toast.error(data.message)
         })
+        .finally(() => setLoading(false))
     }
 
     useEffect(()=> fetchTenants(),[])
@@ -50,24 +55,35 @@ const Tenants = () =>
                     </thead>
                     <tbody>
                         {
-                            tenants?.map(tenant =>
-                            {
-                                return(
-                                    <tr key={tenant.id}>
-                                        <td data-label="Name" className='text-center p-3'>{tenant?.first_name} {tenant?.last_name}</td>
-                                        <td data-label="Email address" className='text-center p-3'>{tenant?.email}</td>
-                                        <td data-label="Phone number" className='text-center p-3'>{tenant?.phone_number}</td>
-                                        <td data-label="Propeties leased" className='text-center p-3'>{tenant?.properties_leased || 0}</td>
-                                        <td className='text-center p-3'>
-                                            <div className="d-flex flex-row justify-content-between border-0">
-                                                <GoPencil className="fs-5"/>
-                                                <FaRegTrashAlt className="text-danger fs-5"/>
-                                            </div>
-                                        </td>
+                            loading
+                            ?
+                                <tr>
+                                    <td colSpan={5} className="text-center text-xl"><CircularProgress size={30}/></td>
+                                </tr>
+                            :
+                                tenants?.length > 0
+                                ?
+                                tenants?.map(tenant =>
+                                    {
+                                        return(
+                                            <tr key={tenant.id}>
+                                                <td data-label="Name" className='text-center p-3'>{tenant?.first_name} {tenant?.last_name}</td>
+                                                <td data-label="Email address" className='text-center p-3'>{tenant?.email}</td>
+                                                <td data-label="Phone number" className='text-center p-3'>{tenant?.phone_number}</td>
+                                                <td data-label="Propeties leased" className='text-center p-3'>{tenant?.properties_leased || 0}</td>
+                                                <td className='text-center p-3'>
+                                                    <div className="d-flex flex-row justify-content-between border-0">
+                                                        <GoPencil className="fs-5"/>
+                                                        <FaRegTrashAlt className="text-danger fs-5"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                :
+                                    <tr>
+                                        <td colSpan={5}>No tenants to display</td>
                                     </tr>
-                                )
-                            }
-                            )
                         }
                     </tbody>
                 </table>
