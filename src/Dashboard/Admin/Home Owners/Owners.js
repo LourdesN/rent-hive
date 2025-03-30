@@ -2,9 +2,17 @@ import { useEffect, useState } from "react"
 import { FaRegTrashAlt } from "react-icons/fa"
 import { GoPencil } from "react-icons/go"
 import { toast } from "react-toastify"
+import EditOwner from "./Edit"
 const Owners = () => 
 {
+    //State to store the owner details
     const [owners, setOwners] = useState([])
+
+    //State to handle the edit form modal
+    const [editModal, setEditModal] = useState(false)
+
+    //State to handle the owner whose details are being edited
+    const [onwerToEdit, setOwnerToEdit] = useState({})
 
     //Fetching the tenant details from the backend
     const fetchOwners = () =>
@@ -29,6 +37,22 @@ const Owners = () =>
     }
     
     useEffect(()=> fetchOwners(),[])
+
+    //Function to handle owner changes
+    const editOwner = id =>
+    {
+        //Getting the owner details by ID from the owners state
+        const owner = owners.find(owner => owner.id === id)
+
+        setEditModal(true)
+        setOwnerToEdit(owner)
+    }
+
+    //Function to delete the owner
+    const deleteOwner = id =>
+    {
+        console.log(id)
+    }
 
     return ( 
         <div className="container py-2">
@@ -61,8 +85,8 @@ const Owners = () =>
                                             <td data-label="Propeties Listed" className='text-center p-3'>{owner.properties_listed || 0}</td>
                                             <td className='text-center p-3'>
                                                 <div className="d-flex flex-row justify-content-between border-0">
-                                                    <GoPencil className="fs-5"/>
-                                                    <FaRegTrashAlt className="text-danger fs-5"/>
+                                                    <GoPencil className="fs-5" onClick={()=> editOwner(owner.id)}/>
+                                                    <FaRegTrashAlt className="text-danger fs-5" onClick={()=> deleteOwner(owner.id)}/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -77,6 +101,9 @@ const Owners = () =>
                     </tbody>
                 </table>
             </div>
+            {
+                editModal && <EditOwner owner={onwerToEdit} setEditModal={setEditModal}/>
+            }
         </div>
     )
 }
