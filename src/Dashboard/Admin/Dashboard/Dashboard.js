@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaCity } from "react-icons/fa"
 import { MdPeople, MdGroups } from "react-icons/md";
+import Loader from "../../../Assets/Components/Loader";
 
 const AdminDashboard = ({ fullName }) => 
 {
@@ -8,6 +9,8 @@ const AdminDashboard = ({ fullName }) =>
     const [totalTenants, setTotalTenants] = useState(0)
     const [totalOwners, setTotalOwners] = useState(0)
     const [totalProperties, setTotalProperties] = useState(0)
+
+    const [isLoading, setIsLoading] = useState(true)
 
     //Fetching the data from the backend
     useEffect(()=>
@@ -30,9 +33,13 @@ const AdminDashboard = ({ fullName }) =>
                 setTotalProperties(data?.properties)
             }
         })
+        .finally(() => setIsLoading(false))
     },[])
     return ( 
         <>
+            {
+                isLoading && <Loader/>
+            }
             <h1 className="text-uppercase fs-2 fw-bold text-center">Welcome back, {fullName}</h1>
             <div className="container-fluid px-4 py-3">
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4">
