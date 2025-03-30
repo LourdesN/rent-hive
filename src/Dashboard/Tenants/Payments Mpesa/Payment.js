@@ -21,7 +21,7 @@ function PaymentForm({phone_number,setEditModalOpen,amount}) {
     };
 
     return (
-        <div className="max-w-md mx-auto p-6 bg-success rounded-lg shadow-md text-center">
+        <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md text-center">
         <h2 className="text-xl font-semibold mb-4">Make a Payment</h2>
         <input
             type="text"
@@ -38,7 +38,7 @@ function PaymentForm({phone_number,setEditModalOpen,amount}) {
         />
         <button
             onClick={handlePayment}
-            className="w-full p-2 bg-success-600 text-white rounded hover:bg-success-700">
+            className="w-full p-2 btn btn-success-600 text-white rounded hover:btn btn-success-700">
             Pay via M-Pesa
         </button>
         {message && <p className="mt-2 text-red-500">{message}</p>}

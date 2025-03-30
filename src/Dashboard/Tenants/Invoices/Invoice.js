@@ -43,7 +43,7 @@ const Invoice = () =>
                 </tbody>
             </table>
 
-            <button className="paynow btn-success" onClick={()=> setEditModalOpen(true)}> Pay Via Mpesa</button>
+            <button className="paynow btn btn-success" onClick={()=> setEditModalOpen(true)}> Pay Via Mpesa</button>
              {/* Modal for editing payment details */}
              {
                 editModalOpen && <PaymentForm setEditModalOpen={setEditModalOpen}/>
