@@ -3,8 +3,10 @@ import { PiUsersBold } from "react-icons/pi";
 import { useEffect, useState } from "react";
 
 import Loader from "../../../Assets/Components/Loader";
+import PaymentsReceived from "./Payments Done"
+import ExpiringLeases from "./Expiring Leases";
 
-const OwnerDashboard = ({ fullName, properties }) => 
+const OwnerDashboard = ({ fullName }) => 
 {
     const [isLoading, setIsLoading] = useState(true)
 
@@ -102,7 +104,13 @@ const OwnerDashboard = ({ fullName, properties }) =>
                         </div>
                     </div>
                 </div>
+                <div className="d-flex flex-column flex-md-row flex-md-nowrap justify-content-evenly p-2">
+                    <ExpiringLeases/>
+                    <PaymentsReceived/>
+                </div>
             </div>
+
+            
         </>
      );
 }
