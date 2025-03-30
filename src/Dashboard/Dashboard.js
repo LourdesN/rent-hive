@@ -17,6 +17,7 @@ import Leases from "./Tenants/Leases/Leases"
 import Lease from "./Tenants/Leases/Lease"
 import ErrorPage from "../404/Error"
 import Profile from "./Profile/Profile"
+import PaymentForm from "./Tenants/Payments Mpesa/Payment"
 
 const Dashboard = () => 
 {
@@ -96,6 +97,7 @@ const Dashboard = () =>
                             <Route exact path="/leases" element={<Leases fullName={fullName}/>}></Route>
                             <Route exact path="/leases/:id" element={<Lease/>}></Route>
                             <Route exact path="/profile" element={<Profile/>}></Route>
+                            <Route exact path= "/payments" element= {<PaymentForm/>}></Route>
                             <Route exact path="*" element={<ErrorPage/>}></Route>
                         </Routes>
                 }
