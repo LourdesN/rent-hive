@@ -6,7 +6,6 @@ import Loader from "../Assets/Components/Loader"
 
 import Navbar from "./Components/Navbar"
 import Sidebar from "./Components/Sidebar"
-import Landing from "./Landing Page/Home"
 import Properties from "./Owners/Properties/Properties"
 import Property from "./Owners/Properties/Property"
 import AvailableProperties from "./Tenants/Available Properties/Properties"
@@ -17,14 +16,13 @@ import Leases from "./Tenants/Leases/Leases"
 import Lease from "./Tenants/Leases/Lease"
 import ErrorPage from "../404/Error"
 import Profile from "./Profile/Profile"
-import PaymentForm from "./Tenants/Payments Mpesa/Payment"
 
 //Admin pages
 import AdminDashboard from "./Admin/Dashboard/Dashboard"
 import Owners from "./Admin/Home Owners/Owners"
 import Tenants from "./Admin/Tenants/Tenants"
 import OwnerDashboard from "./Owners/Dashboard/Dashboard"
-import { FaUikit } from "react-icons/fa"
+import TenantDashboard from "./Tenants/Dashboard/Home"
 
 const Dashboard = () => 
 {
@@ -103,7 +101,7 @@ const Dashboard = () =>
                                     ?
                                         <OwnerDashboard fullName={fullName}/>
                                     :
-                                        <Landing fullName={fullName} role={role} properties={properties}/>
+                                        <TenantDashboard fullName={fullName} role={role}/>
                             }/>
                             <Route exact path="/properties" element={<Properties fullName={fullName}/>}></Route>
                             <Route exact path="/properties/:id"  element={<Property/>}></Route>
@@ -114,7 +112,6 @@ const Dashboard = () =>
                             <Route exact path="/leases" element={<Leases fullName={fullName}/>}></Route>
                             <Route exact path="/leases/:id" element={<Lease/>}></Route>
                             <Route exact path="/profile" element={<Profile/>}></Route>
-                            <Route exact path= "/payments" element= {<PaymentForm/>}></Route>
 
                             {/* Admin routes */}
                             <Route exact path="/owners" element={<Owners/>}></Route>

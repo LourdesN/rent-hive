@@ -6,7 +6,6 @@ const PaymentHistory = () =>
   const payments = [
     { id: 1, date: "2024-12-01", amount: "Kshs. 12,000.00", status: "Paid" },
     { id: 2, date: "2024-12-05", amount: "Kshs. 85,000.00", status: "Pending" },
-    { id: 3, date: "2024-12-10", amount: "Kshs. 20,000.00", status: "Paid" },
   ];
 
   return (

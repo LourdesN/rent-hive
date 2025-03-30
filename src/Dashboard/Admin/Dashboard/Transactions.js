@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const PaymentsReceived = () => 
+const TransactionHistory = () => 
 {
   // Sample payment history data
   const payments = [
@@ -10,7 +10,7 @@ const PaymentsReceived = () =>
 
   return (
     <div className="w-100">
-        <h1 className="text-uppercase fs-3 fw-bold text-center">Payments Received</h1>
+        <h1 className="text-uppercase fs-3 fw-bold text-center">Transaction History</h1>
         <table className="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -33,7 +33,7 @@ const PaymentsReceived = () =>
                 }
                 <tr>
                     <td colSpan={3}>
-                        <Link to="/dashboard/payments" className="text-blue-600 hover:text-blue-800 font-semibold underline d-flex justify-content-end">See more</Link>
+                        <Link to="/dashboard/all-payments" className="text-blue-600 hover:text-blue-800 font-semibold underline d-flex justify-content-end">See more</Link>
                     </td>
                 </tr>
                 
@@ -43,4 +43,4 @@ const PaymentsReceived = () =>
   );
 };
 
-export default PaymentsReceived;
+export default TransactionHistory;

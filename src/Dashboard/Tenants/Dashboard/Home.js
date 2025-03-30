@@ -2,7 +2,7 @@ import Cards from "./Cards"
 import PaymentHistory from "./Payment History"
 import Piechart from "./Pie chart"
 
-const Landing = ({fullName, soon, sooner, soonest, role, properties}) => 
+const TenantDashboard = ({fullName, soon, sooner, soonest, properties}) => 
 {
     return ( 
         <>
@@ -16,4 +16,4 @@ const Landing = ({fullName, soon, sooner, soonest, role, properties}) =>
     )
 }
  
-export default Landing
+export default TenantDashboard
