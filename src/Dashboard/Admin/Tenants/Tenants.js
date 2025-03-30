@@ -153,7 +153,7 @@ const Tenants = () =>
                 addModal && <AddTenant tenants={tenants} setTenants={setTenants} setAddModal={setAddModal}/>
             }
             {
-                editModal && <EditTenant tenant={tenantToEdit} setEditModal={setEditModal}/>
+                editModal && <EditTenant tenant={tenantToEdit} setEditModal={setEditModal} fetchTenants={fetchTenants}/>
             }
         </div>
     )

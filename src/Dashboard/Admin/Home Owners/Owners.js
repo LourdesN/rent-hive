@@ -150,7 +150,7 @@ const Owners = () =>
                 </table>
             </div>
             {
-                editModal && <EditOwner owner={onwerToEdit} setEditModal={setEditModal}/>
+                editModal && <EditOwner owner={onwerToEdit} setEditModal={setEditModal} fetchOwners={fetchOwners}/>
             }
             {
                 addModal && <AddOwner owners={owners} setOwners={setOwners} setAddModal={setAddModal} />
