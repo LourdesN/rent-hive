@@ -93,6 +93,9 @@ const Dashboard = () =>
                     setTotalTenants(data?.tenants)
                     setVacantProperties(data?.vacant)
                     setRentedProperties(data?.rented)
+                    setSoon(data?.expiring_61_plus_days) //Furthest away from expiring
+                    setSooner(data?.expiring_31_60_days) //Second furtherst
+                    setSoonest(data?.expiring_30_days) //Soonest to expire
                 }
                 else if(data?.role === "Tenant")
                 {
@@ -138,7 +141,7 @@ const Dashboard = () =>
                                 :
                                     role === "Owner"
                                     ?
-                                        <OwnerDashboard fullName={fullName} totalProperties={totalProperties} totalTenants={totalTenants} vacantProperties={vacantProperties} rentedProperties={rentedProperties}/>
+                                        <OwnerDashboard fullName={fullName} totalProperties={totalProperties} totalTenants={totalTenants} vacantProperties={vacantProperties} rentedProperties={rentedProperties} soon={soon} sooner={sooner} soonest={soonest}/>
                                     :
                                         <TenantDashboard fullName={fullName} rentDue={rentDue} leasedProperties={leasedProperties} soon={soon} sooner={sooner} soonest={soonest}/>
                             }/>

@@ -4,7 +4,7 @@ import { PiUsersBold } from "react-icons/pi";
 import PaymentsReceived from "./Payments Done"
 import ExpiringLeases from "./Expiring Leases";
 
-const OwnerDashboard = ({ fullName, totalProperties, totalTenants, vacantProperties, rentedProperties }) => 
+const OwnerDashboard = ({ fullName, totalProperties, totalTenants, vacantProperties, rentedProperties, soon, sooner, soonest }) => 
 {
     return ( 
         <>
@@ -67,7 +67,7 @@ const OwnerDashboard = ({ fullName, totalProperties, totalTenants, vacantPropert
                     </div>
                 </div>
                 <div className="d-flex flex-column flex-md-row flex-md-nowrap justify-content-evenly p-2">
-                    <ExpiringLeases/>
+                    <ExpiringLeases soon={soon} sooner={sooner} soonest={soonest}/>
                     <PaymentsReceived/>
                 </div>
             </div>
