@@ -98,6 +98,9 @@ const Dashboard = () =>
                 {
                     setRentDue(data?.rent_due)
                     setLeasedProperties(data?.leased_properties)
+                    setSoon(data?.expiring_61_plus_days) //Furthest away from expiring
+                    setSooner(data?.expiring_31_60_days) //Second furtherst
+                    setSoonest(data?.expiring_30_days) //Soonest to expire
                 }
             }
         })
@@ -137,7 +140,7 @@ const Dashboard = () =>
                                     ?
                                         <OwnerDashboard fullName={fullName} totalProperties={totalProperties} totalTenants={totalTenants} vacantProperties={vacantProperties} rentedProperties={rentedProperties}/>
                                     :
-                                        <TenantDashboard fullName={fullName} rentDue={rentDue} leasedProperties={leasedProperties}/>
+                                        <TenantDashboard fullName={fullName} rentDue={rentDue} leasedProperties={leasedProperties} soon={soon} sooner={sooner} soonest={soonest}/>
                             }/>
                             <Route exact path="/properties" element={<Properties fullName={fullName}/>}></Route>
                             <Route exact path="/properties/:id"  element={<Property/>}></Route>

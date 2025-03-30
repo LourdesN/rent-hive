@@ -2,7 +2,7 @@ import Cards from "./Cards"
 import PaymentHistory from "./Payment History"
 import Piechart from "./Pie chart"
 
-const TenantDashboard = ({fullName, soon, sooner, soonest, rentDue, leasedProperties}) => 
+const TenantDashboard = ({fullName, soonest, sooner, soon, rentDue, leasedProperties}) => 
 {
     return ( 
         <>
