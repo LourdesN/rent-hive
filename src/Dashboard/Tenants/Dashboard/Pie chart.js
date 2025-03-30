@@ -9,10 +9,6 @@ const Piechart = ({soonest, sooner, soon}) =>
         soonest: soonest
     }
 
-    console.log(values.soon)
-    console.log(values.sooner)
-    console.log(values.soonest)
-
     const data =
     [
         {id: 0, value: values.soonest, label: "<30 days", color: "#FF0000"},
