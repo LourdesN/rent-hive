@@ -23,6 +23,8 @@ import PaymentForm from "./Tenants/Payments Mpesa/Payment"
 import AdminDashboard from "./Admin/Dashboard/Dashboard"
 import Owners from "./Admin/Home Owners/Owners"
 import Tenants from "./Admin/Tenants/Tenants"
+import OwnerDashboard from "./Owners/Dashboard/Dashboard"
+import { FaUikit } from "react-icons/fa"
 
 const Dashboard = () => 
 {
@@ -97,7 +99,11 @@ const Dashboard = () =>
                                 ?
                                     <AdminDashboard fullName={fullName}/>
                                 :
-                                    <Landing fullName={fullName} role={role} properties={properties}/>
+                                    role === "Owner"
+                                    ?
+                                        <OwnerDashboard fullName={fullName}/>
+                                    :
+                                        <Landing fullName={fullName} role={role} properties={properties}/>
                             }/>
                             <Route exact path="/properties" element={<Properties fullName={fullName}/>}></Route>
                             <Route exact path="/properties/:id"  element={<Property/>}></Route>
