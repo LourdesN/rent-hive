@@ -26,7 +26,7 @@ function PaymentForm({phone_number,setEditModalOpen,amount}) {
         <input
             type="text"
             placeholder="Phone number"
-            value={phone}
+            value={phone_number}
             onChange={(e) => setPhone(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded mb-2"
         />
@@ -34,13 +34,11 @@ function PaymentForm({phone_number,setEditModalOpen,amount}) {
             type="number"
             placeholder="Amount"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded mb-2"
         />
         <button
             onClick={handlePayment}
-            className="w-full p-2 bg-green-600 text-white rounded hover:bg-green-700"
-        >
+            className="w-full p-2 bg-green-600 text-white rounded hover:bg-green-700">
             Pay via M-Pesa
         </button>
         {message && <p className="mt-2 text-red-500">{message}</p>}
