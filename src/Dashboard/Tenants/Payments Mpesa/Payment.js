@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-function PaymentForm() {
-    const [phone, setPhone] = useState("");
-    const [amount, setAmount] = useState("");
+function PaymentForm({phone_number,setEditModalOpen,amount}) {
+    const [phone, setPhone] = useState(phone_number);
+   
     const [message, setMessage] = useState("");
 
     const handlePayment = async () => {
@@ -21,22 +21,28 @@ function PaymentForm() {
     };
 
     return (
-        <div>
-            <input
-                type="text"
-                placeholder="Phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-            />
-            <input
-                type="number"
-                placeholder="Amount"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-            />
-            <button onClick={handlePayment}>Pay via M-Pesa</button>
-            {message && <p>{message}</p>}
-        </div>
+        <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md text-center">
+        <h2 className="text-xl font-semibold mb-4">Make a Payment</h2>
+        <input
+            type="text"
+            placeholder="Phone number"
+            value={phone_number}
+            onChange={(e) => setPhone(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+        />
+        <input
+            type="number"
+            placeholder="Amount"
+            value={amount}
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+        />
+        <button
+            onClick={handlePayment}
+            className="w-full p-2 btn btn-success-600 text-white rounded hover:btn btn-success-700">
+            Pay via M-Pesa
+        </button>
+        {message && <p className="mt-2 text-red-500">{message}</p>}
+    </div>
     );
 }
 

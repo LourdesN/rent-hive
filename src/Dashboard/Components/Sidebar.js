@@ -20,6 +20,7 @@ const Sidebar = ({isVisible, role}) =>
             { to: "/dashboard/available-properties", icon: <BiBuildingHouse className="me-2" />, label: "Available Properties" },
             { to: "/dashboard/invoices", icon: <FaFileInvoiceDollar className="me-2" />, label: "Invoices" },
             { to: "/dashboard/leases", icon: <MdOutlineRealEstateAgent className="me-2" />, label: "Leases" },
+          
         ]
     return (
         isVisible && (

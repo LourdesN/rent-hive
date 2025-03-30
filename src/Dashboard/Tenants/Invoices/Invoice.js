@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom"
 import { formatCurrency } from "../../Calculations/Format Currency"
+import { useState } from "react"
+import PaymentForm from "../Payments Mpesa/Payment"
 
 const Invoice = () =>
 {
     const { ref } = useParams()
+     //State to handle the edit payment form modal
+     const [editModalOpen, setEditModalOpen]=useState(false)
 
     return(
         <div className="mx-5">
@@ -38,6 +42,12 @@ const Invoice = () =>
                     </tr>
                 </tbody>
             </table>
+
+            <button className="paynow btn btn-success" onClick={()=> setEditModalOpen(true)}> Pay Via Mpesa</button>
+             {/* Modal for editing payment details */}
+             {
+                editModalOpen && <PaymentForm setEditModalOpen={setEditModalOpen}/>
+             }
         </div>
     )
 
