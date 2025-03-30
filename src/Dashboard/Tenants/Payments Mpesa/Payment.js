@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function PaymentForm() {
+function PaymentForm({phone_number,setEditModalOpen,amount}) {
     const [phone, setPhone] = useState("");
     const [amount, setAmount] = useState("");
     const [message, setMessage] = useState("");
