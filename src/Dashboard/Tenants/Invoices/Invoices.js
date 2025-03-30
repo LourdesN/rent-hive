@@ -73,7 +73,9 @@ const Invoices = () =>
                         {
                             loading
                             ?
-                                <CircularProgress size={20}/>
+                                <tr>
+                                    <td colSpan={5} className="text-center"><CircularProgress size={30}/></td>
+                                </tr>
                             :
                                 invoices.length > 0
                                 ?
