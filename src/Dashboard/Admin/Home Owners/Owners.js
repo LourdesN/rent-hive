@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react"
+import { CircularProgress } from "@mui/material"
 import { FaRegTrashAlt } from "react-icons/fa"
 import { GoPencil } from "react-icons/go"
-import { toast } from "react-toastify"
-import EditOwner from "./Edit Owner"
-import { CircularProgress } from "@mui/material"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+
 import AddOwner from "./Add Owner"
+import EditOwner from "./Edit Owner"
+
+import Swal from "sweetalert2"
 
 const Owners = () => 
 {
@@ -63,36 +66,56 @@ const Owners = () =>
     //Function to delete the owner
     const deleteOwner = id =>
     {
-        fetch(`https://rent-hive-backend.vercel.app/owners/${id}`,
-        {
-            method: "DELETE",
-            headers:
-            {
-                "X-Session-ID": localStorage.getItem("X-Session-ID")
-            },
-        })
-        .then(response => response.json())
-        .then(data => 
-        {
-            if(data.type === "success")
-            {
-                toast.success(data.message)
-                //Update the tenants state by removing the tenant whose ID has been deleted from the database
-                const remainingOwners = owners.filter(owner => owner.id !== id)
-                setOwners(remainingOwners)
-            }
-            else
-            {
-                if(data.type === "error")
-                {
-                    toast.error(data.message)
+        //Getting the owner's details
+        const owner = owners.find(owner => owner.id === id)
 
-                    if(data.reason === "Invalid credentials")
+        //Creating a sweet alert to notify the admin of the deletion
+        Swal.fire(
+        {
+            title: `Are you sure you want to delete ${owner.first_name} ${owner.last_name}'s account?`,
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        })
+        .then(result =>
+        {
+            if(result.isConfirmed)
+            {
+                fetch(`https://rent-hive-backend.vercel.app/owners/${id}`,
+                {
+                    method: "DELETE",
+                    headers:
                     {
-                        navigate(-1)
+                        "X-Session-ID": localStorage.getItem("X-Session-ID")
+                    },
+                })
+                .then(response => response.json())
+                .then(data => 
+                {
+                    if(data.type === "success")
+                    {
+                        toast.success(data.message)
+                        //Update the tenants state by removing the tenant whose ID has been deleted from the database
+                        const remainingOwners = owners.filter(owner => owner.id !== id)
+                        setOwners(remainingOwners)
                     }
-                }
-            }
+                    else
+                    {
+                        if(data.type === "error")
+                        {
+                            toast.error(data.message)
+        
+                            if(data.reason === "Invalid credentials")
+                            {
+                                navigate(-1)
+                            }
+                        }
+                    }
+                })
+            } 
         })
     }
 
