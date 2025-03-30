@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { formatCurrency } from "../../Calculations/Format Currency"
 import { useState } from "react"
-import { PaymentForm} from "../Payments Mpesa/Payment"
+import PaymentForm from "../Payments Mpesa/Payment"
 
 const Invoice = () =>
 {
