@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 
 import Swal from "sweetalert2"
 import AddAdmin from "./Add Admin"
+import EditAdmin from "./Edit Admin"
 
 const Admins = () => 
 {
@@ -57,7 +58,7 @@ const Admins = () =>
     const editAdmin = id =>
     {
         //Getting the admin being edited from the admins state
-        const admin = admins.find(admin => admin._id === id)
+        const admin = admins.find(admin => admin.id === id)
 
         //Opening the edit modal
         setOpenEditAdmin(true)
@@ -102,7 +103,7 @@ const Admins = () =>
                     {
                         toast.success(data.message)
                         //Update the admins state by removing the tenant whose ID has been deleted from the database
-                        const remainingAdmins = admin.filter(owner => owner.id !== id)
+                        const remainingAdmins = admin.filter(admin => admin.id !== id)
                         setAdmins(remainingAdmins)
                     }
                     else
@@ -154,7 +155,6 @@ const Admins = () =>
                                                 <td data-label="Name" className='text-center p-3'>{admin.first_name} {admin.last_name}</td>
                                                 <td data-label="Email address" className='text-center p-3'>{admin.email}</td>
                                                 <td data-label="Phone number" className='text-center p-3'>{admin.phone_number}</td>
-                                                <td data-label="Propeties Listed" className='text-center p-3'>{admin.properties_listed || 0}</td>
                                                 <td className='text-center p-3'>
                                                     <div className="d-flex flex-row justify-content-between border-0">
                                                         <GoPencil className="fs-5" onClick={()=> editAdmin(admin.id)}/>
@@ -173,9 +173,9 @@ const Admins = () =>
                     </tbody>
                 </table>
             </div>
-            {/* {
-                editModal && <EditOwner owner={onwerToEdit} setEditModal={setEditModal} fetchOwners={fetchOwners}/>
-            } */}
+            {
+                openEditAdmin && <EditAdmin admin={adminToEdit} setOpenEditModal={setOpenEditAdmin} fetchAdmins={fetchAdmins}/>
+            }
             {
                 openAddAdmin && <AddAdmin fetchAdmins={fetchAdmins} setOpenAddModal={setOpenAddAdmin} />
             }
