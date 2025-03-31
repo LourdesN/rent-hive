@@ -2,6 +2,7 @@ import { FaHome, FaFileInvoiceDollar, FaHouseUser, FaBuilding } from "react-icon
 import { BiBuildingHouse } from "react-icons/bi"
 import { IoCashOutline } from "react-icons/io5"
 import { MdOutlineRealEstateAgent } from "react-icons/md"
+import { RiAdminLine } from "react-icons/ri";
 
 import { NavLink } from "react-router-dom"
 
@@ -30,6 +31,7 @@ const Sidebar = ({isVisible, role}) =>
                     { to: "/dashboard/owners", icon: <BiBuildingHouse className="me-2"/>, label: "Home owners" },
                     { to: "/dashboard/tenants", icon: <FaHouseUser className="me-2"/>, label: "Tenants" },
                     { to: "/dashboard/all-properties", icon: <FaBuilding className="me-2"/>, label: "Properties" },
+                    { to: "/dashboard/admins", icon: <RiAdminLine className="me-2"/>, label: "Admins" },
                 ]
             :
                 null

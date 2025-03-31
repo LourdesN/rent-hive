@@ -5,33 +5,32 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-import AddOwner from "./Add Owner"
-import EditOwner from "./Edit Owner"
-
 import Swal from "sweetalert2"
+import AddAdmin from "./Add Admin"
 
-const Owners = () => 
+const Admins = () => 
 {
     const navigate = useNavigate(-1)
-    //State to store the data loading state
+
+    //State to store admins data
+    const [admins, setAdmins] = useState([])
+
+    //State to handle data loading state
     const [loading, setLoading] = useState(true)
 
-    //State to store the owner details
-    const [owners, setOwners] = useState([])
+    //State to handle add admin form modal
+    const [openAddAdmin, setOpenAddAdmin] = useState(false)
 
-    //State to handle the edit form modal
-    const [editModal, setEditModal] = useState(false)
+    //State to handle edit admin form modal
+    const [openEditAdmin, setOpenEditAdmin] = useState(false)
 
-    //State to handle the add owner form modal
-    const [addModal, setAddModal] = useState(false)
+    //State to handle the admin being edited
+    const [adminToEdit, setAdminToEdit] = useState({})
 
-    //State to handle the owner whose details are being edited
-    const [onwerToEdit, setOwnerToEdit] = useState({})
-
-    //Fetching the tenant details from the backend
-    const fetchOwners = () =>
+    //Fetching the admins
+    const fetchAdmins = () =>
     {
-        fetch("https://rent-hive-backend.vercel.app/owners",
+        fetch("https://rent-hive-backend.vercel.app/admins",
         {
             method: "GET",
             headers:
@@ -44,35 +43,39 @@ const Owners = () =>
         {
             data.type === "success"
             ?
-            setOwners(data?.owners)
+            setAdmins(data?.admins)
             :
                 toast.error(data.message)
         })
         .finally(() => setLoading(false))
     }
     
-    useEffect(()=> fetchOwners(),[])
+    //Triggering the useEffect once the page loads
+    useEffect(() => fetchAdmins(), [])
 
-    //Function to handle owner changes
-    const editOwner = id =>
+    //Function to handle admin changes
+    const editAdmin = id =>
     {
-        //Getting the owner details by ID from the owners state
-        const owner = owners.find(owner => owner.id === id)
+        //Getting the admin being edited from the admins state
+        const admin = admins.find(admin => admin._id === id)
 
-        setEditModal(true)
-        setOwnerToEdit(owner)
+        //Opening the edit modal
+        setOpenEditAdmin(true)
+
+        //Setting the admin to be edited in state
+        setAdminToEdit(admin)
     }
 
-    //Function to delete the owner
-    const deleteOwner = id =>
+    //Function to delete admin account
+    const deleteAdmin = id =>
     {
-        //Getting the owner's details
-        const owner = owners.find(owner => owner.id === id)
+        //Getting the admin being deleted from the admins state
+        const admin = admins.find(admin => admin._id === id)
 
         //Creating a sweet alert to notify the admin of the deletion
         Swal.fire(
         {
-            title: `Are you sure you want to delete ${owner.first_name} ${owner.last_name}'s account?`,
+            title: `Are you sure you want to delete ${admin.first_name} ${admin.last_name}'s account?`,
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
@@ -98,9 +101,9 @@ const Owners = () =>
                     if(data.type === "success")
                     {
                         toast.success(data.message)
-                        //Update the owners state by removing the owner whose ID has been deleted from the database
-                        const remainingOwners = owners.filter(owner => owner.id !== id)
-                        setOwners(remainingOwners)
+                        //Update the admins state by removing the tenant whose ID has been deleted from the database
+                        const remainingAdmins = admin.filter(owner => owner.id !== id)
+                        setAdmins(remainingAdmins)
                     }
                     else
                     {
@@ -118,12 +121,11 @@ const Owners = () =>
             } 
         })
     }
-
     return ( 
         <div className="container py-2">
-            <h1 className="text-uppercase fs-2 fw-bold text-center">All home owners</h1>
+            <h1 className="text-uppercase fs-2 fw-bold text-center">All system administrators</h1>
             <div className="d-flex justify-content-end mb-3 me-5">
-                <button className="btn btn-primary" onClick={()=> setAddModal(true)}>Add new owner</button>
+                <button className="btn btn-primary" onClick={()=> setOpenAddAdmin(true)}>Add new admin</button>
             </div>
             <div className="overflow-x-auto p-2 px-md-5">
                 <table className="table table-stripped table-hover">
@@ -132,7 +134,6 @@ const Owners = () =>
                             <th scope="col" className="text-white text-uppercase text-center bg-success">Name</th>
                             <th scope="col" className="text-white text-uppercase text-center bg-success">Email</th>
                             <th scope="col" className="text-white text-uppercase text-center bg-success">Phone Number</th>
-                            <th scope="col" className="text-white text-uppercase text-center bg-success">Properties listed</th>
                             <th scope="col" className="text-white text-uppercase text-center bg-success">Action</th>
                         </tr>
                     </thead>
@@ -144,20 +145,20 @@ const Owners = () =>
                                     <td colSpan={5} className="text-center"><CircularProgress size={30}/></td>
                                 </tr>
                             :
-                                owners.length > 0
+                                admins.length > 0
                                 ?
-                                    owners.map(owner =>
+                                    admins.map(admin =>
                                     {
                                         return(
-                                            <tr key={owner.id}>
-                                                <td data-label="Name" className='text-center p-3'>{owner.first_name} {owner.last_name}</td>
-                                                <td data-label="Email address" className='text-center p-3'>{owner.email}</td>
-                                                <td data-label="Phone number" className='text-center p-3'>{owner.phone_number}</td>
-                                                <td data-label="Propeties Listed" className='text-center p-3'>{owner.properties_listed || 0}</td>
+                                            <tr key={admin.id}>
+                                                <td data-label="Name" className='text-center p-3'>{admin.first_name} {admin.last_name}</td>
+                                                <td data-label="Email address" className='text-center p-3'>{admin.email}</td>
+                                                <td data-label="Phone number" className='text-center p-3'>{admin.phone_number}</td>
+                                                <td data-label="Propeties Listed" className='text-center p-3'>{admin.properties_listed || 0}</td>
                                                 <td className='text-center p-3'>
                                                     <div className="d-flex flex-row justify-content-between border-0">
-                                                        <GoPencil className="fs-5" onClick={()=> editOwner(owner.id)}/>
-                                                        <FaRegTrashAlt className="text-danger fs-5" onClick={()=> deleteOwner(owner.id)}/>
+                                                        <GoPencil className="fs-5" onClick={()=> editAdmin(admin.id)}/>
+                                                        <FaRegTrashAlt className="text-danger fs-5" onClick={()=> deleteAdmin(admin.id)}/>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -166,20 +167,20 @@ const Owners = () =>
                                     )
                                 :
                                     <tr>
-                                        <td colSpan={5}>No home owners to display</td>
+                                        <td colSpan={5}>No admin accounts to display</td>
                                     </tr>
                         }
                     </tbody>
                 </table>
             </div>
-            {
+            {/* {
                 editModal && <EditOwner owner={onwerToEdit} setEditModal={setEditModal} fetchOwners={fetchOwners}/>
-            }
+            } */}
             {
-                addModal && <AddOwner fetchOwners={fetchOwners} setAddModal={setAddModal} />
+                openAddAdmin && <AddAdmin fetchAdmins={fetchAdmins} setOpenAddModal={setOpenAddAdmin} />
             }
         </div>
-    )
+     );
 }
  
-export default Owners
+export default Admins;

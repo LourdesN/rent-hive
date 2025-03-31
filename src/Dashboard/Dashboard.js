@@ -23,6 +23,7 @@ import Owners from "./Admin/Home Owners/Owners"
 import Tenants from "./Admin/Tenants/Tenants"
 import OwnerDashboard from "./Owners/Dashboard/Dashboard"
 import TenantDashboard from "./Tenants/Dashboard/Home"
+import Admins from "./Admin/Admins/Admins"
 
 const Dashboard = () => 
 {
@@ -160,6 +161,7 @@ const Dashboard = () =>
                             {/* Admin routes */}
                             <Route exact path="/owners" element={<Owners/>}></Route>
                             <Route exact path="/tenants" element={<Tenants/>}></Route>
+                            <Route exact path="/admins" element={<Admins/>}></Route>
                             <Route exact path="*" element={<ErrorPage/>}></Route>
                         </Routes>
                 }
