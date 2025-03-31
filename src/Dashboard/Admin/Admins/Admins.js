@@ -71,7 +71,7 @@ const Admins = () =>
     const deleteAdmin = id =>
     {
         //Getting the admin being deleted from the admins state
-        const admin = admins.find(admin => admin._id === id)
+        const admin = admins.find(admin => admin.id === id)
 
         //Creating a sweet alert to notify the admin of the deletion
         Swal.fire(
