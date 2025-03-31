@@ -178,7 +178,7 @@ const AdminAddProperty = ({addModal, setAddModal, fetchProperties, owners}) =>
                     </div>
                     
                     {/* Deposit required checkboxes */}
-                    <div className="col-6 col-md-3 mb-3">
+                    <div className="col-12 col-md-3 mb-3">
                         <label className="form-label">Deposit required</label>
                         <div className="d-flex flex-row gap-2">
                             <div className="form-check">
@@ -192,7 +192,7 @@ const AdminAddProperty = ({addModal, setAddModal, fetchProperties, owners}) =>
                         </div>
                     </div>
 
-                    <div className="col-6 col-md-3 mb-3">
+                    <div className="col-12 col-md-3 mb-3">
                         <label className="form-label">Home owner</label>
                         {/* Select dropdown for the home owners */}
                         <select className="form-select" id="owner_id" name="owner_id" value={propertyDetails.owner_id} onChange={handleInputChange}>
