@@ -139,7 +139,7 @@ const Properties = () =>
                 </button>
             </div>
             <div className="row g-3">
-                <div className="col-12 col-md-6 col-lg-4 mb-3 position-relative">
+                <div className="col-12 col-md-6 col-lg-6 mb-3 position-relative">
                     <input type="text" name="location" id="location" placeholder="Filter by location" className="form-control p-3" value={filters.location} onChange={handleInputChange}/>
                     {
                         locationResults.length > 0 && (
@@ -156,17 +156,13 @@ const Properties = () =>
                         </div>
                 )}
                 </div>
-                <div className="col-12 col-md-6 col-lg-4 mb-3">
+                <div className="col-12 col-md-6 col-lg-6 mb-3">
                     <select name="property" className="form-select p-3" value={filters.property} onChange={handleInputChange}>
                         <option value="">Search by property type</option>
                         <option value="Apartment">Apartment</option>
                         <option value="Commercial">Commercial</option>
                         <option value="Residential">Residential</option>
                     </select>
-                </div>
-                <div className="col-12 col-md-6 col-lg-4 mb-3">
-                    <label htmlFor="rent" className="form-label fw-bold"> Max Rent: Ksh {formatCurrency(filters.rent)}</label>
-                    <input type="range" name="rent" id="rent" min={0} max={90000} step={1000} className="form-range" value={filters.rent} onChange={handleInputChange}/>
                 </div>
             </div>
 
