@@ -132,7 +132,7 @@ const Properties = () =>
 
     return ( 
         <div className="container mt-2">
-            <h1 className="text-uppercase fs-2 fw-bold text-center mb-2">List of all Properties</h1>
+            <h1 className="text-uppercase fs-2 fw-bold text-center">List of all Properties</h1>
             <div className="d-flex justify-content-end gap-2 p-3">
                 <button className="btn btn-primary" onClick={() => setShowAddPropertyModal(!showAddPropertyModal)}>
                     <IoAddOutline className="fs-4" /> Add a new property
